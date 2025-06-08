@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "966579307607",
+    "firebase_url": "https://reale-e0163.firebaseio.com",
+    "project_id": "reale-e0163",
+    "storage_bucket": "reale-e0163.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966579307607:android:e8876e147a0a66641fcf12",
+        "android_client_info": {
+          "package_name": "com.brackets.reale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966579307607-k3h9lcgj4ltno2q11pprcjtecc2u3tf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brackets.reale",
+            "certificate_hash": "9e90f1b579070a4b5f2c22c247446a08c0cd100b"
+          }
+        },
+        {
+          "client_id": "966579307607-bmjlg21hlisvtn94nv0qnof1iu5jf3gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYW1R_BqWI7w-wxip8quBnK1J-6yGofQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966579307607-bmjlg21hlisvtn94nv0qnof1iu5jf3gq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
