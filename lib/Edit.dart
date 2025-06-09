@@ -25,7 +25,7 @@ class Edit extends StatefulWidget {
   final data;
   final name;
 
-  Edit({this.uid, this.data,this.name});
+  const Edit({super.key, this.uid, this.data,this.name});
 
   @override
   _EditState createState() => _EditState();
@@ -76,7 +76,7 @@ class _EditState extends State<Edit> {
                       // padding: const EdgeInsets.all(15),
                       child: Text(
                         "${widget.data["provinceName"]}, ${widget.data["cityName"]}\n${widget.data["schemeName"]}, ${widget.data["phaseName"]}\n${widget.data["blockName"]}, ${widget.data["subBlockName"]}\n${widget.data["type"]}, ${widget.data["subType"]}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )),
                   Container(
@@ -84,14 +84,14 @@ class _EditState extends State<Edit> {
                       child: TextField(
                         controller: area,
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(labelText: "Area"),
+                        decoration: const InputDecoration(labelText: "Area"),
                       )),
                   Container(
                       alignment: Alignment.center,
                       child: TextField(
                         controller: adress,
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(labelText: "Adress"),
+                        decoration: const InputDecoration(labelText: "Adress"),
                       )),
                   Container(
                       alignment: Alignment.center,
@@ -102,8 +102,8 @@ class _EditState extends State<Edit> {
                             areaUnits.value = TextEditingValue(text: "$val");
                           });
                         },
-                        hint: Text("Area Unit"),
-                        items: [
+                        hint: const Text("Area Unit"),
+                        items: const [
                           "Squareft",
                           "Marla",
                         ],
@@ -113,14 +113,14 @@ class _EditState extends State<Edit> {
                       child: TextField(
                         controller: demands,
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(labelText: "Demand"),
+                        decoration: const InputDecoration(labelText: "Demand"),
                       )),
                   Container(
                       alignment: Alignment.center,
                       child: TextField(
                         controller: description,
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(labelText: "Description"),
+                        decoration: const InputDecoration(labelText: "Description"),
                       )),
                   // Container(
                   //     alignment: Alignment.center,
@@ -187,8 +187,8 @@ class _EditState extends State<Edit> {
                             sold.value = TextEditingValue(text: "$val");
                           });
                         },
-                        hint: Text("Sold"),
-                        items: ["yes", "no"],
+                        hint: const Text("Sold"),
+                        items: const ["yes", "no"],
                       )),
                   Container(
                       alignment: Alignment.center,
@@ -199,8 +199,8 @@ class _EditState extends State<Edit> {
                             purpose.value = TextEditingValue(text: "$val");
                           });
                         },
-                        hint: Text("Purpose"),
-                        items: ["Sale", "Rent", "Lease"],
+                        hint: const Text("Purpose"),
+                        items: const ["Sale", "Rent", "Lease"],
                       )),
                   Container(
                       alignment: Alignment.center,
@@ -251,7 +251,7 @@ class _EditState extends State<Edit> {
                                 body: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Center(
+                                    const Center(
                                       child: Text(
                                         "Your Listing was Successfully Posted",
                                         textAlign: TextAlign.center,
@@ -260,7 +260,7 @@ class _EditState extends State<Edit> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     SizedBox(

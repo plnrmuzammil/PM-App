@@ -4,6 +4,8 @@ import "package:google_fonts/google_fonts.dart";
 
 
 class policy extends StatefulWidget {
+  const policy({super.key});
+
   @override
   _policyState createState() => _policyState();
 }
@@ -28,7 +30,7 @@ class _policyState extends State<policy> {
                   );
                 }
                 else{
-                  return Text("LOADING");
+                  return const Text("LOADING");
                 }
 
               }

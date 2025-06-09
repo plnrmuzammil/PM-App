@@ -3,6 +3,8 @@ import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 
 class about extends StatefulWidget {
+  const about({super.key});
+
   @override
   _aboutState createState() => _aboutState();
 }
@@ -27,7 +29,7 @@ class _aboutState extends State<about> {
                   );
                 }
                 else{
-                  return Text("LOADING");
+                  return const Text("LOADING");
                 }
 
             }

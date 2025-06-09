@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectCityDetails.dart';
 
@@ -27,7 +25,7 @@ class _SelectProvinceDetailsState extends State<SelectProvinceDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -53,7 +51,7 @@ class _SelectProvinceDetailsState extends State<SelectProvinceDetails> {
                   }
                   print(provinceId);
                   return DropDown<dynamic>(
-                    hint: Text("select province"),
+                    hint: const Text("select province"),
                     items: provinces,
                     onChanged: (val){
                       setState(() {
@@ -78,7 +76,7 @@ class _SelectProvinceDetailsState extends State<SelectProvinceDetails> {
                     box.delete('provinceName');
                     box.delete('provinceId');
                   },
-                  child: Text("Back"),
+                  child: const Text("Back"),
                 ),
                 MaterialButton(
                   color: Colors.green,

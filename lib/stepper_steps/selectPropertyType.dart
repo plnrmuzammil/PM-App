@@ -22,7 +22,7 @@ class selectPropertyType extends StatefulWidget {
   final subBlockName;
   //final adress;
 
-  selectPropertyType({
+  const selectPropertyType({super.key, 
     this.scheme,
     this.schemeName,
     this.province,
@@ -58,9 +58,9 @@ class _selectPropertyTypeState extends State<selectPropertyType> {
           IgnorePointer(
             ignoring: !stepperStateModel.isSelectPropertyDropDownEnable,
             child: DropDown(
-              items: ["Commercial", "Land / Plot", "Residential"],
-              hint: Text("Property Type"),
-              initialValue: houseModel.propertyType.length > 0
+              items: const ["Commercial", "Land / Plot", "Residential"],
+              hint: const Text("Property Type"),
+              initialValue: houseModel.propertyType.isNotEmpty
                   ? houseModel.propertyType
                   : null,
               onChanged: (val) {
@@ -127,7 +127,7 @@ class _selectPropertyTypeState extends State<selectPropertyType> {
                   'content': Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Select Property Sub Type',
                         style: TextStyle(fontSize: 18.0),
                       ),

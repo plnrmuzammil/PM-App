@@ -1,23 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import 'package:hive/hive.dart';
-import 'package:reale/EntryDetails/selectSchemeDetails.dart';
-import 'package:reale/policy.dart';
 import 'package:reale/dealers.dart';
 import 'package:reale/sold.dart';
 import 'package:reale/userInformationFormAfterOTP.dart';
 import 'package:reale/widgets/custom_text_widget.dart';
-import 'package:reale/widgets/setting_stepper.dart';
 import 'package:reale/widgets/stylishCustomButton.dart';
 import 'Auth/login.dart';
 
 import 'EntryDetails/selectProvinceDetails.dart';
-import 'main.dart';
 import 'mainPage.dart';
 import 'newCode/Functions.dart';
 
 class propertyManagement extends StatefulWidget {
+  const propertyManagement({super.key});
+
   @override
   _propertyManagementState createState() => _propertyManagementState();
 }
@@ -44,8 +41,8 @@ class _propertyManagementState extends State<propertyManagement> {
       final userData = value.data();
       setState(() {
         userName = userData!['name'];
-        phoneNumber = userData!['phone'];
-        imgUrl = userData!['profile'];
+        phoneNumber = userData['phone'];
+        imgUrl = userData['profile'];
       });
 
     }
@@ -113,7 +110,7 @@ class _propertyManagementState extends State<propertyManagement> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Center(
                             child: imgUrl != null
                                 ? CircleAvatar(
@@ -122,9 +119,9 @@ class _propertyManagementState extends State<propertyManagement> {
                             )
                                 : Center(
                                     child: Container(
-                                        child: CircularProgressIndicator())),
+                                        child: const CircularProgressIndicator())),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           CustomTextWidget(
                             text1: 'Name: ',
                             text2: userName ?? "",
@@ -133,7 +130,7 @@ class _propertyManagementState extends State<propertyManagement> {
                             text1: 'Phone Number: ',
                             text2: phoneNumber ?? "",
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                         ],
                       ),
                     ),
@@ -156,7 +153,7 @@ class _propertyManagementState extends State<propertyManagement> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return SelectProvinceDetails();
+                                    return const SelectProvinceDetails();
                                 // here we need to reset the stepper state model
                                // stepperStateModel.reset();
                                 // return policy();
@@ -166,7 +163,7 @@ class _propertyManagementState extends State<propertyManagement> {
                               }));
                             },
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           StylishCustomButton(
                             text: "DEALERS",
                             onPressed: () {
@@ -174,11 +171,11 @@ class _propertyManagementState extends State<propertyManagement> {
                                   MaterialPageRoute(builder: (context) {
                                     // return policy();
                                     // me **************************
-                                return dealers();
+                                return const dealers();
                               }));
                             },
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           StylishCustomButton(
                             text: "SOLD/UNSOLD",
                             onPressed: () {
@@ -191,7 +188,7 @@ class _propertyManagementState extends State<propertyManagement> {
                               }));
                             },
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           StylishCustomButton(
                             text: "Profile",
                             onPressed: () async {
@@ -205,7 +202,7 @@ class _propertyManagementState extends State<propertyManagement> {
                               }));
                             },
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           StylishCustomButton(
                             text: "Logout",
                             onPressed: () async {
@@ -214,22 +211,22 @@ class _propertyManagementState extends State<propertyManagement> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('Logout'),
-                                    content: Text('Do you want to Logout ?'),
+                                    title: const Text('Logout'),
+                                    content: const Text('Do you want to Logout ?'),
                                     actions: [
                                      ElevatedButton(
                                         onPressed: () {
                                           print('Log out user');
                                           Navigator.of(context).pop(false);
                                         },
-                                        child: Text('No'),
+                                        child: const Text('No'),
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
                                           print('Login user');
                                           Navigator.of(context).pop(true);
                                         },
-                                        child: Text('Yes'),
+                                        child: const Text('Yes'),
                                       ),
                                     ],
                                   );
@@ -243,7 +240,7 @@ class _propertyManagementState extends State<propertyManagement> {
 
                                 Navigator.pushReplacement(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return SafeArea(
+                                  return const SafeArea(
                                       child: Scaffold(body: login()));
                                 }));
                               }

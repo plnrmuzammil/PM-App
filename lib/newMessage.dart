@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:reale/chat.dart';
 
 TextEditingController currentSearch = TextEditingController();
 
 class newMessage extends StatefulWidget {
+  const newMessage({super.key});
+
   @override
   _newMessageState createState() => _newMessageState();
 }
@@ -23,23 +24,23 @@ class _newMessageState extends State<newMessage> {
               List<QueryDocumentSnapshot> users = data.docs;
 
               return ListView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: [
                   Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin: const EdgeInsets.only(left: 20, right: 20),
                       child: TextField(
                         onChanged: (val) {
                           setState(() {});
                         },
                         controller: currentSearch,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText:
                                 "Search By Name , Id Card , Phone , Email"),
                       )),
                   ListView.builder(
                       shrinkWrap: true,
                       itemCount: users.length,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         if ((users[index].data()
                                 as Map<String, dynamic>)["name"] !=
@@ -75,7 +76,7 @@ class _newMessageState extends State<newMessage> {
                                   .toLowerCase())) {
                             return Container(
                               margin:
-                                  EdgeInsets.only(left: 5, right: 5, top: 10),
+                                  const EdgeInsets.only(left: 5, right: 5, top: 10),
                               child: ButtonTheme(
                                 child: MaterialButton(
                                     color: Colors.white,
@@ -86,26 +87,26 @@ class _newMessageState extends State<newMessage> {
                                       }));
                                     },
                                     padding:
-                                        EdgeInsets.only(top: 20, bottom: 20),
+                                        const EdgeInsets.only(top: 20, bottom: 20),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
                                             Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 20),
-                                                child: Icon(Icons.person)),
+                                                    const EdgeInsets.only(left: 20),
+                                                child: const Icon(Icons.person)),
                                             Expanded(
                                               child: Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 60),
+                                                    const EdgeInsets.only(left: 60),
                                                 child: Text(
                                                   (users[index].data() as Map<
                                                           String,
                                                           dynamic>)["name"]
                                                       .toString(),
                                                   style:
-                                                      TextStyle(fontSize: 25),
+                                                      const TextStyle(fontSize: 25),
                                                   textAlign: TextAlign.left,
                                                 ),
                                               ),
@@ -117,12 +118,12 @@ class _newMessageState extends State<newMessage> {
                               ),
                             );
                           } else {
-                            return SizedBox(
+                            return const SizedBox(
                               height: 0,
                             );
                           }
                         } else {
-                          return SizedBox(
+                          return const SizedBox(
                             height: 0,
                           );
                         }
@@ -130,7 +131,7 @@ class _newMessageState extends State<newMessage> {
                 ],
               );
             } else {
-              return Text("EMPTY");
+              return const Text("EMPTY");
             }
           },
         ),

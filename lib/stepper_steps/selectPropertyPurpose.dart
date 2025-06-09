@@ -31,8 +31,8 @@ class selectPropertyPurpose extends StatefulWidget {
   final propertyType;
   final propertySubType;
 
-  selectPropertyPurpose(
-      {this.scheme,
+  const selectPropertyPurpose(
+      {super.key, this.scheme,
       this.province,
       this.city,
       this.phase,
@@ -75,14 +75,14 @@ class _selectPropertyPurposeState extends State<selectPropertyPurpose> {
           IgnorePointer(
             ignoring: !stepperStateModel.selectPropertyPurposeDropDownEnable,
             child: DropDown(
-              items: [
+              items: const [
                 "Lease",
                 "Rent",
                 "Sale",
               ],
-              hint: Text("Property Purpose"),
+              hint: const Text("Property Purpose"),
               initialValue:
-                  houseModel.purpose.length > 0 ? houseModel.purpose : null,
+                  houseModel.purpose.isNotEmpty ? houseModel.purpose : null,
               onChanged: (val) {
                 if (SchemeType.isScheme()) {
                   // if isScheme is true
@@ -156,11 +156,11 @@ class _selectPropertyPurposeState extends State<selectPropertyPurpose> {
                   'content': Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Total Area',
                         style: TextStyle(fontSize: 18.0),
                       ),
-                      selectArea(
+                      SelectArea (
                         province: widget.province,
                         scheme: widget.scheme,
                         city: widget.city,

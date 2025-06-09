@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectCityDetails.dart';
-import 'package:reale/EntryDetails/selectProvinceDetails.dart';
 import 'package:reale/EntryDetails/selectTypeDetails.dart';
 
 
@@ -30,7 +29,7 @@ class _SelectSchemeDetailsState extends State<SelectSchemeDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -58,7 +57,7 @@ class _SelectSchemeDetailsState extends State<SelectSchemeDetails> {
                   onPressed: (){
                     box.delete('schemeData');
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectCityDetails(provinceId: widget.provinceId)));
-                  }, child: Text("Back"),),
+                  }, child: const Text("Back"),),
 
                 MaterialButton(
                   color: Colors.green,
@@ -68,7 +67,7 @@ class _SelectSchemeDetailsState extends State<SelectSchemeDetails> {
                         MaterialPageRoute(
                             builder: (context) => SelectTypeDetails(provinceId: widget.provinceId, cityId: widget.cityId, isScheme: selectScheme == "Scheme" ? true : false,)
                         ));
-                  }, child: Text("Continue"),),
+                  }, child: const Text("Continue"),),
               ],
             ),
           ],

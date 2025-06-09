@@ -4,10 +4,8 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectBlockDetails.dart';
 import 'package:reale/EntryDetails/select_area.dart';
-import 'package:reale/EntryDetails/select_property_type.dart';
 
 
-import '../newCode/data.dart';
 
 class SubBlockDetails extends StatefulWidget {
   const SubBlockDetails({Key? key, required this.cityId, required this.provinceId, required this.phaseId, required this.blockId, required this.schemeId, required this.isScheme, required this.propertyType}) : super(key: key);
@@ -40,7 +38,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -80,7 +78,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
 
 
                     return  DropDown<dynamic>(
-                      hint: Text("select sub block"),
+                      hint: const Text("select sub block"),
                       items: subBlock,
                       onChanged: (val)
                       {
@@ -93,7 +91,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
                   }
                   else
                   {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 }),
 
@@ -114,7 +112,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
                       propertyType: widget.propertyType,
                       phaseId: widget.phaseId,
                    )));
-    }, child: Text("Back"),),
+    }, child: const Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
                   onPressed:(selectedSubBlock == "" && selectedSubBlockId == "") ? null : (){
@@ -125,7 +123,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
                             builder: (context) => SelectArea(isScheme: widget.isScheme,),
                         ));
                   },
-                  child: Text("Continue"),),
+                  child: const Text("Continue"),),
               ],
             ),
           ],

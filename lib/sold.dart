@@ -2,7 +2,6 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:reale/Edit.dart';
-import 'package:reale/propertyDetails.dart';
 import 'package:reale/propertyDetailsNew.dart';
 import 'package:reale/widgets/custom_text_widget.dart';
 import 'package:reale/widgets/stylishCustomButton.dart';
@@ -17,7 +16,7 @@ var schemeName;
 
 class sold extends StatefulWidget {
   String name;
-  sold({required this.name } );
+  sold({super.key, required this.name } );
 
   @override
   _soldState createState() => _soldState();
@@ -48,14 +47,14 @@ class _soldState extends State<sold> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: Text('Sold/Unsold'),
+          title: const Text('Sold/Unsold'),
         ),
         body: Center(
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height -
                 MediaQuery.of(context).viewPadding.top -
                 80,
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -139,7 +138,7 @@ class _soldState extends State<sold> {
                           DocumentSnapshot currentDoc = fiteredList[index];
                           var data = currentDoc.data();
                           DateTime time =
-                          (fiteredList![index].data() as Map<String,dynamic>)["time"].toDate();
+                          (fiteredList[index].data() as Map<String,dynamic>)["time"].toDate();
                           var timeHours = time.hour;
                           var timeMinutes = time.minute;
                           var timeCode = "am";
@@ -166,7 +165,7 @@ class _soldState extends State<sold> {
                                     //     left: 10,
                                     //     right: 10,
                                     //     top: 10),
-                                    padding: EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(15),
                                     child: GestureDetector(
                                       onTap: () {
                                         Navigator.push(context,
@@ -185,7 +184,7 @@ class _soldState extends State<sold> {
                                             children: [
                                               CustomTextWidget(
                                                 text1: "Time :",
-                                                text2: "$timeFormat",
+                                                text2: timeFormat,
                                               ),
                                               // Text(
                                               //   "Time : $timeFormat",
@@ -198,7 +197,7 @@ class _soldState extends State<sold> {
                                               // ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 0,
                                           ),
                                           // scheme row
@@ -321,7 +320,7 @@ class _soldState extends State<sold> {
                                             //   ),
                                             // ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           // floating action buttons
@@ -405,7 +404,7 @@ class _soldState extends State<sold> {
                                                 ),
                                               ),
                                               // delete button
-                                              SizedBox(width: 10),
+                                              const SizedBox(width: 10),
                                               // sold button
                                               Expanded(
                                                 child: StylishCustomButton
@@ -425,9 +424,9 @@ class _soldState extends State<sold> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: Text(
+                                                          title: const Text(
                                                               'Change Sold status'),
-                                                          content: Text(
+                                                          content: const Text(
                                                               'Do you want to Sold ?'),
                                                           actions: [
                                                             TextButton(
@@ -440,7 +439,7 @@ class _soldState extends State<sold> {
                                                                     .pop(
                                                                         true);
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   'Yes'),
                                                             ),
                                                             TextButton(
@@ -451,7 +450,7 @@ class _soldState extends State<sold> {
                                                                     .pop(
                                                                         false);
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   'No'),
                                                             ),
                                                           ],
@@ -536,7 +535,7 @@ class _soldState extends State<sold> {
                                           height: 105,
                                           child: Transform.rotate(
                                             angle: 1.6,
-                                            child: Text(
+                                            child: const Text(
                                               'Sold',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -814,7 +813,7 @@ class _soldState extends State<sold> {
                           // );
                         });
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -834,7 +833,7 @@ class _soldState extends State<sold> {
           .where((DocumentSnapshot documentSnapshot) =>
               documentID == documentSnapshot.id)
           .toList();
-      List<Row> _userRow = userAllDocs
+      List<Row> userRow = userAllDocs
           .map(
             (DocumentSnapshot snapshot) => Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -847,7 +846,8 @@ class _soldState extends State<sold> {
             ),
           )
           .toList();
-      return _userRow;
+      return userRow;
     }
+    return null;
   }
 }

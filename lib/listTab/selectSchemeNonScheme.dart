@@ -1,4 +1,5 @@
-import 'package:flutter/Material.dart';
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:772191951.
+import 'package:flutter/material.dart';
 import 'package:reale/listTab/nonScheme.dart';
 import 'package:reale/listTab/viewScheme.dart';
 
@@ -20,8 +21,8 @@ class SelectSchemeNonScheme extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 color: Colors.green,
                 height: 40,
-                child: Padding(
-                  padding: const EdgeInsets.all(9.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(9.0),
                   child: Text("Select Catagory",style: TextStyle(color: Colors.white,fontSize: 15),),
                 ),
               ),

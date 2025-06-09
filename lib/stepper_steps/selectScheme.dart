@@ -1,5 +1,4 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import "package:flutter_dropdown/flutter_dropdown.dart";
 import 'package:reale/main.dart';
@@ -23,7 +22,7 @@ class selectScheme extends StatefulWidget {
   final cityName;
   bool isNonScheme;
 
-  selectScheme({
+  selectScheme({super.key, 
     this.province,
     this.city,
     this.provinceName,
@@ -81,7 +80,7 @@ class _selectSchemeState extends State<selectScheme> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    schemes.length > 0
+                    schemes.isNotEmpty
                         ? IgnorePointer(
                       ignoring: !stepperStateModel.isListSchemeDropDownEnable,
 
@@ -90,7 +89,7 @@ class _selectSchemeState extends State<selectScheme> {
                               items: schemes,
                               hint: Text(
                                   "Select ${widget.isNonScheme ? "Non Scheme" : "Scheme"}"),
-                              initialValue: houseModel.schemeName.length > 0
+                              initialValue: houseModel.schemeName.isNotEmpty
                                   ? houseModel.schemeName
                                   : null,
                               onChanged: ( schemeType) async {
@@ -159,7 +158,7 @@ class _selectSchemeState extends State<selectScheme> {
                                         widget.isNonScheme // TODO: check this behaviour later on
                                             ? 'Select Property Type'
                                             : 'Select Zone/ Phase',
-                                        style: TextStyle(fontSize: 18.0),
+                                        style: const TextStyle(fontSize: 18.0),
                                       ),
                                       widget.isNonScheme
                                           ? selectPropertyType(
@@ -195,7 +194,7 @@ class _selectSchemeState extends State<selectScheme> {
                               },
                             ),
                         )
-                        : Text('No data found'),
+                        : const Text('No data found'),
                     // : Center(
                     //     child: CircularProgressIndicator(
                     //       valueColor:
@@ -226,7 +225,7 @@ class _selectSchemeState extends State<selectScheme> {
                 ),
               );
             } else {
-              return Padding(
+              return const Padding(
                   padding: EdgeInsets.only(top: 15),
                   child: Text(
                     'No data found',

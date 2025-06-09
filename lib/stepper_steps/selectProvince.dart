@@ -15,6 +15,8 @@ var provinceIds = [];
 var currentId;
 
 class selectProvince extends StatefulWidget {
+  const selectProvince({super.key});
+
   //void Function({bool isShowLoader}) refresh;
   //selectProvince({this.refresh});
   @override
@@ -76,8 +78,8 @@ class _selectProvinceState extends State<selectProvince> {
                           ignoring: !stepperStateModel.isProvinceDropDownEnable,
                           child: DropDown<dynamic>(
                             items: provinces,
-                            hint: Text("select province"),
-                            initialValue: houseModel.provinceName.length > 0
+                            hint: const Text("select province"),
+                            initialValue: houseModel.provinceName.isNotEmpty
                                 ? houseModel.provinceName
                                 : null,
                             //initialValue: houseModel.provinceName ?? provinces[0],
@@ -92,7 +94,7 @@ class _selectProvinceState extends State<selectProvince> {
                               SimpleDatabase province =
                                   SimpleDatabase(name: 'province');
                               await province.clear();
-                              await province.add('${val}');
+                              await province.add('$val');
                               // storing the province into house model
                               houseModel.provinceName = val.toString();
 
@@ -134,7 +136,7 @@ class _selectProvinceState extends State<selectProvince> {
                                 'content': Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(
+                                    const Text(
                                       'Select District',
                                       style: TextStyle(fontSize: 18.0),
                                     ),
@@ -175,7 +177,7 @@ class _selectProvinceState extends State<selectProvince> {
                 ),
               );
             } else {
-              return TextContainer();
+              return const TextContainer();
             }
           }),
     );

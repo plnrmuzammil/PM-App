@@ -5,7 +5,7 @@ import 'package:reale/widgets/stylishCustomButton.dart';
 
 class selectPhase extends StatefulWidget {
   final scheme;
-  selectPhase({this.scheme});
+  const selectPhase({super.key, this.scheme});
 
   @override
   _selectPhaseState createState() => _selectPhaseState();
@@ -30,7 +30,7 @@ class _selectPhaseState extends State<selectPhase> {
 
               return ListView.builder(
                   itemCount: docs.length,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     if (index == 0) {
                       return Column(
@@ -39,8 +39,8 @@ class _selectPhaseState extends State<selectPhase> {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             color: Colors.green,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Select Zone',
                                 style: TextStyle(
@@ -50,11 +50,11 @@ class _selectPhaseState extends State<selectPhase> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Container(
                             width: MediaQuery.of(context).size.width - 50,
                             margin:
-                                EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                                const EdgeInsets.only(top: 15, bottom: 5, left: 20),
                             child: StylishCustomButton(
                               onPressed: () {
                                 Navigator.push(context,
@@ -72,7 +72,7 @@ class _selectPhaseState extends State<selectPhase> {
                       return Center(
                         child: Container(
                           width: MediaQuery.of(context).size.width - 50,
-                          margin: EdgeInsets.only(top: 15, bottom: 5),
+                          margin: const EdgeInsets.only(top: 15, bottom: 5),
                           child: StylishCustomButton(
                             onPressed: () {
                               Navigator.push(context,
@@ -88,7 +88,7 @@ class _selectPhaseState extends State<selectPhase> {
                   });
             } else {
               return Container(
-                child: Center(
+                child: const Center(
                   child: Text('No Content'),
                 ),
               );

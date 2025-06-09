@@ -7,7 +7,7 @@ import 'package:reale/widgets/stylishCustomButton.dart';
 
 class viewCity extends StatefulWidget {
   final province;
-  viewCity({this.province});
+  const viewCity({super.key, this.province});
 
   @override
   _viewCityState createState() => _viewCityState();
@@ -38,7 +38,7 @@ class _viewCityState extends State<viewCity> {
                 {
                   return ListView.builder(
                       itemCount: docs.length,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index){
                         if (index == 0) {
                           return Column(
@@ -85,7 +85,7 @@ class _viewCityState extends State<viewCity> {
                           return Center(
                             child: Container(
                               width: MediaQuery.of(context).size.width - 50,
-                              margin: EdgeInsets.only(top: 15, bottom: 5),
+                              margin: const EdgeInsets.only(top: 15, bottom: 5),
                               child: StylishCustomButton(
                                 onPressed: () {
                                   listingModel.city = docs[index]["name"];

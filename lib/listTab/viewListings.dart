@@ -3,9 +3,7 @@ import 'dart:async';
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 import 'package:flutter_dropdown/flutter_dropdown.dart';
-import 'package:reale/constant.dart';
 import 'package:reale/main.dart';
-import "package:reale/propertyDetails.dart";
 import 'package:reale/propertyDetailsNew.dart';
 import 'package:simple_database/simple_database.dart';
 
@@ -14,7 +12,7 @@ import '../list.dart';
 class viewListings extends StatefulWidget {
   final subBlock;
   static var subBlockListing;
-  viewListings({this.subBlock}){subBlockListing = subBlock;}
+  viewListings({super.key, this.subBlock}){subBlockListing = subBlock;}
 
   @override
   _viewListingsState createState() => _viewListingsState();
@@ -45,9 +43,9 @@ class _viewListingsState extends State<viewListings> {
         .where("subblock", isEqualTo: widget.subBlock)
         .orderBy("time", descending: true)
         .get()
-        .then((QuerySnapshot _query) {
+        .then((QuerySnapshot query) {
 
-      _currentStream.sink.add(_query);
+      _currentStream.sink.add(query);
     });
   }
 
@@ -57,9 +55,9 @@ class _viewListingsState extends State<viewListings> {
     });
   }
 
-  void addToStream(QuerySnapshot _snap) {
-    print('add to query snapshot stream with data size: ${_snap.size}');
-    _currentStream.sink.add(_snap);
+  void addToStream(QuerySnapshot snap) {
+    print('add to query snapshot stream with data size: ${snap.size}');
+    _currentStream.sink.add(snap);
   }
 
   // invoke in initState()
@@ -68,13 +66,13 @@ class _viewListingsState extends State<viewListings> {
       isFilteredDataLoading = true;
     });
     print('getFilterData() started');
-    Map<String, dynamic> propertySearchDialog = Map<String, dynamic>();
+    Map<String, dynamic> propertySearchDialog = <String, dynamic>{};
     var result = await listingPropertySelectedBasedOnRange.getAll();
     print('result length: ${result.length}');
-    if (result.length == 0 || result.length == null){
+    if (result.isEmpty){
       // here the query for firebase
 
-      QuerySnapshot _query = await FirebaseFirestore.instance
+      QuerySnapshot query = await FirebaseFirestore.instance
           .collection("listings")
           .where(
             'provinceName',
@@ -83,7 +81,7 @@ class _viewListingsState extends State<viewListings> {
           .where('cityName', isEqualTo: listingModel.city)
           .where("subblock", isEqualTo: widget.subBlock)
           .get();
-      _currentStream.sink.add(_query);
+      _currentStream.sink.add(query);
 
       setState((){
         isFilteredExist = false;
@@ -125,7 +123,7 @@ class _viewListingsState extends State<viewListings> {
         isFilteredDataLoading = false;
         print('query adding to a stream: <query Legnth>: ${query.docs.length}');
         _currentStream.sink.add(query);
-        if (query.docs.length == 0) {
+        if (query.docs.isEmpty) {
           isShowNoneData = true;
           setState(() {});
         }
@@ -156,7 +154,7 @@ class _viewListingsState extends State<viewListings> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: Text('View Listing'),
+          title: const Text('View Listing'),
           actions: [
             Container(
               //height: 40,
@@ -181,7 +179,7 @@ class _viewListingsState extends State<viewListings> {
                   print('get stream');
                   print('start searching from this button');
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.filter_list,
                   color: Colors.white,
                 ),
@@ -198,14 +196,14 @@ class _viewListingsState extends State<viewListings> {
               shrinkWrap: true,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 4),
+                  margin: const EdgeInsets.only(top: 4),
                   height: MediaQuery.of(context).size.height - 50,
                   child: isShowNoneData
                       ? Container(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('No Data Found',
+                              const Text('No Data Found',
                                   style: TextStyle(fontSize: 26)),
                               TextButton(
                                 onPressed: () {
@@ -215,7 +213,7 @@ class _viewListingsState extends State<viewListings> {
                                     isShowNoneData = false;
                                   });
                                 },
-                                child: Text('Show All Data'),
+                                child: const Text('Show All Data'),
                               ),
                             ],
                           ),
@@ -237,11 +235,11 @@ class _viewListingsState extends State<viewListings> {
                               List<QueryDocumentSnapshot>? documents = data?.docs;
 
                               print(data!.docs.length);
-                              if(documents!.length > 0) {
+                              if(documents!.isNotEmpty) {
                                 return ListView.builder(
                                     itemCount: documents.length,
                                     shrinkWrap: true,
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       DateTime time = (documents[index]
                                           .data() as Map<String,
@@ -281,7 +279,7 @@ class _viewListingsState extends State<viewListings> {
                                               margin: const EdgeInsets.all(0),
                                               // margin: EdgeInsets.only(
                                               //     bottom: 40, left: 5, right: 5),
-                                              padding: EdgeInsets.all(10),
+                                              padding: const EdgeInsets.all(10),
                                               child: Container(
 
                                                 child: Row(
@@ -294,7 +292,7 @@ class _viewListingsState extends State<viewListings> {
                                                           dynamic>)[
                                                       "schemeImageURL"] ==
                                                           ''
-                                                          ? NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5V0xbLGXgCE5b9LrnrrawNIaYO6qsZxBxRxkOI9yKtA&s")
+                                                          ? const NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5V0xbLGXgCE5b9LrnrrawNIaYO6qsZxBxRxkOI9yKtA&s")
                                                           : NetworkImage(
                                                         (documents[index]
                                                             .data() as Map<
@@ -307,7 +305,7 @@ class _viewListingsState extends State<viewListings> {
                                                       Colors.blue,
                                                       radius: 40,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 5,
                                                     ),
                                                     Flexible(
@@ -352,7 +350,7 @@ class _viewListingsState extends State<viewListings> {
                                                                   angle:
                                                                   1.6,
                                                                   child:
-                                                                  Text(
+                                                                  const Text(
                                                                     'Sold',
                                                                     style:
                                                                     TextStyle(
@@ -381,12 +379,12 @@ class _viewListingsState extends State<viewListings> {
                                                                 MainAxisAlignment
                                                                     .start,
                                                                 children: [
-                                                                  Icon(Icons
+                                                                  const Icon(Icons
                                                                       .timer_rounded),
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                       width: 3),
                                                                   Text(
-                                                                    "$timeFormat",
+                                                                    timeFormat,
                                                                     style: const TextStyle(
                                                                         color: Colors
                                                                             .black,
@@ -430,7 +428,7 @@ class _viewListingsState extends State<viewListings> {
                                                                         2,
                                                                         softWrap:
                                                                         true,
-                                                                        style: TextStyle(
+                                                                        style: const TextStyle(
                                                                             color: Colors
                                                                                 .black,
                                                                             fontFamily:
@@ -460,7 +458,7 @@ class _viewListingsState extends State<viewListings> {
                                                                       //     TextOverflow
                                                                       //         .ellipsis,
                                                                       maxLines: 2,
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                           color: Colors
                                                                               .black,
                                                                           fontFamily:
@@ -585,7 +583,7 @@ class _viewListingsState extends State<viewListings> {
                                                                       //     TextOverflow
                                                                       //         .ellipsis,
                                                                       //maxLines: 2,
-                                                                      style: textstyleMainCard,
+                                                                   //   style: textstyleMainCard,
                                                                     ),
                                                                   ),
                                                                   // const Icon(
@@ -611,7 +609,7 @@ class _viewListingsState extends State<viewListings> {
                                                                       //     TextOverflow
                                                                       //         .ellipsis,
                                                                       //maxLines: 2,
-                                                                      style: textstyleMainCard,
+                                                                 //     style: textstyleMainCard,
                                                                     ),
                                                                   ),
                                                                   // const Icon(
@@ -1130,7 +1128,7 @@ class _viewListingsState extends State<viewListings> {
                               else
                                 {
                                   return Container(
-                                    child: Center(
+                                    child: const Center(
                                       child: Text('No Content'),
                                     ),
                                   );
@@ -1139,7 +1137,7 @@ class _viewListingsState extends State<viewListings> {
 
                             } else {
                               return Container(
-                                child: Center(
+                                child: const Center(
                                   child: Text('No Confsdtent'),
                                 ),
                               );
@@ -1334,7 +1332,7 @@ class ListingRangeDialog extends StatefulWidget {
   Function addToStream;
   Function showNoneDataToUser;
 
-  ListingRangeDialog({required this.refresh, required this.addToStream, required this.showNoneDataToUser});
+  ListingRangeDialog({super.key, required this.refresh, required this.addToStream, required this.showNoneDataToUser});
   @override
   _ListingRangeDialogState createState() => _ListingRangeDialogState();
 }
@@ -1465,7 +1463,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
     propertyDialogData?.getAll().then((List<dynamic> userData) {
       isLoading = false;
       print('User All data: $userData');
-      if (userData.length > 0) {
+      if (userData.isNotEmpty) {
         selectedProvince = userData[0]['selectedProvince'];
         selectedCity = userData[0]['selectedCity'];
         propertySubType = userData[0]['selectPropertySubType'];
@@ -1484,7 +1482,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
     // already have city and province
     return Dialog(
       child: isLoading
-          ? Container(child: Center(child: CircularProgressIndicator()))
+          ? Container(child: const Center(child: CircularProgressIndicator()))
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               //width: 200,
@@ -1497,7 +1495,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
 
                 children: [
 
-                  Text(
+                  const Text(
                     'Filter',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
@@ -1551,7 +1549,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                       items: subtypes,
                       hint: propertySubType != null
                           ? Text(propertySubType!)
-                          : Text("select sub type"),
+                          : const Text("select sub type"),
                       onChanged: (String? val) async {
                         _isSubTypeSelected = true;
                         propertySubType = val;
@@ -1592,16 +1590,16 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                   Row(
                     children: [
                       DropDown(
-                          items: [5, 10, 20, 50, 100],
+                          items: const [5, 10, 20, 50, 100],
                           hint: Text(minRange.toString()),
                           onChanged: (int? val) async {
                             print('min range: $val');
                             minRange = val!;
                             _isRangeSelected = true;
                           }),
-                      Spacer(),
+                      const Spacer(),
                       DropDown(
-                          items: [300, 500, 1000, 2000, 4000, 5000],
+                          items: const [300, 500, 1000, 2000, 4000, 5000],
                           hint: Text(maxRange.toString()),
                           onChanged: (int? val) async {
                             print('max range: $val');
@@ -1609,17 +1607,17 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                           }),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // drop down for area unit
                   DropDown(
-                      items: ["Squareft", "Marla", "Canal", "Acre", "Hectare"],
-                      hint: areaUnit.length > 0
+                      items: const ["Squareft", "Marla", "Canal", "Acre", "Hectare"],
+                      hint: areaUnit.isNotEmpty
                           ? Text(areaUnit)
-                          : Text("Select Unit"),
+                          : const Text("Select Unit"),
                       onChanged: (String? val) async {
                         areaUnit = val!;
                       }),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Row(
                     children: [
                       // search button
@@ -1633,7 +1631,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                           await listingPropertySelectedBasedOnRange.clear();
                           // map represent user current selected value
                           Map<String, dynamic> propertySearchDialog =
-                              Map<String, dynamic>();
+                              <String, dynamic>{};
 
                           propertySearchDialog['selectedProvince'] =
                               selectedProvince;
@@ -1741,20 +1739,20 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                           //int totalLength = await querySnap.length;
                           //print('total query Lenght: $totalLength');
 
-                          querySnap.then((QuerySnapshot _snap) async{
-                            if (_snap.docs.length == 0){
+                          querySnap.then((QuerySnapshot snap) async{
+                            if (snap.docs.isEmpty){
 
                               // TODO: show no data to user on the screen
 
                               await showDialog(
                                 context: context,
-                                builder: (context) => AlertErrorWidget(),
+                                builder: (context) => const AlertErrorWidget(),
                               );
                               widget.showNoneDataToUser(true);
                             } else {
                               // data found
-                              print('else- Total Docs: ${_snap.docs.length}');
-                              widget.addToStream(_snap);
+                              print('else- Total Docs: ${snap.docs.length}');
+                              widget.addToStream(snap);
                               Navigator.of(context).pop();
                               //Navigator.of(context).pop(Stream.fromFuture(Future.value(_snap)));
                             }
@@ -1793,16 +1791,16 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                           //Navigator.of(context).pop(querySnap);
 
                         },
-                        child: Text('search'),
+                        child: const Text('search'),
                       ),
                       // exit button
                       TextButton(
                         onPressed: () async {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Exit'),
+                        child: const Text('Exit'),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
                         onPressed: _totalRecord > 0
                             ? () async {
@@ -1812,7 +1810,7 @@ class _ListingRangeDialogState extends State<ListingRangeDialog> {
                                 Navigator.of(context).pop();
                               }
                             : null,
-                        child: Text('clear Filter'),
+                        child: const Text('clear Filter'),
                       ),
                     ],
                   ),

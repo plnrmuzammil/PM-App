@@ -1,10 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_dropdown/flutter_dropdown.dart";
-import 'package:reale/stepper_steps/selectCity.dart';
-import "package:reale/stepper_steps/selectPropertySubType.dart";
-import 'package:reale/stepper_steps/selectPropertyType.dart';
 import 'package:reale/stepper_steps/selectScheme.dart';
-import 'package:reale/stepper_steps/selectSubblocks.dart';
 import 'package:reale/widgets/setting_stepper.dart';
 
 import '../main.dart';
@@ -22,7 +18,7 @@ class SchemeType extends StatefulWidget {
   String? city;
   String? cityName;
 
-  SchemeType({
+  SchemeType({super.key, 
     this.province,
     this.provinceName,
     this.city,
@@ -57,12 +53,12 @@ class _SchemeTypeState extends State<SchemeType> {
           IgnorePointer(
             ignoring: !stepperStateModel.isSchemeDropDownEnable,
             child: DropDown(
-              items: [
+              items: const [
                 "Scheme",
                 "Non Scheme",
               ],
               initialValue: houseModel.isNonScheme ? "Non Scheme" : "Scheme",
-              hint: Text("Select Scheme"),
+              hint: const Text("Select Scheme"),
               onChanged: (String? value) {
                 print('Length of th list: ${InformationStepper.allSteps.length}');
                 var previousStep1 = InformationStepper.allSteps[0];
@@ -98,7 +94,7 @@ class _SchemeTypeState extends State<SchemeType> {
                     'content': Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'List',
                           style: TextStyle(fontSize: 18.0),
                         ),
@@ -141,7 +137,7 @@ class _SchemeTypeState extends State<SchemeType> {
                     'content': Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'List',
                           style: TextStyle(fontSize: 18.0),
                         ),

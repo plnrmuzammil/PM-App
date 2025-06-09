@@ -1,13 +1,9 @@
-import 'package:carousel_images/carousel_images.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:reale/chat.dart';
 
 import './widgets/custom_text_widget.dart';
-import "./image_preview.dart";
-import 'constant.dart';
 import 'image_screen.dart';
 
 var provinceName;
@@ -16,7 +12,7 @@ var districtName;
 fetchUserInfo(id) async {
   FirebaseAuth auth = FirebaseAuth.instance;
   var userInfo =
-      await FirebaseFirestore.instance.collection('users').doc("${id}").get();
+      await FirebaseFirestore.instance.collection('users').doc("$id").get();
   return userInfo;
 }
 
@@ -24,7 +20,7 @@ class propertyDetailsNew extends StatefulWidget {
   final data;
   String? currentListingDocumentID;
 
-  propertyDetailsNew(this.data, {this.currentListingDocumentID});
+  propertyDetailsNew(this.data, {super.key, this.currentListingDocumentID});
 
   // @override
   // propertyDetailsState createState() => propertyDetailsState();
@@ -34,7 +30,7 @@ class propertyDetailsNew extends StatefulWidget {
 }
 
 class _propertyDetailsState extends State<propertyDetailsNew> {
-  List<String> _allPropertyImages = [];
+  final List<String> _allPropertyImages = [];
   String? imgUrl;
   bool loadImage = false;
   final db = FirebaseFirestore.instance;
@@ -56,15 +52,15 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
     setState(() {
       _isPropertyImagesLoading = true;
     });
-    DocumentSnapshot _snapshot = await FirebaseFirestore.instance
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection("plots_images")
         .doc(widget.currentListingDocumentID)
         .get();
     print('Current Listing document id: ${widget.currentListingDocumentID}');
-    if (_snapshot.exists == true) {
+    if (snapshot.exists == true) {
       print('non empty Listing document');
       for (String imageURL
-          in (_snapshot.data() as Map<String, dynamic>).values) {
+          in (snapshot.data() as Map<String, dynamic>).values) {
         _allPropertyImages.add(imageURL.toString());
       }
       print(
@@ -143,11 +139,11 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                     return chatScreen(widget.data["seller"]);
                   }));
                 },
-                child: Icon(Icons.message),
+                child: const Icon(Icons.message),
               ),
               appBar: AppBar(
                 backgroundColor: Colors.green,
-                title: Text('Detail'),
+                title: const Text('Detail'),
               ),
               body: Column(
                 children: [
@@ -200,7 +196,7 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.access_time),
+                                      const Icon(Icons.access_time),
                                       CustomTextWidget(
                                         text1: ' $timeFormat',
                                         text2: '',
@@ -226,7 +222,7 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                                   ),
                                   CustomTextWidget(
                                     text1: 'Dealer: ',
-                                    text2: '$dealerName',
+                                    text2: dealerName,
                                   ),
                                   widget.data!["isShowPlotInfoToUser"] ? CustomTextWidget(
                                     text1: 'Plot no: ',
@@ -242,7 +238,7 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                             ),
                           ),
                           Card(
-                            margin: EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.all(2.0),
                             elevation: 8.0,
                             child: Container(
                               padding: const EdgeInsets.all(10),
@@ -353,8 +349,8 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                                       //       fontSize: 20),
                                       // ),*/
                                   /*address component*/
-                                  SizedBox(height: 30),
-                                  CustomTextWidget(
+                                  const SizedBox(height: 30),
+                                  const CustomTextWidget(
                                     text1: 'Description: ',
                                   ),
 
@@ -366,7 +362,7 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -376,7 +372,7 @@ class _propertyDetailsState extends State<propertyDetailsNew> {
               //},)
             ));
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

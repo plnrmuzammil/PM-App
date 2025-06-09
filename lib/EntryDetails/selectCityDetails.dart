@@ -4,7 +4,6 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectProvinceDetails.dart';
 import 'package:reale/EntryDetails/selectSchemeDetails.dart';
-import 'package:reale/stepper_steps/selectCity.dart';
 
 class SelectCityDetails extends StatefulWidget {
   const SelectCityDetails({Key? key, required this.provinceId, }) : super(key: key);
@@ -30,7 +29,7 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -60,7 +59,7 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
                   }
 
                   return DropDown<dynamic>(
-                    hint: Text('select city'),
+                    hint: const Text('select city'),
                     items: city,
                     onChanged: (val){
                       setState(() {
@@ -72,7 +71,7 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
                 }
                 else
                 {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
               },
             ),
@@ -84,8 +83,8 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
                   onPressed: (){
                     box.delete('city');
                     box.delete('cityId');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectProvinceDetails()));
-                  }, child: Text("Back"),),
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SelectProvinceDetails()));
+                  }, child: const Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
                   onPressed:(selectCity == "" && selectCityId == "") ? null : (){
@@ -96,7 +95,7 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
                       cityId: selectCityId,
                     )));
                     //Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectProvinceDetails()));
-                  }, child: Text("Continue"),),
+                  }, child: const Text("Continue"),),
 
               ],
             ),

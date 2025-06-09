@@ -35,12 +35,12 @@ class StylishCustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       child: MaterialButton(
         padding: EdgeInsets.all(isSmallerSize == true ? 5 : 10),
         elevation: 20,
-        color: this.buttonColor ?? Colors.green,
+        color: buttonColor ?? Colors.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
           side: BorderSide.none,
@@ -74,7 +74,7 @@ class StylishCustomButton extends StatelessWidget {
                             ),
                           ),
                     text == null
-                        ? SizedBox(width: 0)
+                        ? const SizedBox(width: 0)
                         : SizedBox(
                             width: isSmallerSize == true
                                 ? 5

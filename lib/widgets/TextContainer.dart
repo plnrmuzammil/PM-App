@@ -6,7 +6,7 @@ class TextContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text(
           'No data found',
           style: TextStyle(fontSize: 20),

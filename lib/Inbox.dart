@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:google_fonts/google_fonts.dart';
 import 'package:reale/chat.dart';
 import 'package:reale/newMessage.dart';
 // import 'package:reale/newMessage.dart';
-import 'package:reale/policy.dart';
 
 TextEditingController currentSearch = TextEditingController();
 
 class inbox extends StatefulWidget {
+  const inbox({super.key});
+
   @override
   _inboxState createState() => _inboxState();
 }
@@ -20,7 +19,7 @@ class _inboxState extends State<inbox> {
   fetchUserInfo(id) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     var userInfo =
-        await FirebaseFirestore.instance.collection('users').doc("${id}").get();
+        await FirebaseFirestore.instance.collection('users').doc("$id").get();
     print(auth.currentUser!.uid);
     return userInfo;
   }
@@ -45,7 +44,7 @@ class _inboxState extends State<inbox> {
           }
 
           return Container(
-            margin: EdgeInsets.only(left: 5, right: 5, bottom: 20),
+            margin: const EdgeInsets.only(left: 5, right: 5, bottom: 20),
             child: ButtonTheme(
               child: MaterialButton(
                   color: Colors.white,
@@ -55,13 +54,13 @@ class _inboxState extends State<inbox> {
                       return chatScreen(id);
                     }));
                   },
-                  padding: EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.only(bottom: 10),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Container(
-                              margin: EdgeInsets.only(left: 20),
+                              margin: const EdgeInsets.only(left: 20),
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundImage: NetworkImage(
@@ -69,10 +68,10 @@ class _inboxState extends State<inbox> {
                               )),
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(left: 10),
+                              margin: const EdgeInsets.only(left: 10),
                               child: Text(
                                 snapshot.data.data()["name"],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: "Times New Roman",
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16),
@@ -82,10 +81,10 @@ class _inboxState extends State<inbox> {
                           ),
                           Container(
                             alignment: Alignment.centerRight,
-                            margin: EdgeInsets.only(right: 10),
+                            margin: const EdgeInsets.only(right: 10),
                             child: Text(
-                              "${status}",
-                              style: TextStyle(
+                              status,
+                              style: const TextStyle(
                                   fontFamily: "Times New Roman",
                                   fontWeight: FontWeight.w100,
                                   fontSize: 13),
@@ -98,12 +97,12 @@ class _inboxState extends State<inbox> {
                         children: [
                           Expanded(
                             child: Container(
-                              padding: EdgeInsets.only(top: 10, left: 30),
+                              padding: const EdgeInsets.only(top: 10, left: 30),
                               child: Text(
                                 msg,
                                 overflow: TextOverflow.fade,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.grey,
                                     fontFamily: "Times New Roman",
                                     fontWeight: FontWeight.w500,
@@ -120,10 +119,10 @@ class _inboxState extends State<inbox> {
           );
         } else {
           return Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             height: 40,
             width: 40,
-            child: CircleAvatar(
+            child: const CircleAvatar(
               child: Text(""),
             ),
           );
@@ -137,17 +136,17 @@ class _inboxState extends State<inbox> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 20),
           child: FloatingActionButton(
               backgroundColor: Colors.green,
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   //me ************************************
-                  return newMessage();
+                  return const newMessage();
                   // return policy();
                 }));
               },
-              child: Icon(
+              child: const Icon(
                 Icons.chat,
                 size: 30,
                 color: Colors.white,
@@ -155,7 +154,7 @@ class _inboxState extends State<inbox> {
         ),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Expanded(
@@ -170,7 +169,7 @@ class _inboxState extends State<inbox> {
                     List<DocumentSnapshot> userMessages = data.docs;
                     return ListView.builder(
                         itemCount: userMessages.length,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           FirebaseAuth auth = FirebaseAuth.instance;
                           if (userMessages[index]
@@ -189,17 +188,17 @@ class _inboxState extends State<inbox> {
                             if (time == null) {
                               print("time is null");
                             }
-                            return message("${targetId}", recentMessage,
+                            return message(targetId, recentMessage,
                                 time); //This is the id of the user we chatted with
                           } else {
-                            return SizedBox(
+                            return const SizedBox(
                               height: 0,
                             );
                           }
                         });
                   } else {
                     print('LOADING data ');
-                    return Text("LOADING");
+                    return const Text("LOADING");
                   }
                 },
               ),

@@ -19,7 +19,7 @@ class selectCity extends StatefulWidget{
   final province;
   final provinceName;
 
-  selectCity({this.province, this.provinceName});
+  const selectCity({super.key, this.province, this.provinceName});
 
   @override
   _selectCityState createState() => _selectCityState();
@@ -84,7 +84,7 @@ class _selectCityState extends State<selectCity> {
                         initialValue: houseModel.cityName.isNotEmpty
                             ? houseModel.cityName
                             : null,
-                        hint: Text("select city"),
+                        hint: const Text("select city"),
                         onChanged: (val) async {
                           dev.log(
                               'city outside the onChange: content: $cities \ncities id: $cityIds');
@@ -100,7 +100,7 @@ class _selectCityState extends State<selectCity> {
 
                           SimpleDatabase city = SimpleDatabase(name: 'city');
                           await city.clear();
-                          await city.add('${val}');
+                          await city.add('$val');
 
                           setState(() {
                             selectedCity = val.toString();
@@ -122,7 +122,7 @@ class _selectCityState extends State<selectCity> {
                             'content': Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   'Select Scheme/ Non-Scheme',
                                   style: TextStyle(fontSize: 18.0),
                                 ),
@@ -144,7 +144,7 @@ class _selectCityState extends State<selectCity> {
                 ),
               );
             } else {
-              return TextContainer();
+              return const TextContainer();
             }
           }),
     );

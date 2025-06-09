@@ -1,14 +1,8 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import "package:firebase_auth/firebase_auth.dart";
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/Material.dart';
-import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import "package:google_fonts/google_fonts.dart";
-import 'package:reale/policy.dart';
 
 import 'package:reale/widgets/stylishCustomButton.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -216,7 +210,7 @@ class loginState extends State<login> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return mobileEntry();
+                          return const mobileEntry();
 
                         }));
                       },
@@ -281,7 +275,7 @@ class loginState extends State<login> {
                   //   ),
                   // ),//FA
                   // CEBOOK
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Text(
                     "مدد کے لیے کال کریں",

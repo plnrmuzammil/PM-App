@@ -6,7 +6,7 @@ import 'package:reale/widgets/stylishCustomButton.dart';
 class viewSubBlock extends StatefulWidget {
   final block;
 
-  viewSubBlock({this.block});
+  const viewSubBlock({super.key, this.block});
 
   @override
   viewSubBlockState createState() => viewSubBlockState();
@@ -43,7 +43,7 @@ class viewSubBlockState extends State<viewSubBlock> {
                         ? const Text('PLease Wait')
                         : ListView.builder(
                         itemCount: docs.length,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           if (index == 0) {
                             return Column(

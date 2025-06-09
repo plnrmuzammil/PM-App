@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class help extends StatefulWidget {
+  const help({super.key});
+
   @override
   _helpState createState() => _helpState();
 }
@@ -29,7 +31,7 @@ class _helpState extends State<help> {
                   );
                 }
                 else{
-                  return Text("LOADING");
+                  return const Text("LOADING");
                 }
 
               }

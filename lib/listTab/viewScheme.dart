@@ -5,7 +5,7 @@ import 'package:reale/widgets/stylishCustomButton.dart';
 
 class viewSceme extends StatefulWidget {
   final city;
-  viewSceme({this.city});
+  const viewSceme({super.key, this.city});
 
   @override
   _viewScemeState createState() => _viewScemeState();
@@ -29,7 +29,7 @@ class _viewScemeState extends State<viewSceme> {
 
               return ListView.builder(
                   itemCount: docs.length,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     if (index == 0) {
                       return Column(
@@ -38,8 +38,8 @@ class _viewScemeState extends State<viewSceme> {
                           Container(
                             width: MediaQuery.of(context).size.width,
                             color: Colors.green,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Select Scheme',
                                 style: TextStyle(
@@ -49,11 +49,11 @@ class _viewScemeState extends State<viewSceme> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Container(
                             width: MediaQuery.of(context).size.width - 50,
                             margin:
-                                EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                                const EdgeInsets.only(top: 15, bottom: 5, left: 20),
                             child: StylishCustomButton(
                               onPressed: () {
                                 Navigator.push(context,
@@ -71,7 +71,7 @@ class _viewScemeState extends State<viewSceme> {
                       return Center(
                         child: Container(
                           width: MediaQuery.of(context).size.width - 50,
-                          margin: EdgeInsets.only(top: 15, bottom: 5),
+                          margin: const EdgeInsets.only(top: 15, bottom: 5),
                           child: StylishCustomButton(
                             onPressed: () {
                               Navigator.push(context,
@@ -88,7 +88,7 @@ class _viewScemeState extends State<viewSceme> {
                   });
             } else {
               return Container(
-                child: Center(
+                child: const Center(
                   child: Text('No Content'),
                 ),
               );

@@ -1,16 +1,11 @@
-import 'dart:ui';
 import 'package:dash_chat_2/dash_chat_2.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flutter/scheduler.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import "dart:io";
 import 'package:image_picker/image_picker.dart';
-import 'package:reale/newCode/Functions.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 var globalmsg = "";
@@ -19,7 +14,7 @@ final picker = ImagePicker();
 
 class chatScreen extends StatefulWidget {
   final targetUid;
-  chatScreen(this.targetUid);
+  const chatScreen(this.targetUid, {super.key});
   @override
   _chatScreenState createState() => _chatScreenState();
 }
@@ -64,12 +59,8 @@ class _chatScreenState extends State<chatScreen> {
         messages = messagesDoc!["chat"];
       });
     }
-    if (messages == null) {
-      messages = [];
-    } else {
-      messages = messages;
-    }
-
+    messages = messages;
+  
     return 1;
   }
 
@@ -198,7 +189,7 @@ class _chatScreenState extends State<chatScreen> {
                 return Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.green,
                         // gradient: LinearGradient(
                         //     colors: [Colors.blue, Colors.green],
@@ -218,7 +209,7 @@ class _chatScreenState extends State<chatScreen> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
                               ),
@@ -229,7 +220,7 @@ class _chatScreenState extends State<chatScreen> {
                               NetworkImage(targetInfo!['profile'])),
                           Text(
                             " " + targetInfo!['businessOwner'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
@@ -401,7 +392,7 @@ class _chatScreenState extends State<chatScreen> {
                   ],
                 );
               } else {
-                return Text("Loading");
+                return const Text("Loading");
               }
 
 //        return Center(child: Text("Target is ${widget.targetUid} Current User is ${auth.currentUser.uid}"));
@@ -411,10 +402,10 @@ class _chatScreenState extends State<chatScreen> {
   }
 
   scrollToEnd() {
-    new Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       chatscrolCtrl.animateTo(
         chatscrolCtrl.position.maxScrollExtent,
-        duration: Duration(milliseconds: 1),
+        duration: const Duration(milliseconds: 1),
         curve: Curves.fastOutSlowIn,
       );
     });

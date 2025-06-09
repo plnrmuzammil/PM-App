@@ -29,6 +29,8 @@ TextEditingController registrationNumber = TextEditingController();
 TextEditingController loc = TextEditingController();
 
 class profile extends StatefulWidget {
+  const profile({super.key});
+
   @override
   _profileState createState() => _profileState();
 }
@@ -42,7 +44,7 @@ class _profileState extends State<profile> {
         .collection("users")
         .doc(auth.currentUser!.uid)
         .get();
-    var userData = await user.data();
+    var userData = user.data();
     (userData as Map<String, dynamic>)["profile"] = link.toString();
 
     // updating the user profile data
@@ -61,7 +63,7 @@ class _profileState extends State<profile> {
     if (pickedFile != null) {
       _image = File(pickedFile.path);
 
-      FirebaseStorage _storage = FirebaseStorage.instance;
+      FirebaseStorage storage = FirebaseStorage.instance;
 
       String? fileName = _image?.path;
 
@@ -81,8 +83,8 @@ class _profileState extends State<profile> {
   }
 
   initializeValues() async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    var tempUser = await _auth.currentUser;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    var tempUser = auth.currentUser;
 
     setState(() {
       currentUser = tempUser;
@@ -90,20 +92,18 @@ class _profileState extends State<profile> {
 
     var userCol = await FirebaseFirestore.instance
         .collection("users")
-        .doc(_auth.currentUser!.uid)
+        .doc(auth.currentUser!.uid)
         .get();
-    var userData = await userCol.data();
+    var userData = userCol.data();
 
     var nameTemp = tempUser!.displayName == null ? "" : tempUser.displayName;
     var tempIdCard = userData!["idCard"] == null ? "" : userData["idCard"];
     var tempBusinessName =
-        userData["businessName"] == null ? "" : userData["businessName"];
-    var tempRegistrationNumber = userData["registrationNumber"] == null
-        ? ""
-        : userData["registrationNumber"];
+        userData["businessName"] ?? "";
+    var tempRegistrationNumber = userData["registrationNumber"] ?? "";
     var tempBusinessOwner =
-        userData["businessOwner"] == null ? "" : userData["businessOwner"];
-    var locationa = userData["loc"] == null ? "" : userData["loc"];
+        userData["businessOwner"] ?? "";
+    var locationa = userData["loc"] ?? "";
 
     profileName.value = TextEditingValue(text: nameTemp!);
     idCard.value = TextEditingValue(text: tempIdCard);
@@ -122,13 +122,13 @@ class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
-    var photo = currentUser!.photoURL == null ? "none" : currentUser!.photoURL;
+    var photo = currentUser!.photoURL ?? "none";
 
     return SafeArea(
       child: StreamBuilder<dynamic>(
           stream: FirebaseFirestore.instance
               .collection("users")
-              .doc("${auth.currentUser!.uid}")
+              .doc(auth.currentUser!.uid)
               .snapshots(),
           builder: (context, snapshot) {
             return Container(
@@ -147,18 +147,18 @@ class _profileState extends State<profile> {
                   Center(
                     child: CircleAvatar(
                       radius: 100,
-                      backgroundImage: NetworkImage(photo!),
+                      backgroundImage: NetworkImage(photo),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text('dummy name here'),
-                  Text('dummy phone number here'),
-                  Divider(color: Colors.blue),
+                  const SizedBox(height: 20),
+                  const Text('dummy name here'),
+                  const Text('dummy phone number here'),
+                  const Divider(color: Colors.blue),
                   // list tile start
                   // profile list tile
                   ListTile(
-                    leading: Icon(Icons.person_add_alt_1_outlined),
-                    title: Text('Profile Setting'),
+                    leading: const Icon(Icons.person_add_alt_1_outlined),
+                    title: const Text('Profile Setting'),
                     onTap: () {
                       // go to user info screen
                       Navigator.push(context,
@@ -171,30 +171,30 @@ class _profileState extends State<profile> {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text('Logout'),
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Logout'),
                     onTap: () async {
                       print('logout text tapped');
                       bool? result = await showDialog<bool>(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Logout'),
-                            content: Text('Do you want to Logout ?'),
+                            title: const Text('Logout'),
+                            content: const Text('Do you want to Logout ?'),
                             actions: [
                               MaterialButton(
                                 onPressed: () {
                                   print('Log out user');
                                   Navigator.of(context).pop(false);
                                 },
-                                child: Text('No'),
+                                child: const Text('No'),
                               ),
                               MaterialButton(
                                 onPressed: () {
                                   print('Login user');
                                   Navigator.of(context).pop(true);
                                 },
-                                child: Text('Yes'),
+                                child: const Text('Yes'),
                               ),
                             ],
                           );
@@ -208,7 +208,7 @@ class _profileState extends State<profile> {
 
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
-                          return SafeArea(child: Scaffold(body: login()));
+                          return const SafeArea(child: Scaffold(body: login()));
                         }));
                       }
                     },

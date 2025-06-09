@@ -32,18 +32,18 @@ class UserForm {
   String long='';
 
   bool isProvidedAllFields() {
-    if (!(name.length > 0) ||
-        !(businessName.length > 0) ||
-        !(businessOwner.length > 0) ||
-        !(officeAddress.length > 0) ||
-        !(idCardNumber.length > 0) ||
-        !(registrationNumber.length > 0) ||
+    if (!(name.isNotEmpty) ||
+        !(businessName.isNotEmpty) ||
+        !(businessOwner.isNotEmpty) ||
+        !(officeAddress.isNotEmpty) ||
+        !(idCardNumber.isNotEmpty) ||
+        !(registrationNumber.isNotEmpty) ||
         //!(cardFrontImage.length > 0) ||
         //!(cardBackImage.length > 0) ||
         //!(documentFrontImage.length > 0) ||
         //!(documentBackImage.length > 0) ||
-        !(province.length > 0) ||
-        !(city.length > 0)) {
+        !(province.isNotEmpty) ||
+        !(city.isNotEmpty)) {
       return false;
     } else {
       return true;

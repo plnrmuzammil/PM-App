@@ -1,12 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/Material.dart';
-import "package:flutter/cupertino.dart";
+import 'package:flutter/material.dart';
 import "package:pin_code_text_field/pin_code_text_field.dart";
 import "package:google_fonts/google_fonts.dart";
-import 'package:reale/mainPage.dart';
-import 'package:reale/mobileEntry.dart';
-import 'package:reale/setUserDetails.dart';
 import 'package:reale/userInformationFormAfterOTP.dart';
 
 TextEditingController codeField = TextEditingController();
@@ -14,7 +9,7 @@ TextEditingController codeField = TextEditingController();
 class codeEntry extends StatefulWidget {
   final verifId;
 
-  codeEntry(this.verifId);
+  const codeEntry(this.verifId, {super.key});
 
   @override
   _codeEntryState createState() => _codeEntryState();
@@ -26,7 +21,7 @@ class _codeEntryState extends State<codeEntry> {
     return SafeArea(
       child: Scaffold(
           body: Container(
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +33,7 @@ class _codeEntryState extends State<codeEntry> {
                 style: GoogleFonts.getFont('Montserrat',
                     fontWeight: FontWeight.w500, fontSize: 30),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               PinCodeTextField(
@@ -56,7 +51,7 @@ class _codeEntryState extends State<codeEntry> {
                 pinBoxDecoration:
                     ProvidedPinBoxDecoration.defaultPinBoxDecoration,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -79,11 +74,11 @@ class _codeEntryState extends State<codeEntry> {
                   )
                 ],
               )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
-                decoration: new BoxDecoration(
+                decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                       color: Color.fromRGBO(249, 214, 148, 0.5),
@@ -101,10 +96,6 @@ class _codeEntryState extends State<codeEntry> {
                   height: 70,
                   child: MaterialButton(
                     color: Colors.green,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
                     onPressed: () async {
                       FirebaseAuth auth = FirebaseAuth.instance;
                       PhoneAuthCredential phoneAuthCredential =
@@ -130,8 +121,12 @@ class _codeEntryState extends State<codeEntry> {
                         print(e);
                       }
                     },
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
                     ),
                   ),
                 ),

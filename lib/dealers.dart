@@ -6,6 +6,8 @@ import 'package:reale/chat.dart';
 TextEditingController currentSearch = TextEditingController();
 
 class dealers extends StatefulWidget {
+  const dealers({super.key});
+
   @override
   _dealersState createState() => _dealersState();
 }
@@ -14,11 +16,11 @@ class _dealersState extends State<dealers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               width: double.infinity,
               margin: const EdgeInsets.only(top: 30, left: 10, right: 10),
@@ -28,18 +30,18 @@ class _dealersState extends State<dealers> {
                 },
                 controller: currentSearch,
                 textAlign: TextAlign.center,
-                style: TextStyle(),
+                style: const TextStyle(),
                 decoration: InputDecoration(
                     isDense: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     labelText: 'Search',
                     hintMaxLines: 3,
-                    suffixIcon: Icon(Icons.search),
+                    suffixIcon: const Icon(Icons.search),
                     hintText: "Search by name,id card,email,phone"),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: StreamBuilder(
                 stream:
@@ -91,7 +93,7 @@ class _dealersState extends State<dealers> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               margin:
-                                  EdgeInsets.only(left: 5, right: 5, bottom: 3),
+                                  const EdgeInsets.only(left: 5, right: 5, bottom: 3),
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.push(context,
@@ -163,7 +165,7 @@ class _dealersState extends State<dealers> {
                                             text: 'Owner: ',
                                             children: [
                                               TextSpan(
-                                                text: '${businessOwner}',
+                                                text: businessOwner,
                                                 style: GoogleFonts.getFont(
                                                     'Montserrat',
                                                     color: Colors.black,
@@ -199,7 +201,7 @@ class _dealersState extends State<dealers> {
                                             text: 'Business Name: ',
                                             children: [
                                               TextSpan(
-                                                text: '${businessName}',
+                                                text: businessName,
                                                 style: GoogleFonts.getFont(
                                                     'Montserrat',
                                                     color: Colors.black,
@@ -229,24 +231,24 @@ class _dealersState extends State<dealers> {
                               ),
                             );
                           } else {
-                            return SizedBox(
+                            return const SizedBox(
                               height: 0,
                             );
                           }
                         } else {
-                          return SizedBox(
+                          return const SizedBox(
                             height: 0,
                           );
                         }
                       },
                     );
                   } else {
-                    return Text("LOADING");
+                    return const Text("LOADING");
                   }
                 },
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
-import 'package:flutter/Material.dart';
+import 'dart:ui';
+
 
 
 const GreyColorWriting = Color(0xD7000000);
@@ -7,7 +8,7 @@ const BackGroundComtainerColor = Color(0x3D000000);
 const String TempUserIdddddd="PyUcYODgZsXUYafa2fkEXilHtbx1";
 
 
-const textstyleMainCard= TextStyle(
+final textstyleMainCard= TextStyle(
     color:
     GreyColorWriting,
     fontFamily:

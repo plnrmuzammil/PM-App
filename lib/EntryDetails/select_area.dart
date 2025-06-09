@@ -9,11 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reale/stepper_steps/selectScheme.dart';
 
 import '../mainPage.dart';
 import '../widgets/stylishCustomButton.dart';
@@ -155,13 +153,13 @@ class _SelectAreaState extends State<SelectArea> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
       ),
 
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           child: Column(
@@ -169,7 +167,7 @@ class _SelectAreaState extends State<SelectArea> {
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Enter Area*",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -180,8 +178,8 @@ class _SelectAreaState extends State<SelectArea> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: DropDown<dynamic>(
-                  items: ['Squareft', 'Marla'],
-                  hint: Text('units'),
+                  items: const ['Squareft', 'Marla'],
+                  hint: const Text('units'),
                   onChanged: (val)
                   {
                     setState((){
@@ -194,7 +192,7 @@ class _SelectAreaState extends State<SelectArea> {
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Enter Demand*",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -202,7 +200,7 @@ class _SelectAreaState extends State<SelectArea> {
                 controller: demandController,
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               
@@ -210,7 +208,7 @@ class _SelectAreaState extends State<SelectArea> {
                 maxLines: 3,
                 decoration: InputDecoration(
                   hintText: "Enter Details*",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -226,7 +224,7 @@ class _SelectAreaState extends State<SelectArea> {
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Plot/ Flat/ Khasra*",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -238,7 +236,7 @@ class _SelectAreaState extends State<SelectArea> {
                 (
                   direction: Axis.horizontal,
                   groupValue: _verticalGroupValue,
-                  textStyle: TextStyle(fontSize: 25),
+                  textStyle: const TextStyle(fontSize: 25),
                   horizontalAlignment: MainAxisAlignment.spaceAround,
                   onChanged: (val)
                   {
@@ -258,7 +256,7 @@ class _SelectAreaState extends State<SelectArea> {
                       }
                     
                   },
-                  items: ['Show', 'Hide'],
+                  items: const ['Show', 'Hide'],
                   itemBuilder: (item){
                     return RadioButtonBuilder(item);
                   }
@@ -270,7 +268,7 @@ class _SelectAreaState extends State<SelectArea> {
                 decoration: InputDecoration(
                   hintText: "Address*",
                   labelText: 'Address',
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -278,7 +276,7 @@ class _SelectAreaState extends State<SelectArea> {
                 controller: addressController,
               ),
 
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width - 50,
                 child: MaterialButton(
                   color: Colors.green,
@@ -308,8 +306,8 @@ class _SelectAreaState extends State<SelectArea> {
                   print(isShownPlotInfo);
                   if(image != null) {
                       print("image exist");
-                      Get.defaultDialog(title: "uploading" ,content: CircularProgressIndicator());
-                      final result =await storage.child("location_image").child(DateTime.now().toString());
+                      Get.defaultDialog(title: "uploading" ,content: const CircularProgressIndicator());
+                      final result =storage.child("location_image").child(DateTime.now().toString());
                       final fil = await result.putFile(image!.absolute);
                       final picUrl = await fil.ref.getDownloadURL();
 
@@ -355,7 +353,7 @@ class _SelectAreaState extends State<SelectArea> {
                           }
                         );
 
-                        print("image ${picUrl}");
+                        print("image $picUrl");
 
                         Get.back();
                         showMsg('Successful');
@@ -364,13 +362,13 @@ class _SelectAreaState extends State<SelectArea> {
                         showMsg('Failed');
                       });
 
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainPage()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainPage()));
 
                     }
                   else
                   {
                     print("image does not exist");
-                    Get.defaultDialog(title: "uploading" ,content: CircularProgressIndicator());
+                    Get.defaultDialog(title: "uploading" ,content: const CircularProgressIndicator());
 
                     await db.add({
                       "province": provinceId.toString()?? "",
@@ -417,7 +415,7 @@ class _SelectAreaState extends State<SelectArea> {
                       showMsg('Failed');
                     });
 
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => mainPage()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainPage()));
 
                   }
                   },

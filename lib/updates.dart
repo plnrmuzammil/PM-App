@@ -29,7 +29,7 @@ class updatesState extends State<updates> {
 
             return ListView.builder(
                 itemCount: docs?.length,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index){
 
                   if(index == 0)

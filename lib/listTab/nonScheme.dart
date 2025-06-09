@@ -1,13 +1,11 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
-import "package:reale/listTab/selectPhase.dart";
-import 'package:reale/listTab/viewNonSchemeListing.dart';
 import "package:reale/listTab/viewNonSchemeListing_new_shams.dart";
 import 'package:reale/widgets/stylishCustomButton.dart';
 
 class NonSceme extends StatefulWidget {
   final city;
-  NonSceme({this.city});
+  const NonSceme({super.key, this.city});
 
   @override
   _viewScemeState createState() => _viewScemeState();
@@ -76,7 +74,7 @@ class _viewScemeState extends State<NonSceme> {
                           return Center(
                             child: Container(
                               width: MediaQuery.of(context).size.width - 50,
-                              margin: EdgeInsets.only(top: 15, bottom: 5),
+                              margin: const EdgeInsets.only(top: 15, bottom: 5),
                               child: StylishCustomButton(
                                 onPressed: () {
                                   Navigator.push(context,
@@ -94,7 +92,7 @@ class _viewScemeState extends State<NonSceme> {
               else
                 {
                   return Container(
-                    child: Center(
+                    child: const Center(
                       child: Text('No Content'),
                     ),
                   );
@@ -102,7 +100,7 @@ class _viewScemeState extends State<NonSceme> {
 
             } else {
               return Container(
-                child: Center(
+                child: const Center(
                   child: CircularProgressIndicator(),
                 ),
               );

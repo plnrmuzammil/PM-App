@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_dropdown/flutter_dropdown.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
-import "package:reale/stepper_steps/selectAdress.dart";
-import "package:reale/stepper_steps/addListing.dart";
 import 'package:reale/stepper_steps/select_scheme_route.dart';
 import 'package:reale/widgets/setting_stepper.dart';
 import 'package:simple_database/simple_database.dart';
@@ -28,8 +26,8 @@ class selectSubblocks extends StatefulWidget {
   final phaseName;
   final schemeName;
 
-  selectSubblocks(
-      {this.scheme,
+  const selectSubblocks(
+      {super.key, this.scheme,
       this.schemeName,
       this.province,
       this.city,
@@ -87,8 +85,8 @@ class _selectSubblocksState extends State<selectSubblocks> {
                       ignoring: !stepperStateModel.isSubBlockDropDownEnable,
                       child: DropDown<dynamic>(
                         items: subblocks,
-                        hint: Text("select Sub Block"),
-                        initialValue: houseModel.subBlockName.length > 0
+                        hint: const Text("select Sub Block"),
+                        initialValue: houseModel.subBlockName.isNotEmpty
                             ? houseModel.subBlockName
                             : null,
                         onChanged: (val) async {
@@ -136,7 +134,7 @@ class _selectSubblocksState extends State<selectSubblocks> {
                           SimpleDatabase subBlock =
                               SimpleDatabase(name: 'subBlock');
                           await subBlock.clear();
-                          await subBlock.add('${val}');
+                          await subBlock.add('$val');
 
                           setState(() {
                             selectedSubblock = val.toString();
@@ -158,7 +156,7 @@ class _selectSubblocksState extends State<selectSubblocks> {
                             'content': Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   // 'Select Address', old one
                                   'Select Property Type', // new one
                                   style: TextStyle(fontSize: 18.0),

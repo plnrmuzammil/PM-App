@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
-import 'package:reale/EntryDetails/selectPhaseDetails.dart';
 import 'package:reale/EntryDetails/selectSchemeDetails.dart';
 import 'package:reale/EntryDetails/select_property_type.dart';
 
@@ -39,7 +38,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -71,7 +70,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
                       }
 
                     return DropDown<dynamic>(
-                      hint: Text("select type"),
+                      hint: const Text("select type"),
                       items: type,
                       onChanged: (val)
                       {
@@ -100,7 +99,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
                     box.delete('type');
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectSchemeDetails(provinceId: widget.provinceId, cityId: widget.cityId,)));
                   },
-                  child: Text("Back"),
+                  child: const Text("Back"),
                 ),
                 MaterialButton(
                   color: Colors.green,

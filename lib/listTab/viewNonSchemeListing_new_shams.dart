@@ -2,11 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:reale/constant.dart';
 import 'package:reale/non_scheme_property_details_new.dart';
 
-import '../non_scheme_property_details.dart';
 
 class ViewNonSchemeListingNew extends StatefulWidget {
   const ViewNonSchemeListingNew({Key? key, this.scheme}) : super(key: key);
@@ -60,18 +57,18 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("View listing"),
+        title: const Text("View listing"),
         actions: [
           IconButton(
               onPressed: ()
               {
-                Get.defaultDialog(title: "Filter",radius: 0.0 , content: Container(
+                Get.defaultDialog(title: "Filter",radius: 0.0 , content: SizedBox(
                   height: 250.0,
                   width: 300,
                   child: ListView(
                     children: [
 
-                      Text(
+                      const Text(
                         'Filter',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
@@ -79,7 +76,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                       
                       DropDown(
                           items: subtypes,
-                          hint: Text("select sub type"),
+                          hint: const Text("select sub type"),
                           onChanged: (val)
                           {
                             setState(() {
@@ -92,18 +89,18 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                       Row(
                         children: [
                           DropDown(
-                              items: [5, 10, 20, 50, 100],
-                              hint: Text("select min Range"),
+                              items: const [5, 10, 20, 50, 100],
+                              hint: const Text("select min Range"),
                               onChanged: (val) async
                               {
                                 setState(() {
                                   minRange = val.toString();
                                 });
                               }),
-                          Spacer(),
+                          const Spacer(),
                           DropDown(
-                              items: [300, 500, 1000, 2000, 4000, 5000],
-                              hint: Text("select max range"),
+                              items: const [300, 500, 1000, 2000, 4000, 5000],
+                              hint: const Text("select max range"),
                               onChanged: (val)
                               {
                                 setState(() {
@@ -114,18 +111,18 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                         ],
                       ),
 
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
 
                       DropDown(
-                          items: ["Squareft", "Marla"],
-                          hint: Text("Select Unit"),
+                          items: const ["Squareft", "Marla"],
+                          hint: const Text("Select Unit"),
                           onChanged: (val) async {
                             setState((){
                               unit = val.toString();
                             });
                           },),
 
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Row(
                         children: [
 
@@ -137,23 +134,23 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                 isFilter = true;
                               });
                               print("scheme ${widget.scheme}");
-                              print("syb type ${subType}");
+                              print("syb type $subType");
                             },
-                            child: Text('search'),
+                            child: const Text('search'),
                           ),
 
                           TextButton(
                             onPressed: (){
                               Navigator.of(context).pop();
                             },
-                            child: Text('Exit'),
+                            child: const Text('Exit'),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text('clear Filter'),
+                            child: const Text('clear Filter'),
                           ),
                         ],
                       ),
@@ -161,13 +158,13 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                   ),
                 ));
               },
-              icon: Icon(Icons.filter_list_sharp))
+              icon: const Icon(Icons.filter_list_sharp))
         ],
       ),
       body: isFilter ? StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("listings")
-            .where('scheme', isEqualTo: "${widget.scheme}").where('type', isEqualTo: '${subType}')
+            .where('scheme', isEqualTo: "${widget.scheme}").where('type', isEqualTo: subType)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot)
         {
@@ -178,7 +175,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
 
             print("document length ${documents.length}");
 
-            if(documents.length != 0)
+            if(documents.isNotEmpty)
             {
               return ListView.builder(
                   itemCount: documents.length,
@@ -213,12 +210,12 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                               ),
                             ),
                             margin: const EdgeInsets.all(0),
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Row(
                               children: [
 
                                 (documents[index].data() as Map<String, dynamic>)['schemeImageURL'] == "" ?
-                                CircleAvatar(
+                                const CircleAvatar(
                                   radius: 40,
                                   backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5V0xbLGXgCE5b9LrnrrawNIaYO6qsZxBxRxkOI9yKtA&s"),
                                 ) : CircleAvatar(
@@ -227,7 +224,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                 ),
 
 
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 Flexible(
@@ -269,7 +266,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                               angle:
                                               1.6,
                                               child:
-                                              Text(
+                                              const Text(
                                                 'Sold',
                                                 style:
                                                 TextStyle(
@@ -296,13 +293,13 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                             MainAxisAlignment
                                                 .start,
                                             children: [
-                                              Icon(Icons
+                                              const Icon(Icons
                                                   .timer_rounded),
-                                              SizedBox(
+                                              const SizedBox(
                                                   width: 3),
                                               Text(
-                                                "$timeFormat",
-                                                style:textstyleMainCard,
+                                                timeFormat,
+                                          //      style:textstyleMainCard,
                                               ),
                                             ],
                                           ),
@@ -333,7 +330,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                     2,
                                                     softWrap:
                                                     true,
-                                                    style:textstyleMainCard,
+                                           //         style:textstyleMainCard,
                                                   ),
                                                 ),
                                               ],
@@ -352,7 +349,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   maxLines: 1,
-                                                  style:textstyleMainCard,
+                                       //           style:textstyleMainCard,
                                                 ),
                                               ),
                                             ],
@@ -453,7 +450,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   //maxLines: 2,
-                                                  style:textstyleMainCard,
+                                         //         style:textstyleMainCard,
                                                 ),
                                               ),
 
@@ -471,7 +468,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   //maxLines: 2,
-                                                  style:textstyleMainCard,
+                                         //         style:textstyleMainCard,
                                                 ),
                                               ),
                                               // const Icon(
@@ -574,7 +571,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
             QuerySnapshot? querySnapshot = snapshot.data;
             List<QueryDocumentSnapshot> documents = querySnapshot!.docs;
 
-            if(documents.length != 0)
+            if(documents.isNotEmpty)
             {
               return ListView.builder(
                   itemCount: documents.length,
@@ -609,12 +606,12 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                               ),
                             ),
                             margin: const EdgeInsets.all(0),
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Row(
                               children: [
 
                                 (documents[index].data() as Map<String, dynamic>)['schemeImageURL'] == "" ?
-                                CircleAvatar(
+                                const CircleAvatar(
                                   radius: 40,
                                   backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5V0xbLGXgCE5b9LrnrrawNIaYO6qsZxBxRxkOI9yKtA&s"),
                                 ) : CircleAvatar(
@@ -623,7 +620,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                 ),
 
 
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 Flexible(
@@ -665,7 +662,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                               angle:
                                               1.6,
                                               child:
-                                              Text(
+                                              const Text(
                                                 'Sold',
                                                 style:
                                                 TextStyle(
@@ -692,13 +689,13 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                             MainAxisAlignment
                                                 .start,
                                             children: [
-                                              Icon(Icons
+                                              const Icon(Icons
                                                   .timer_rounded),
-                                              SizedBox(
+                                              const SizedBox(
                                                   width: 3),
                                               Text(
-                                                "$timeFormat",
-                                                style:textstyleMainCard,
+                                                timeFormat,
+                                     //           style:textstyleMainCard,
                                               ),
                                             ],
                                           ),
@@ -729,7 +726,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                     2,
                                                     softWrap:
                                                     true,
-                                                    style: textstyleMainCard,
+                                      //              style: textstyleMainCard,
                                                   ),
                                                 ),
                                               ],
@@ -748,7 +745,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   maxLines: 2,
-                                                  style:textstyleMainCard,
+                                     //             style:textstyleMainCard,
                                                 ),
                                               ),
                                             ],
@@ -848,7 +845,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   //maxLines: 2,
-                                                  style:textstyleMainCard,
+                                    //              style:textstyleMainCard,
                                                 ),
                                               ),
                                               // const Icon(
@@ -870,7 +867,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListingNew> {
                                                   //     TextOverflow
                                                   //         .ellipsis,
                                                   //maxLines: 2,
-                                                  style:textstyleMainCard,
+                                     //             style:textstyleMainCard,
                                                 ),
                                               ),
                                               // const Icon(

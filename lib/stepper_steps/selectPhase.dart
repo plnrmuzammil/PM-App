@@ -3,7 +3,6 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter_dropdown/flutter_dropdown.dart";
 import 'package:reale/main.dart';
 import "package:reale/stepper_steps/selectBlock.dart";
-import "package:reale/stepper_steps/addListing.dart";
 import 'package:reale/stepper_steps/select_scheme_route.dart';
 import 'package:reale/widgets/setting_stepper.dart';
 import 'package:simple_database/simple_database.dart';
@@ -21,8 +20,8 @@ class selectPhase extends StatefulWidget {
   final city;
   final cityName;
 
-  selectPhase(
-      {this.scheme,
+  const selectPhase(
+      {super.key, this.scheme,
       this.province,
       this.city,
       this.cityName,
@@ -77,8 +76,8 @@ class _selectPhaseState extends State<selectPhase> {
                       ignoring: !stepperStateModel.isPhaseDropDownEnable,
                       child: DropDown<dynamic>(
                         items: phases,
-                        hint: Text("select phase"),
-                        initialValue: houseModel.phaseName.length > 0
+                        hint: const Text("select phase"),
+                        initialValue: houseModel.phaseName.isNotEmpty
                             ? houseModel.phaseName
                             : null,
                         onChanged: (val) async {
@@ -118,7 +117,7 @@ class _selectPhaseState extends State<selectPhase> {
 
                           SimpleDatabase phase = SimpleDatabase(name: 'phase');
                           await phase.clear();
-                          await phase.add('${val}');
+                          await phase.add('$val');
 
                           setState(() {
                             selectedPhase = val.toString();
@@ -138,7 +137,7 @@ class _selectPhaseState extends State<selectPhase> {
                             'content': Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   'Select Sub Zone/ Sub Phase/ Sector/ Block',
                                   style: TextStyle(fontSize: 18.0),
                                 ),

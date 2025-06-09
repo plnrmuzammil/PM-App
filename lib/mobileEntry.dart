@@ -1,13 +1,9 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:reale/codeEntry.dart';
-import 'package:reale/mainPage.dart';
 import 'package:reale/setUserDetails.dart';
 import 'package:reale/widgets/stylishCustomButton.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -41,6 +37,7 @@ class mobileEntryState extends State<mobileEntry> {
     FirebaseAuth auth = FirebaseAuth.instance;
   }
 
+  @override
   void initState(){
     // TODO: implement initState
     checkLoggedIn();
@@ -56,7 +53,7 @@ class mobileEntryState extends State<mobileEntry> {
           body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         child: Column(
           children: [
             Text(

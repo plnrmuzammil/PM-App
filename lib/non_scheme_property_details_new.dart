@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reale/widgets/custom_text_widget.dart';
 
-import 'constant.dart';
 import 'image_screen.dart';
 
 class NonSchemePropertyDetailsNew extends StatefulWidget {
@@ -56,7 +55,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Details"),
+        title: const Text("Details"),
       ),
 
       body: Column(
@@ -109,9 +108,9 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.access_time),
+                              const Icon(Icons.access_time),
                               CustomTextWidget(
-                                text1: '$timeFormat',
+                                text1: timeFormat,
                                 text2: '',
                               ),
                             ],
@@ -134,7 +133,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
                           ),
                           CustomTextWidget(
                             text1: 'Dealer: ',
-                            text2: '$dealerName',
+                            text2: dealerName,
                           ),
                           CustomTextWidget(
                             text1: 'Property Type: ',
@@ -146,7 +145,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
                     ),
                   ),
                   Card(
-                    margin: EdgeInsets.all(2.0),
+                    margin: const EdgeInsets.all(2.0),
                     elevation: 8.0,
                     child: Container(
                       padding: const EdgeInsets.all(10),
@@ -199,8 +198,8 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
                             '${widget.data["plotInfo"]}',
                           ),
 
-                          SizedBox(height: 30),
-                          CustomTextWidget(
+                          const SizedBox(height: 30),
+                          const CustomTextWidget(
                             text1: 'Description: ',
                           ),
 
@@ -212,7 +211,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetailsNew>{
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectBlockDetails.dart';
-import 'package:reale/EntryDetails/selectTypeDetails.dart';
 import 'package:reale/EntryDetails/select_purpose.dart';
 
 
@@ -33,7 +32,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -63,7 +62,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                   }
 
                   return DropDown<dynamic>(
-                    hint: Text("select phase"),
+                    hint: const Text("select phase"),
                     items: phase,
                     onChanged: (val){
                       setState(() {
@@ -89,7 +88,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                     box.delete('phase');
                     box.delete('phaseId');
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectPurpose(provinceId: widget.provinceId, cityId: widget.cityId, isScheme: true, propertyType: widget.propertyType, typeId: widget.typeId,)));
-                  }, child: Text("Back"),),
+                  }, child: const Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
                   onPressed:(selectedPhaseName == "" && selectedPhaseNameId == "") ? null : (){
@@ -100,7 +99,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                             builder: (context) => SelectBlockDetails(provinceId: widget.provinceId, cityId: widget.cityId, schemeId: widget.typeId, phaseId: selectedPhaseNameId, isScheme: widget.isScheme, propertyType: widget.propertyType,)
                         ));
                   },
-                  child: Text("Continue"),),
+                  child: const Text("Continue"),),
               ],
             ),
           ],

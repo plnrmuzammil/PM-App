@@ -31,7 +31,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Details"),
+        title: const Text("Details"),
       ),
       
       body: Column(
@@ -74,9 +74,9 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.access_time),
+                                const Icon(Icons.access_time),
                                 CustomTextWidget(
-                                  text1: '$timeFormat',
+                                  text1: timeFormat,
                                   text2: '',
                                 ),
                               ],
@@ -111,7 +111,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
                       ),
                     ),
                     Card(
-                      margin: EdgeInsets.all(2.0),
+                      margin: const EdgeInsets.all(2.0),
                       elevation: 8.0,
                       child: Container(
                         padding: const EdgeInsets.all(10),
@@ -166,8 +166,8 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
                               '${widget.data["area"]} ${widget.data["plotInfo"]}',
                             ),
 
-                            SizedBox(height: 30),
-                            CustomTextWidget(
+                            const SizedBox(height: 30),
+                            const CustomTextWidget(
                               text1: 'Description: ',
                             ),
 
@@ -179,7 +179,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),

@@ -6,12 +6,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:reale/chat.dart';
 
 // import 'package:location/location.dart';
 import 'package:reale/model/userFormModel.dart';
-import 'package:reale/policy.dart';
 import 'package:reale/widgets/stylishCustomButton.dart';
 
 import 'mainPage.dart';
@@ -28,7 +26,7 @@ class UserFormAfterOTP extends StatefulWidget {
 }
 
 class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   UserForm? _userModel;
   File? _profileImage;
   File? _idCardFrontImage;
@@ -55,7 +53,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
   // bool viewFromProfileSide = false;
 
-  final TextStyle _lableStyle = TextStyle(fontSize: 12);
+  static const TextStyle _lableStyle = TextStyle(fontSize: 12);
 
   bool loadProfileImage = false;
   int? lines;
@@ -66,7 +64,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _profileImage = File(pickedImage!.path);
+      _profileImage = File(pickedImage.path);
       loadProfileImage = true;
       showCircleAvatarPic = false;
       profileImageExist = false;
@@ -94,7 +92,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _idCardFrontImage = File(pickedImage!.path);
+      _idCardFrontImage = File(pickedImage.path);
       isFrontImageSelected = true;
     });
   }
@@ -103,7 +101,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _idCardFrontImage = File(pickedImage!.path);
+      _idCardFrontImage = File(pickedImage.path);
       isFrontImageSelected = true;
     });
   }
@@ -115,7 +113,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _idCardBackImage = File(pickedImage!.path);
+      _idCardBackImage = File(pickedImage.path);
       isBackImageSelected = true;
     });
   }
@@ -124,7 +122,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _idCardBackImage = File(pickedImage!.path);
+      _idCardBackImage = File(pickedImage.path);
       isBackImageSelected = true;
     });
   }
@@ -136,7 +134,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _registerationDocFrontImage = File(pickedImage!.path);
+      _registerationDocFrontImage = File(pickedImage.path);
       isDocumentFrontImageSelected = true;
     });
   }
@@ -146,7 +144,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _registerationDocFrontImage = File(pickedImage!.path);
+      _registerationDocFrontImage = File(pickedImage.path);
       isDocumentFrontImageSelected = true;
     });
   }
@@ -158,7 +156,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _registerationDocBackImage = File(pickedImage!.path);
+      _registerationDocBackImage = File(pickedImage.path);
       isDocumentBackImageSelected = true;
     });
   }
@@ -168,7 +166,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if (pickedImage == null) return;
     setState(() {
-      _registerationDocBackImage = File(pickedImage!.path);
+      _registerationDocBackImage = File(pickedImage.path);
       isDocumentBackImageSelected = true;
     });
   }
@@ -225,7 +223,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
     if(isCameraSelected & isTextFieldSelected)
       {
-        final profileRef = await storage.child("user_profile_image").child("${updatedName.toString()}").child(updatedName.toString() + " profile pic");
+        final profileRef = storage.child("user_profile_image").child(updatedName.toString()).child("$updatedName profile pic");
         await profileRef.putFile(_profileImage!.absolute);
         String imgUrl =await profileRef.getDownloadURL();
 
@@ -260,7 +258,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           pageLoading = true;
         });
 
-        final profileRef = await storage.child("user_profile_image").child("${updatedName.toString()}").child(updatedName.toString() + " profile pic");
+        final profileRef = storage.child("user_profile_image").child(updatedName.toString()).child("$updatedName profile pic");
         await profileRef.putFile(_profileImage!.absolute);
         String imgUrl =await profileRef.getDownloadURL();
 
@@ -343,31 +341,31 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           ),
         );
 
-        Reference profileRef = await storage.child("user_profile_image").child("${nameController.text}").child(nameController.text + " profile pic");
+        Reference profileRef = storage.child("user_profile_image").child(nameController.text).child("${nameController.text} profile pic");
         UploadTask task1 = profileRef.putFile(_profileImage!.absolute);
         TaskSnapshot taskSnapshot1 =await task1;
         String imgUrl = await taskSnapshot1.ref.getDownloadURL();
 
         // Second image
-        Reference cardFrontImg = await storage.child("user_profile_image").child("${nameController.text}").child(nameController.text + " id card front img");
+        Reference cardFrontImg = storage.child("user_profile_image").child(nameController.text).child("${nameController.text} id card front img");
         UploadTask task2 = cardFrontImg.putFile(_idCardFrontImage!.absolute);
         TaskSnapshot taskSnapshot2 =await task2;
         String idCardFrontImgUrl = await taskSnapshot2.ref.getDownloadURL();
 
         // Third image
-        Reference cardBackImg = await storage.child("user_profile_image").child("${nameController.text}").child(nameController.text + " id card back img");
+        Reference cardBackImg = storage.child("user_profile_image").child(nameController.text).child("${nameController.text} id card back img");
         UploadTask task3 = cardBackImg.putFile(_idCardBackImage!.absolute);
         TaskSnapshot taskSnapshot3 =await task3;
         String idCardbackImgUrl = await taskSnapshot3.ref.getDownloadURL();
 
         // Fourth image
-        Reference regDocFrontImg = await storage.child("user_profile_image").child("${nameController.text}").child(nameController.text + " reg front img");
+        Reference regDocFrontImg = storage.child("user_profile_image").child(nameController.text).child("${nameController.text} reg front img");
         UploadTask task4 = regDocFrontImg.putFile(_registerationDocFrontImage!.absolute);
         TaskSnapshot taskSnapshot4 =await task4;
         String regDocFrontImgUrl = await taskSnapshot4.ref.getDownloadURL();
 
         // Fifth image
-        Reference regDocBackImg = await storage.child("user_profile_image").child("${nameController.text}").child(nameController.text + " reg back img");
+        Reference regDocBackImg = storage.child("user_profile_image").child(nameController.text).child("${nameController.text} reg back img");
         UploadTask task5 = regDocBackImg.putFile(_registerationDocBackImage!.absolute);
         TaskSnapshot taskSnapshot5 =await task5;
         String regDocBackImgUrl = await taskSnapshot5.ref.getDownloadURL();
@@ -391,7 +389,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           'officeAddress': officeAddressController.text.toString(),
         }).then((value) {
           Get.back();
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => mainPage()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MainPage()));
         }).onError((error, stackTrace) {
           Get.back();
           Get.defaultDialog(
@@ -417,7 +415,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
+          content: SizedBox(
             height: 120.0,
             child: Column(
               children: [
@@ -534,7 +532,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
             if (value) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                 return mainPage();
+                 return const MainPage();
               }));
             }
           });
@@ -579,23 +577,17 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
         .collection("users")
         .doc(auth.currentUser!.uid)
         .get();
-    if (user != null) {
-      print('user exist on firebase');
-      var userData = user;
-      setState(() {
-        print('user profile image url: ${userData["profile"]}');
+    print('user exist on firebase');
+    var userData = user;
+    setState(() {
+      print('user profile image url: ${userData["profile"]}');
 
-        profileImagePath = userData["profile"];
-        _isProfileImageUploading = false;
-      });
-    } else {
-      setState(() {
-        _isProfileImageUploading = false;
-      });
+      profileImagePath = userData["profile"];
+      _isProfileImageUploading = false;
+    });
     }
-  }
 
-  List<String> _provinceNames = const [
+  final List<String> _provinceNames = const [
     'Khyber Pakhtunkhwa',
     'Punjab',
     'Sindh',
@@ -624,11 +616,11 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
               widget.isFromLoginRoute
                   ? 'Enter User Information'
                   : 'Update User Information',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           body: _isSubmitting
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Container(
@@ -652,28 +644,29 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                   width: 160,
                                   height: 160,
                                   child:profileImageExist ? CircleAvatar(
-                                    backgroundImage:updatedProfileImage == "" ? NetworkImage("No Image") : NetworkImage(updatedProfileImage),
+                                    backgroundImage:updatedProfileImage == "" ? const NetworkImage("No Image") : NetworkImage(updatedProfileImage),
                                   ) : CircleAvatar(backgroundImage: FileImage(_profileImage!.absolute),),
                                 ),
                               ),
                             ),
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           // name
-                          !widget.isFromLoginRoute ? Text("Name : " + updatedName) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("Name : $updatedName") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             //readOnly: widget.isFromLoginRoute ? true : false,
                             controller: nameController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                                 {
                                   return "* required";
                                 }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -692,9 +685,9 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                             // },
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           // phone number
-                          !widget.isFromLoginRoute ? Text("Phone Number : " +updatedPhone) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("Phone Number : $updatedPhone") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             //readOnly: true,
                             controller: phoneController,
@@ -703,10 +696,11 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                 {
                                   return '* required';
                                 }
+                              return null;
                             },
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -725,21 +719,22 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                             },
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           // business name
-                          !widget.isFromLoginRoute ? Text("Business Name : " +updatedBusinessName) :TextFormField(
+                          !widget.isFromLoginRoute ? Text("Business Name : $updatedBusinessName") :TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             controller: businessNameController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                                 {
                                   return '* required';
                                 }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -758,21 +753,22 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                             },
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           // business owner
-                          !widget.isFromLoginRoute ? Text("Business Owner : " +updatedBusinessOwnerName) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("Business Owner : $updatedBusinessOwnerName") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             controller: businessOwnerController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                               {
                                 return '* required';
                               }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -820,21 +816,22 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                           //   ),
                           // ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           // city
-                          !widget.isFromLoginRoute ? Text("City : " +updatedCity) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("City : $updatedCity") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             controller: cityController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                               {
                                 return '* required';
                               }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -918,7 +915,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                           !widget.isFromLoginRoute & !enableOfficeAddress ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Office Address : " +updatedOfficeAddress),
+                              Text("Office Address : $updatedOfficeAddress"),
                               IconButton(onPressed: (){
                                 setState(() {
                                   enableOfficeAddress = !enableOfficeAddress;
@@ -929,16 +926,17 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                             padding: const EdgeInsets.symmetric(vertical: 15.0),
                               child: TextFormField(
                               controller: officeAddressController,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                               keyboardType: TextInputType.name,
                               validator: (val){
                                 if(val!.isEmpty)
                                 {
                                   return '* required';
                                 }
+                                return null;
                               },
                                 maxLines: officeAddressController.text.length > 53 ? 5 : 1,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                 isDense: true,
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 8),
@@ -962,28 +960,29 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
 
                           // id card number
-                          !widget.isFromLoginRoute ? Text("ID Card : " +updatedIdCardNumber) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("ID Card : $updatedIdCardNumber") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             controller: idCardNumberController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                               {
                                 return '* required';
                               }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
+                              contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
-                              border: const OutlineInputBorder(
+                              border: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.black, width: 2),
                               ),
                               //border: InputBorder.none,
                               hintText: 'ID Card Number *',
-                              hintStyle: const TextStyle(fontSize: 16),
+                              hintStyle: TextStyle(fontSize: 16),
                               labelText: 'ID Card Number',
                               labelStyle: _lableStyle,
                             ),
@@ -993,14 +992,14 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                           ),
 
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                           if (widget.isFromLoginRoute == true)
                             const Text(
                               'Choose ID card front image ',
                               style: TextStyle(fontSize: 18),
                             ),
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                           if (widget.isFromLoginRoute == true)
                             // for cardFrontImage
                             Container(
@@ -1030,7 +1029,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                       //     _userModel.cardFrontImage;
                                     },
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: FittedBox(
                                       fit: BoxFit.cover,
@@ -1038,7 +1037,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                         isFrontImageSelected
                                             ? 'Image has Selected'
                                             : 'Nothing is Selected',
-                                        style: TextStyle(fontSize: 15),
+                                        style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -1054,14 +1053,14 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                             ),
                           // ------------------------
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                           if (widget.isFromLoginRoute == true)
-                            Text(
+                            const Text(
                               'Choose ID card back image ',
                               style: TextStyle(fontSize: 18),
                             ),
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                           if (widget.isFromLoginRoute == true)
                             // cardBackImage
                             Container(
@@ -1088,7 +1087,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                       //     _userModel.cardBackImage;
                                     },
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: FittedBox(
                                       fit: BoxFit.cover,
@@ -1096,7 +1095,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                         isBackImageSelected
                                             ? 'Image has Selected'
                                             : 'Nothing is Selected',
-                                        style: TextStyle(fontSize: 15),
+                                        style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -1109,22 +1108,23 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                               ),
                             ),
 
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
 
                           // textfield for registration number
-                          !widget.isFromLoginRoute ? Text("Registeration Number : " +updatedRegisterationNumber) : TextFormField(
+                          !widget.isFromLoginRoute ? Text("Registeration Number : $updatedRegisterationNumber") : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
                             //enabled: false,
                             controller: registerationNumberController,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
                               if(val!.isEmpty)
                               {
                                 return '* required';
                               }
+                              return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 8),
@@ -1147,14 +1147,14 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
                           if (widget.isFromLoginRoute == true)
                             // register document
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                           if (widget.isFromLoginRoute == true)
-                            Text(
+                            const Text(
                               'Choose an Registration document front image ',
                               style: TextStyle(fontSize: 18),
                             ),
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                           if (widget.isFromLoginRoute == true)
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -1170,7 +1170,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
                                     },
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: FittedBox(
                                       fit: BoxFit.cover,
@@ -1178,7 +1178,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                         isDocumentFrontImageSelected
                                             ? 'Image has Selected'
                                             : 'Nothing is Selected',
-                                        style: TextStyle(fontSize: 15),
+                                        style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -1191,15 +1191,15 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                               ),
                             ),
                           // ------------------------
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
                           if (widget.isFromLoginRoute == true)
-                            Text(
+                            const Text(
                               'Choose an Registration document back image ',
                               style: TextStyle(fontSize: 18),
                             ),
                           if (widget.isFromLoginRoute == true)
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                           if (widget.isFromLoginRoute == true)
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -1215,7 +1215,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
                                     },
                                   ),
-                                  SizedBox(width: 20),
+                                  const SizedBox(width: 20),
                                   Expanded(
                                     child: FittedBox(
                                       fit: BoxFit.cover,
@@ -1223,7 +1223,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                         isDocumentBackImageSelected
                                             ? 'Image has Selected'
                                             : 'Nothing is Selected',
-                                        style: TextStyle(fontSize: 15),
+                                        style: const TextStyle(fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -1255,7 +1255,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 5),
-                                  child: pageLoading ? CircularProgressIndicator() : StylishCustomButton(
+                                  child: pageLoading ? const CircularProgressIndicator() : StylishCustomButton(
                                     text: 'Update',
                                     icon: Icons.update_rounded,
                                     onPressed: (){
@@ -1284,7 +1284,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                     ),
                   ),
                 ),
-        ) : Center(child: CircularProgressIndicator(),),
+        ) : const Center(child: CircularProgressIndicator(),),
       ),
     );
   }
@@ -1459,7 +1459,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           .get();
       // adding data to user model
       if (widget.isFromLoginRoute == true) {
-        _userModel!.city = this.city;
+        _userModel!.city = city;
         _userModel!.province = province;
         // me *************************************
         // _userModel.lat = _userLocationData.latitude.toString();
@@ -1477,8 +1477,8 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
       // passing the document to the use form model
       FirebaseFirestore.instance
           .collection("users")
-          .doc('${FirebaseAuth.instance.currentUser!.uid}')
-          .update({'officeAddress': officeAddressController!.text.toString()});
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({'officeAddress': officeAddressController.text.toString()});
 
       setState(() {
         _isSubmitting = false;

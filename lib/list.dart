@@ -4,9 +4,7 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:reale/constant.dart';
-import 'package:reale/propertyDetails.dart';
 import 'package:reale/propertyDetailsNew.dart';
-import 'package:reale/tempConstant.dart';
 import 'package:simple_database/simple_database.dart';
 
 var provinceName;
@@ -18,6 +16,8 @@ TextEditingController currentSearch = TextEditingController();
 var filters = ["province", "type", "sold", "area"];
 
 class list extends StatefulWidget {
+  const list({super.key});
+
   @override
   _listState createState() => _listState();
 }
@@ -33,7 +33,7 @@ class _listState extends State<list> {
   //Stream<UserModel> get onCurrentUserChanged => _currentUserStreamCtrl.stream;
   //void updateCurrentUserUI() => _currentUserStreamCtrl.sink.add(_currentUser);
 
-  String _currentIndividualListingID = '';
+  final String _currentIndividualListingID = '';
 
   Stream<QuerySnapshot>? querySnapShot;
   SimpleDatabase propertySelectedBasedOnRange =
@@ -48,16 +48,16 @@ class _listState extends State<list> {
       isFilteredDataLoading = true;
     });
     // print('getFilterData() started');
-    Map<String, dynamic> propertySearchDialog = Map<String, dynamic>();
+    Map<String, dynamic> propertySearchDialog = <String, dynamic>{};
     var result = await propertySelectedBasedOnRange.getAll();
-    if (result.length == 0 || result.length == null) {
+    if (result.isEmpty) {
       // print('(result.length == 0 || result.length == null)');
-      QuerySnapshot _query = await FirebaseFirestore.instance
+      QuerySnapshot query = await FirebaseFirestore.instance
           .collection("listings")
           .orderBy("time", descending: true)
           .get();
 
-      _currentStream.sink.add(_query);
+      _currentStream.sink.add(query);
 
       setState(() {
         isFilteredExist = false;
@@ -101,7 +101,7 @@ class _listState extends State<list> {
         isFilteredDataLoading = false;
         print('query adding to a stream: <query Legnth>: ${query.docs.length}');
         _currentStream.sink.add(query);
-        if (query.docs.length == 0) {
+        if (query.docs.isEmpty) {
           isShowNoneData = true;
         }
       });
@@ -113,23 +113,7 @@ class _listState extends State<list> {
     super.initState();
     getFilterData();
     // get all province
-
-    // --------------logic - 001
-    // _snapshot.docs.map((DocumentSnapshot _docSnapshot){
-    //  if(_docSnapshot.exists){
-    //    return _docSnapshot.data()['name'].toString();
-    //    // _docSnapshot.data().map((String key, dynamic value) {
-    //    //   return
-    //    // })
-    //  }
-    // }).toList();
-    // print('Province names from firebase; $_allProvinceFromFirebase');
-
-    // get corresponding city from firebase
-    // get sub type
-    // based on range do search operation
-  }
-
+    }
   @override
   void dispose() {
     if (querySnapShot != null) {
@@ -145,7 +129,7 @@ class _listState extends State<list> {
         .collection("listings")
         .orderBy("time", descending: true)
         .get()
-        .then((QuerySnapshot _query) => _currentStream.sink.add(_query));
+        .then((QuerySnapshot query) => _currentStream.sink.add(query));
   }
 
   void showNoneDataToUser(bool isTrue) {
@@ -154,20 +138,14 @@ class _listState extends State<list> {
     });
   }
 
-  void addToStream(QuerySnapshot _snap) {
+  void addToStream(QuerySnapshot snap) {
     print('add to query snapshot stream');
-    _currentStream.sink.add(_snap);
+    _currentStream.sink.add(snap);
   }
 
   Future<void> getPicsData(String uid) async {
     print(uid);
-    //picsData.where("listing_id", isEqualTo: uid).snapshots().map((event){
-    // event.docs.map((e){
-    //   print((e.data() as Map<String, dynamic>)['listing_id']);
-    // });
-    //});
-    //print("data ${(event.data() as Map<String, dynamic>)['listing_id']}");
-    //print(event);
+
   }
 
   @override
@@ -180,143 +158,7 @@ class _listState extends State<list> {
           child: Column(
             //shrinkWrap: true,
             children: [
-              // search bar row
-              // Container(
-              //     color: Colors.green,
-              //     padding:
-              //         EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Expanded(
-              //       child: Container(
-              //         color: Colors.green,
-              //         //width: 150,
-              //         child: TextField(
-              //           onChanged: (val){},
-              //           controller: currentSearch,
-              //           decoration: InputDecoration(
-              //             contentPadding: EdgeInsets.all(10),
-              //             enabledBorder: OutlineInputBorder(
-              //                 borderSide: const BorderSide(
-              //                     color: Colors.white,
-              //                     width: 2,
-              //                     style: BorderStyle.solid),
-              //                 borderRadius: BorderRadius.circular(15)),
-              //             border: OutlineInputBorder(
-              //                 borderSide: const BorderSide(
-              //                     color: Colors.white,
-              //                     width: 2,
-              //                     style: BorderStyle.solid),
-              //                 borderRadius: BorderRadius.circular(15)),
-              //             isDense: true,
-              //             fillColor: Colors.green,
-              //             filled: true,
-              //             hintText: "Enter Search Query",
-              //             hintStyle:
-              //                 TextStyle(fontSize: 16, color: Colors.white),
-              //           ),
-              //           style: TextStyle(fontSize: 16, color: Colors.white),
-              //         ),
-              //       ),
-              //     ),
-              //     //SizedBox(width: 15),
-              //     Container(
-              //       // width: 200,
-              //       color: Colors.green,
-              //       child: PopupMenuTheme(
-              //         data: Theme.of(context)
-              //             .popupMenuTheme
-              //             .copyWith(color: Colors.green),
-              //         child: PopupMenuButton(
-              //           icon: Icon(
-              //             Icons.wrap_text,
-              //             color: Colors.white,
-              //           ),
-              //           // dropdownColor: Colors.green,
-              //           // iconEnabledColor: Colors.green,
-              //           // iconDisabledColor: Colors.green,
-              //           // focusColor: Colors.green,
-              //           onSelected: (int val) {
-              //             setState(() {
-              //               print(val);
-              //               currentFilterName = filters[val];
-              //               currentFilterValue = val;
-              //             });
-              //           },
-              //           //hint: Text("${currentFilterName}"),
-              //           //value: currentFilterValue,
-              //           itemBuilder: (context) {
-              //             return [
-              //               const PopupMenuItem(
-              //                 value: 0,
-              //                 child: Text(
-              //                   "Province Wise",
-              //                   style: TextStyle(color: Colors.white),
-              //                 ),
-              //               ),
-              //               const PopupMenuItem(
-              //                 value: 1,
-              //                 child: Text(
-              //                   "Property type wise",
-              //                   style: TextStyle(color: Colors.white),
-              //                 ),
-              //               ),
-              //               const PopupMenuItem(
-              //                 value: 2,
-              //                 child: Text(
-              //                   "Sold Wise",
-              //                   style: TextStyle(color: Colors.white),
-              //                 ),
-              //               ),
-              //               const PopupMenuItem(
-              //                 value: 3,
-              //                 child: Text(
-              //                   "Area wise",
-              //                   style: TextStyle(color: Colors.white),
-              //                 ),
-              //               ),
-              //             ];
-              //           },
-              //         ),
-              //       ),
-              //     ),
-              //
-              //     // button show range based property dialogs
-              //     Container(
-              //       //height: 40,
-              //       //width: 90,
-              //       color: Colors.transparent,
-              //       //width: MediaQuery.of(context).size.width - 100,
-              //       child: IconButton(
-              //         onPressed: () async {
-              //           querySnapShot =
-              //               await showDialog<Stream<QuerySnapshot>>(
-              //             //useRootNavigator: false,
-              //             barrierDismissible: false,
-              //             context: context,
-              //             builder: (context) {
-              //               return RangePropertyDialog(
-              //                 refresh: CancellingStream,
-              //                 addToStream: addToStream,
-              //                 showNoneDataToUser: showNoneDataToUser,
-              //               );
-              //             },
-              //           );
-              //           setState(() {});
-              //           print('get stream');
-              //           print('start searching from this button');
-              //         },
-              //         icon: const Icon(
-              //           Icons.filter_list,
-              //           color: Colors.white,
-              //         ),
-              //         //label: Text("Filter"),
-              //       ),
-              //     ),
-              //   ],
-              // )),
-
+           
               Expanded(
                 child: Container(
                   //height: MediaQuery.of(context).size.height * 0.8,
@@ -352,7 +194,7 @@ class _listState extends State<list> {
 
                               return ListView.builder(
                                   shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   itemCount: documents?.length,
                                   itemBuilder: (context, index) {
                                     bool? check() {
@@ -421,6 +263,7 @@ class _listState extends State<list> {
                                           }
                                         }
                                       }
+                                      return null;
                                     }
 
                                     final profilePic = (documents![index].data()
@@ -428,7 +271,7 @@ class _listState extends State<list> {
                                         "schemeImageURL"];
 
                                     if (check() == true) {
-                                      DateTime time = (documents![index].data()
+                                      DateTime time = (documents[index].data()
                                               as Map<String, dynamic>)["time"]
                                           .toDate();
                                       var timeHours = time.hour;
@@ -464,16 +307,9 @@ class _listState extends State<list> {
                                             margin: const EdgeInsets.all(0),
                                             // margin: EdgeInsets.only(
                                             //     bottom: 40, left: 5, right: 5),
-                                            padding: EdgeInsets.all(10),
+                                            padding: const EdgeInsets.all(10),
                                             child: Container(
-                                              // show the red stripe if its sold otherwise show nothing
-                                              //------
-                                              // color: documents[index]
-                                              //             .data()["sold"] ==
-                                              //         "yes"
-                                              //     ? Colors.blueGrey
-                                              //     : Colors.white,
-
+                           
                                               child: Row(
                                                 children: [
                                                   CircleAvatar(
@@ -488,25 +324,14 @@ class _listState extends State<list> {
                                                                     "schemeImageURL"] ??
                                                                 '',
                                                           )
-                                                        : NetworkImage(
+                                                        : const NetworkImage(
                                                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5V0xbLGXgCE5b9LrnrrawNIaYO6qsZxBxRxkOI9yKtA&s"),
-
-                                                    // child: documents[index]
-                                                    //                 .data()[
-                                                    //             "schemeImageURL"] ==
-                                                    //         null
-                                                    //     ? Text('No Image')
-                                                    //     : Image.network(
-                                                    //         documents[index]
-                                                    //                 .data()[
-                                                    //             "schemeImageURL"],
-                                                    //         fit: BoxFit.cover),
 
                                                     backgroundColor:
                                                         Colors.blue,
                                                     radius: 40,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
                                                   Flexible(
@@ -553,7 +378,7 @@ class _listState extends State<list> {
                                                                       angle:
                                                                           1.6,
                                                                       child:
-                                                                          Text(
+                                                                          const Text(
                                                                         'Sold',
                                                                         style:
                                                                             TextStyle(
@@ -656,13 +481,12 @@ class _listState extends State<list> {
                                                                     //     TextOverflow
                                                                     //         .ellipsis,
                                                                     maxLines: 1,
-                                                                    style:textstyleMainCard,
+                                                    //                style:textstyleMainCard,
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
-                                                            //posted by
-                                                            // Row(
+                                                                                                                       // Row(
                                                             //   mainAxisAlignment:
                                                             //   MainAxisAlignment
                                                             //       .start,
@@ -755,7 +579,7 @@ class _listState extends State<list> {
                                                                     //     TextOverflow
                                                                     //         .ellipsis,
                                                                     //maxLines: 2,
-                                                                    style: textstyleMainCard
+                                                      //              style: textstyleMainCard
                                                                   ),
                                                                 ),
 
@@ -773,7 +597,7 @@ class _listState extends State<list> {
                                                                     //     TextOverflow
                                                                     //         .ellipsis,
                                                                     //maxLines: 2,
-                                                                    style: textstyleMainCard
+                                                       //             style: textstyleMainCard
                                                                   ),
                                                                 ),
                                                                 // const Icon(
@@ -799,7 +623,7 @@ class _listState extends State<list> {
                                     }
                                   });
                             } else {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
@@ -815,310 +639,13 @@ class _listState extends State<list> {
   }
 }
 
-/*
-// child: DropdownButton(
-//
-//                             icon: Icon(Icons.filter_1_rounded),
-//                             dropdownColor: Colors.green,
-//                             iconEnabledColor: Colors.green,
-//                             iconDisabledColor: Colors.green,
-//                             focusColor: Colors.green,
-//                             onChanged: (val) {
-//                               setState(() {
-//                                 print(val);
-//                                 currentFilterName = filters[val];
-//                                 currentFilterValue = val;
-//                               });
-//                             },
-//                             hint: Text("${currentFilterName}"),
-//                             value: currentFilterValue,
-//                             items: [
-//                               DropdownMenuItem(
-//                                 child: Text(
-//                                   "Province Wise",
-//                                   style: TextStyle(color: Colors.white),
-//                                 ),
-//                                 value: 0,
-//                               ),
-//                               DropdownMenuItem(
-//                                 child: Text(
-//                                   "Property type wise",
-//                                   style: TextStyle(color: Colors.white),
-//                                 ),
-//                                 value: 1,
-//                               ),
-//                               DropdownMenuItem(
-//                                 child: Text(
-//                                   "Sold Wise",
-//                                   style: TextStyle(color: Colors.white),
-//                                 ),
-//                                 value: 2,
-//                               ),
-//                               DropdownMenuItem(
-//                                 child: Text(
-//                                   "Area wise",
-//                                   style: TextStyle(color: Colors.white),
-//                                 ),
-//                                 value: 3,
-//                               ),
-//                             ],
-//                           ),
-/*raised button for showing data*/
-// child: RaisedButton(
-//                                         elevation: 0,
-//                                         color:
-//                                             documents[index].data()["sold"] ==
-//                                                     "yes"
-//                                                 ? Colors.blueGrey
-//                                                 : Colors.white,
-//                                         onPressed: () {
-//                                           Navigator.push(context,
-//                                               MaterialPageRoute(
-//                                                   builder: (context) {
-//                                             return propertyDetails(
-//                                                 documents[index].data());
-//                                           }));
-//                                         },
-//                                         child: Column(
-//                                           children: [
-//                                             Row(
-//                                               mainAxisAlignment:
-//                                                   MainAxisAlignment.start,
-//                                               children: [
-//                                                 Text(
-//                                                   "Time : $timeFormat",
-//                                                   style: TextStyle(
-//                                                       color: Colors.black,
-//                                                       fontFamily:
-//                                                           "Times New Roman",
-//                                                       fontWeight:
-//                                                           FontWeight.w700,
-//                                                       fontSize: 16),
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                             SizedBox(
-//                                               height: 10,
-//                                             ),
-//                                             Container(
-//                                               width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width,
-//                                               child: Row(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment.start,
-//                                                 children: [
-//                                                   Text(
-//                                                     "Scheme : ${documents[index].data()["schemeName"]}",
-//                                                     overflow:
-//                                                         TextOverflow.ellipsis,
-//                                                     style: TextStyle(
-//                                                         color: Colors.black,
-//                                                         fontFamily:
-//                                                             "Times New Roman",
-//                                                         fontWeight:
-//                                                             FontWeight.w700,
-//                                                         fontSize: 16),
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                             Row(
-//                                               mainAxisAlignment:
-//                                                   MainAxisAlignment
-//                                                       .spaceBetween,
-//                                               children: [
-//                                                 Text(
-//                                                   "Province : ${documents[index].data()["provinceName"]}",
-//                                                   overflow:
-//                                                       TextOverflow.ellipsis,
-//                                                   style: TextStyle(
-//                                                       color: Colors.black,
-//                                                       fontFamily:
-//                                                           "Times New Roman",
-//                                                       fontWeight:
-//                                                           FontWeight.w700,
-//                                                       fontSize: 16),
-//                                                 ),
-//                                                 Icon(
-//                                                   Icons.location_on,
-//                                                   size: 50,
-//                                                 )
-//                                               ],
-//                                             ),
-//                                             Row(
-//                                               mainAxisAlignment:
-//                                                   MainAxisAlignment.start,
-//                                               children: [
-//                                                 StreamBuilder(
-//                                                   stream: FirebaseFirestore
-//                                                       .instance
-//                                                       .collection("users")
-//                                                       .doc(documents[index]
-//                                                           .data()["seller"])
-//                                                       .snapshots(),
-//                                                   builder: (context, snapshot) {
-//                                                     if (snapshot.hasData) {
-//                                                       return Row(
-//                                                         mainAxisAlignment:
-//                                                             MainAxisAlignment
-//                                                                 .center,
-//                                                         children: [
-//                                                           Text(
-//                                                             "Seller : ",
-//                                                             style: TextStyle(
-//                                                                 color: Colors
-//                                                                     .black,
-//                                                                 fontFamily:
-//                                                                     "Times New Roman",
-//                                                                 fontWeight:
-//                                                                     FontWeight
-//                                                                         .w700,
-//                                                                 fontSize: 20),
-//                                                           ),
-//                                                           Text(
-//                                                             "${snapshot.data.data()["businessName"]}",
-//                                                             style: TextStyle(
-//                                                               color: Colors
-//                                                                   .deepOrangeAccent,
-//                                                               fontFamily:
-//                                                                   "Times New Roman",
-//                                                               fontWeight:
-//                                                                   FontWeight
-//                                                                       .w700,
-//                                                               fontSize: 20,
-//                                                             ),
-//                                                             overflow:
-//                                                                 TextOverflow
-//                                                                     .fade,
-//                                                           )
-//                                                         ],
-//                                                       );
-//                                                     } else {
-//                                                       return Text("LOADING");
-//                                                     }
-//                                                   },
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                           ],
-//                                         ),
-//                                       ),
-// class StripOnCardClipper extends CustomClipper<Path> {
-//   @override
-//   Path getClip(Size size) {
-//     // do clipping here
-//     var path = Path();
-//     path.fillType = PathFillType.evenOdd;
-//     path.moveTo(size.width - 25, 0);
-//     path.lineTo(size.width, 70);
-//     path.lineTo(size.width, 85);
-//     path.lineTo(size.width - 40, 0);
-//     path.close();
-//     return path;
-//   }
-//
-//   @override
-//   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-//     return true;
-//   }
-// }
-/*
-* Positioned(
-                                                                right: 5, // 10
-                                                                top: -25, // -15
-                                                                //width: 29,
-                                                                //height: 70,
-                                                                child: Transform
-                                                                    .rotate(
-                                                                  angle: -0.8,
-                                                                  child:
-                                                                      Container(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .centerLeft,
-                                                                    margin: const EdgeInsets
-                                                                        .all(0),
-                                                                    padding: const EdgeInsets
-                                                                            .only(
-                                                                        top: 0,
-                                                                        left: 0,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            13),
-                                                                    color: Colors
-                                                                        .red,
-                                                                    //width: 30,
-                                                                    height: 105,
-                                                                    child: Transform
-                                                                        .rotate(
-                                                                      angle:
-                                                                          1.6,
-                                                                      child:
-                                                                          Text(
-                                                                        'Sold',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              )
-* */
-
-// class RangeDialog extends StatefulWidget {
-//   Function populateMinMaxRange;
-//
-//   RangeDialog({Key key, this.populateMinMaxRange}) : super(key: key);
-//
-//   @override
-//   _RangeDialogState createState() => _RangeDialogState();
-// }
-//
-// class _RangeDialogState extends State<RangeDialog> {
-//   RangeValues _rangeValue = const RangeValues(0, 0);
-//
-//   //RangeLabels _rangeLabel = const RangeLabels('0', '0');
-//   @override
-//   Widget build(BuildContext context) {
-//     return RangeSlider(
-//       min: 0,
-//       max: 1000,
-//       //divisions: 10,
-//       values: _rangeValue,
-//       labels: RangeLabels(_rangeValue.start.round().toString(),
-//           _rangeValue.end.round().toString()),
-//       // labels: RangeLabels(_rangeValue.start.toString(), _rangeValue.end.toString()),
-//       onChanged: (RangeValues rValue) {
-//         print('range slider: $rValue');
-//         //print('range slider: $_rangeValue');
-//         setState(() {
-//           _rangeValue = rValue;
-//           widget.populateMinMaxRange(
-//               rValue.start.round().toDouble(), rValue.end.round().toDouble());
-//           //_rangeLabel.start = _rangeValue.start.toString();
-//           //_rangeLabel.end = _rangeValue.end.toString();
-//           // _rangeLabel = RangeLabels(rValue.start.toString(), rValue.end.toString());
-//         });
-//       },
-//     );
-//   }
-// }
-*/
-
 class RangePropertyDialog extends StatefulWidget {
   Function refresh;
   Function addToStream;
   Function showNoneDataToUser;
 
   RangePropertyDialog(
-      {required this.refresh,
+      {super.key, required this.refresh,
       required this.addToStream,
       required this.showNoneDataToUser});
 
@@ -1129,7 +656,7 @@ class RangePropertyDialog extends StatefulWidget {
 class RangePropertyDialogState extends State<RangePropertyDialog> {
   Future<void> getAllCitiesFromFirebase() async {
     print('invoked.....getAllCitiesFromFirebase()');
-    QuerySnapshot _snapshot = await FirebaseFirestore.instance
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection("cities")
         .orderBy("name", descending: false)
         .get();
@@ -1138,9 +665,9 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
     _allCityIDFromFirebase = [];
 
     print(
-        'city snapshot length: ${(_snapshot.docs.length as Map<String, dynamic>)}');
+        'city snapshot length: ${(snapshot.docs.length as Map<String, dynamic>)}');
     //var el = _snapshot.docs;
-    for (var e in _snapshot.docs) {
+    for (var e in snapshot.docs) {
       if (e.data() != null) {
         print('current province id: $currentProvinceID');
         if ((e.data() as Map<String, dynamic>)["provinceID"] ==
@@ -1155,15 +682,15 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
   }
 
   List<String> _allProvinceFromFirebase = [];
-  List<String> _allProvinceIDFromFirebase = [];
+  final List<String> _allProvinceIDFromFirebase = [];
   String currentProvinceID = '';
 
   List<String> _allCityFromFirebase = [];
   List<String> _allCityIDFromFirebase = [];
   String? currentCityID;
 
-  bool _isProvinceSelected = false;
-  bool _isCitySelected = false;
+  final bool _isProvinceSelected = false;
+  final bool _isCitySelected = false;
 
   bool _isSubTypeSelected = false;
   bool _isRangeSelected = false;
@@ -1215,8 +742,8 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
         .collection("province")
         .orderBy("name", descending: false)
         .get()
-        .then((QuerySnapshot _snapshot) {
-      var el = _snapshot.docs;
+        .then((QuerySnapshot snapshot) {
+      var el = snapshot.docs;
       _allProvinceFromFirebase = [];
       for (var e in el) {
         if (e.data() != null) {
@@ -1233,7 +760,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
       propertyDialogData?.getAll().then((List<dynamic> userData) {
         isLoading = false;
 
-        if (userData.length > 0) {
+        if (userData.isNotEmpty) {
           selectedProvince = userData[0]['selectedProvince'];
           selectedCity = userData[0]['selectedCity'];
           propertySubType = userData[0]['selectPropertySubType'];
@@ -1252,7 +779,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       child: isLoading
-          ? Container(child: Center(child: CircularProgressIndicator()))
+          ? Container(child: const Center(child: CircularProgressIndicator()))
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               //width: 200,
@@ -1262,7 +789,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     'Filter',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
@@ -1270,9 +797,9 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                   // province
                   DropDown(
                     items: _allProvinceFromFirebase,
-                    hint: selectedProvince.length > 0
+                    hint: selectedProvince.isNotEmpty
                         ? Text(selectedProvince)
-                        : Text("select province"),
+                        : const Text("select province"),
                     //initialValue: _allProvinceFromFirebase.length == 0 ? selectedProvince : null,
                     onChanged: (val) async {
                       print('onChanged callback');
@@ -1281,7 +808,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                       int provinceIndex =
                           _allProvinceFromFirebase.indexOf(val.toString());
                       print('province index: $provinceIndex');
-                      if (provinceIndex != -1 && provinceIndex != null) {
+                      if (provinceIndex != -1) {
                         currentProvinceID =
                             _allProvinceIDFromFirebase[provinceIndex]
                                 .toString();
@@ -1292,14 +819,14 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                       }
                     },
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // city
                   DropDown(
                     items: _allCityFromFirebase,
-                    hint: selectedCity.length > 0
+                    hint: selectedCity.isNotEmpty
                         ? Text(selectedCity)
-                        : Text("select city"),
-                    onChanged: _allCityFromFirebase.length > 0
+                        : const Text("select city"),
+                    onChanged: _allCityFromFirebase.isNotEmpty
                         ? (val) async {
                             print('onChanged callback');
                             selectedCity = val.toString();
@@ -1315,14 +842,14 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                           }
                         : null,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   //sub type
 
                   DropDown(
                       items: subtypes,
-                      hint: propertySubType.length > 0
+                      hint: propertySubType.isNotEmpty
                           ? Text(propertySubType)
-                          : Text("select sub type"),
+                          : const Text("select sub type"),
                       onChanged: (val) async {
                         _isSubTypeSelected = true;
                         propertySubType = val.toString();
@@ -1331,8 +858,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                         //   _isSubTypeSelected = true;
                         // });
                       }),
-                  SizedBox(height: 5),
-                  // range
+                  const SizedBox(height: 5),
                   // SliderTheme(
                   //   data: SliderThemeData(
                   //     //activeTickMarkColor: Colors.blue.withOpacity(0.4),
@@ -1402,17 +928,17 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                       // ),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   // drop down for area unit
                   DropDown(
-                      items: ["Squareft", "Marla"],
-                      hint: areaUnit.length > 0
+                      items: const ["Squareft", "Marla"],
+                      hint: areaUnit.isNotEmpty
                           ? Text(areaUnit)
-                          : Text("Select Unit"),
+                          : const Text("Select Unit"),
                       onChanged: (val) async {
                         areaUnit = val.toString();
                       }),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Row(
                     children: [
                       // search button
@@ -1434,7 +960,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                               SimpleDatabase(name: 'propertySearchDialog');
                           await propertySelectedBasedOnRange.clear();
                           Map<String, dynamic> propertySearchDialog =
-                              Map<String, dynamic>();
+                              <String, dynamic>{};
 
                           propertySearchDialog['selectedProvince'] =
                               selectedProvince;
@@ -1542,24 +1068,24 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                           //int totalLength = await querySnap.length;
                           //print('total query Lenght: $totalLength');
 
-                          querySnap.then((QuerySnapshot _snap) async {
-                            if (_snap.docs.length == 0) {
+                          querySnap.then((QuerySnapshot snap) async {
+                            if (snap.docs.isEmpty) {
                               // no data found
-                              print('if- Total Docs: ${_snap.docs.length}');
+                              print('if- Total Docs: ${snap.docs.length}');
                               //widget.addToStream(QuerySnapshot);
                               // TODO: show no data to user on the screen
 
                               await showDialog(
                                 context: context,
-                                builder: (context) => AlertErrorWidget(),
+                                builder: (context) => const AlertErrorWidget(),
                               );
                               widget.showNoneDataToUser(true);
                               //return;
                               //AlertErrorWidget();
                             } else {
                               // data found
-                              print('else- Total Docs: ${_snap.docs.length}');
-                              widget.addToStream(_snap);
+                              print('else- Total Docs: ${snap.docs.length}');
+                              widget.addToStream(snap);
                               Navigator.of(context).pop();
                               //Navigator.of(context).pop(Stream.fromFuture(Future.value(_snap)));
                             }
@@ -1567,47 +1093,18 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
 
                           print('post loading');
                           int totalDocuments = -1;
-                          // querySnap.listen((QuerySnapshot snap) {
-                          //   print('Total Documents: ${snap.docs.length}');
-                          //   totalDocuments = snap.docs.length;
-                          //
-                          // });
-
-                          // if(totalDocuments == 0){
-                          //   print('if Total Document: $totalDocuments');
-                          //   // show dialog and return
-                          //   showDialog(
-                          //     context: context,
-                          //     builder: (context) {
-                          //       return AlertErrorWidget();
-                          //     },
-                          //   );
-                          //
-                          //   //Navigator.of(context).pop();
-                          // }
-                          // else if (totalDocuments == -1){
-                          //   setState(() {
-                          //
-                          //   });
-                          //   print('else-if Total Document: $totalDocuments');
-                          //   return ProgressWidget();
-                          // }
-                          // else{
-                          //   print('else Total Document: $totalDocuments');
-                          //   Navigator.of(context).pop(querySnap);
-                          // }
-                          //Navigator.of(context).pop(querySnap);
+                       
                         },
-                        child: Text('search'),
+                        child: const Text('search'),
                       ),
                       // exit button
                       TextButton(
                         onPressed: () async {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Exit'),
+                        child: const Text('Exit'),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
                         onPressed: _totalRecord > 0
                             ? () async {
@@ -1616,7 +1113,7 @@ class RangePropertyDialogState extends State<RangePropertyDialog> {
                                 Navigator.of(context).pop();
                               }
                             : null,
-                        child: Text('clear Filter'),
+                        child: const Text('clear Filter'),
                       ),
                     ],
                   ),
@@ -1637,12 +1134,12 @@ class AlertErrorWidget extends StatefulWidget {
 class _AlertErrorWidgetState extends State<AlertErrorWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: AlertDialog(
-        title: Text('Searched Data'),
+        title: const Text('Searched Data'),
         content: Container(
-            child: Text(
+            child: const Text(
           'No Data Found',
           textAlign: TextAlign.center,
         )),
@@ -1652,7 +1149,7 @@ class _AlertErrorWidgetState extends State<AlertErrorWidget> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              child: Text('ok')),
+              child: const Text('ok')),
         ],
       ),
     );
@@ -1675,6 +1172,6 @@ class _ProgressWidgetState extends State<ProgressWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 }

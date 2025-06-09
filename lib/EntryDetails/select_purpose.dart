@@ -30,7 +30,7 @@ class _SelectPurposeState extends State<SelectPurpose> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -41,8 +41,8 @@ class _SelectPurposeState extends State<SelectPurpose> {
           children: [
 
             DropDown<dynamic>(
-              hint: Text("select purpose"),
-              items: [
+              hint: const Text("select purpose"),
+              items: const [
                 "Lease",
                 "Rent",
                 "Sale",
@@ -82,7 +82,7 @@ class _SelectPurposeState extends State<SelectPurpose> {
                           builder: (context) => widget.isScheme ? SelectPhaseDetails(cityId: widget.cityId, provinceId: widget.provinceId, typeId: widget.typeId, isScheme: widget.isScheme, propertyType: widget.propertyType,) :  SelectArea(isScheme: widget.isScheme,),
                         ));
                   },
-                  child: Text("Continue"),),
+                  child: const Text("Continue"),),
               ],
             ),
           ],

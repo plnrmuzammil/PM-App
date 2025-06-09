@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_dropdown/flutter_dropdown.dart";
 import 'package:reale/main.dart';
-import "package:reale/stepper_steps/selectFloor.dart";
 import 'package:reale/stepper_steps/selectPropertyPurpose.dart';
 import 'package:reale/stepper_steps/select_scheme_route.dart';
 import 'package:reale/widgets/setting_stepper.dart';
@@ -26,7 +25,7 @@ class selectPropertySubType extends StatefulWidget {
   final adress;
   final propertyType;
 
-  selectPropertySubType({
+  const selectPropertySubType({super.key, 
     this.scheme,
     this.schemeName,
     this.province,
@@ -136,8 +135,8 @@ class _selectPropertySubTypeState extends State<selectPropertySubType> {
             ignoring: !stepperStateModel.isSelectPropertySubTypeDropDownEnable,
             child: DropDown<dynamic>(
               items: dynamicItems,
-              hint: Text("select property Sub type"),
-              initialValue: houseModel.propertySubType.length > 0
+              hint: const Text("select property Sub type"),
+              initialValue: houseModel.propertySubType.isNotEmpty
                   ? houseModel.propertySubType
                   : null,
               onChanged: (val) {
@@ -203,7 +202,7 @@ class _selectPropertySubTypeState extends State<selectPropertySubType> {
                   'content': Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Purpose of property',
                         style: TextStyle(fontSize: 18.0),
                       ),

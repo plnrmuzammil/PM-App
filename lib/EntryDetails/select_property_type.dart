@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/selectTypeDetails.dart';
 import 'package:reale/EntryDetails/select_property_sub_type.dart';
-import 'package:reale/EntryDetails/select_sub_block.dart';
 
 class SelectPropertyType extends StatefulWidget {
   const SelectPropertyType({Key? key, required this.isScheme, required this.provinceId, required this.cityId, required this.typeId}) : super(key: key);
@@ -28,7 +26,7 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -38,8 +36,8 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
           mainAxisSize: MainAxisSize.min,
           children: [
             DropDown<dynamic>(
-              hint: Text("select property type"),
-        items: ["Commercial", "Land / Plot", "Residential"],
+              hint: const Text("select property type"),
+        items: const ["Commercial", "Land / Plot", "Residential"],
             onChanged: (val)
         {
           setState((){
@@ -61,7 +59,7 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
                           cityId: widget.cityId,
                           isScheme: widget.isScheme,
                     )));
-                  }, child: Text("Back"),),
+                  }, child: const Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
                   onPressed:selectPropertyType == "" ? null : (){
@@ -78,7 +76,7 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
                                 ),
                         ));
                   },
-                  child: Text("Continue"),),
+                  child: const Text("Continue"),),
 
               ],
             ),

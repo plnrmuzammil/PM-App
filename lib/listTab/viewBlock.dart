@@ -5,7 +5,7 @@ import 'package:reale/widgets/stylishCustomButton.dart';
 
 class viewBlock extends StatefulWidget {
   final phase;
-  viewBlock({this.phase});
+  const viewBlock({super.key, this.phase});
 
   @override
   _viewBlockState createState() => _viewBlockState();
@@ -28,7 +28,7 @@ class _viewBlockState extends State<viewBlock> {
 
               if(docs.length != 0) {
                 return ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: docs.length,
                     itemBuilder: (context, index) {
                       if (index == 0) {
@@ -81,7 +81,7 @@ class _viewBlockState extends State<viewBlock> {
                                 .of(context)
                                 .size
                                 .width - 50,
-                            margin: EdgeInsets.only(top: 15, bottom: 5),
+                            margin: const EdgeInsets.only(top: 15, bottom: 5),
                             child: StylishCustomButton(
                               onPressed: () {
                                 Navigator.push(context,
@@ -100,14 +100,14 @@ class _viewBlockState extends State<viewBlock> {
               else
                 {
                   return Container(
-                    child: Center(
+                    child: const Center(
                       child: Text('No Content'),
                     ),
                   );
                 }
             } else {
               return Container(
-                child: Center(
+                child: const Center(
                   child: Text('No Content'),
                 ),
               );

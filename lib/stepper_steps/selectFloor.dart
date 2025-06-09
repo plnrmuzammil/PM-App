@@ -26,8 +26,8 @@ class selectFloor extends StatefulWidget {
   final propertyType;
   final propertySubType;
 
-  selectFloor(
-      {this.scheme,
+  const selectFloor(
+      {super.key, this.scheme,
       this.schemeName,
       this.province,
       this.city,
@@ -50,12 +50,12 @@ class selectFloor extends StatefulWidget {
 class _selectFloorState extends State<selectFloor> {
   @override
   void initState() {
-    floors.value = TextEditingValue(text: "0");
-    rooms.value = TextEditingValue(text: "0");
-    kitchens.value = TextEditingValue(text: "0");
-    parkings.value = TextEditingValue(text: "0");
-    basements.value = TextEditingValue(text: "0");
-    washrooms.value = TextEditingValue(text: "0");
+    floors.value = const TextEditingValue(text: "0");
+    rooms.value = const TextEditingValue(text: "0");
+    kitchens.value = const TextEditingValue(text: "0");
+    parkings.value = const TextEditingValue(text: "0");
+    basements.value = const TextEditingValue(text: "0");
+    washrooms.value = const TextEditingValue(text: "0");
     //parkings.value = TextEditingValue(text: "0");
     super.initState();
   }
@@ -73,32 +73,32 @@ class _selectFloorState extends State<selectFloor> {
           TextField(
             keyboardType: TextInputType.phone,
             controller: floors,
-            decoration: InputDecoration(labelText: "Number of Floors"),
+            decoration: const InputDecoration(labelText: "Number of Floors"),
           ),
           TextField(
             keyboardType: TextInputType.phone,
             controller: rooms,
-            decoration: InputDecoration(labelText: "Number of Rooms"),
+            decoration: const InputDecoration(labelText: "Number of Rooms"),
           ),
           TextField(
             keyboardType: TextInputType.phone,
             controller: kitchens,
-            decoration: InputDecoration(labelText: "Number of Kitchens"),
+            decoration: const InputDecoration(labelText: "Number of Kitchens"),
           ),
           TextField(
             keyboardType: TextInputType.phone,
             controller: basements,
-            decoration: InputDecoration(labelText: "Number of Basement"),
+            decoration: const InputDecoration(labelText: "Number of Basement"),
           ),
           TextField(
             keyboardType: TextInputType.phone,
             controller: washrooms,
-            decoration: InputDecoration(labelText: "Number of Washrooms"),
+            decoration: const InputDecoration(labelText: "Number of Washrooms"),
           ),
           TextField(
             keyboardType: TextInputType.phone,
             controller: parkings,
-            decoration: InputDecoration(labelText: "Number of Car Parking"),
+            decoration: const InputDecoration(labelText: "Number of Car Parking"),
           ),
           MaterialButton(
             onPressed: () {
@@ -110,7 +110,7 @@ class _selectFloorState extends State<selectFloor> {
                 'content': Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Select More Information',
                       style: TextStyle(fontSize: 18.0),
                     ),
@@ -161,7 +161,7 @@ class _selectFloorState extends State<selectFloor> {
               //   );
               // }));
             },
-            child: Icon(Icons.navigate_next),
+            child: const Icon(Icons.navigate_next),
           )
         ],
       ),

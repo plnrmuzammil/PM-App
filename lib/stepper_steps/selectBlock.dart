@@ -3,7 +3,6 @@ import "package:flutter_dropdown/flutter_dropdown.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:reale/main.dart';
 import "package:reale/stepper_steps/selectSubblocks.dart";
-import "package:reale/stepper_steps/addListing.dart";
 import 'package:reale/stepper_steps/select_scheme_route.dart';
 import 'package:reale/widgets/setting_stepper.dart';
 import 'package:simple_database/simple_database.dart';
@@ -23,8 +22,8 @@ class selectBlock extends StatefulWidget {
   final phase;
   final phaseName;
 
-  selectBlock(
-      {this.scheme,
+  const selectBlock(
+      {super.key, this.scheme,
       this.province,
       this.city,
       this.phase,
@@ -78,8 +77,8 @@ class _selectBlockState extends State<selectBlock> {
                       ignoring: !stepperStateModel.isBlockDropDownEnable,
                       child: DropDown<dynamic>(
                         items: blocks,
-                        hint: Text("select Block"),
-                        initialValue: houseModel.blockName.length > 0
+                        hint: const Text("select Block"),
+                        initialValue: houseModel.blockName.isNotEmpty
                             ? houseModel.blockName
                             : null,
                         onChanged: (val) async {
@@ -122,7 +121,7 @@ class _selectBlockState extends State<selectBlock> {
 
                           SimpleDatabase block = SimpleDatabase(name: 'block');
                           await block.clear();
-                          await block.add('${val}');
+                          await block.add('$val');
 
                           setState(() {
                             selectedBlock = val.toString();
@@ -143,7 +142,7 @@ class _selectBlockState extends State<selectBlock> {
                             'content': Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   'Select Sub Sector/ Sub Block',
                                   style: TextStyle(fontSize: 18.0),
                                 ),

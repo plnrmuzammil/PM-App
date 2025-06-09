@@ -3,7 +3,6 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:reale/EntryDetails/select_property_type.dart';
 import 'package:reale/EntryDetails/select_purpose.dart';
-import 'package:reale/stepper_steps/selectPropertyType.dart';
 
 class SelectPropertySubType extends StatefulWidget {
   const SelectPropertySubType({Key? key, required this.propertyType, required this.provinceId, required this.cityId, required this.typeId, required this.isScheme}) : super(key: key);
@@ -69,7 +68,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("Entry Details"),
+        title: const Text("Entry Details"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -79,7 +78,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
           mainAxisSize: MainAxisSize.min,
           children: [
             DropDown<dynamic>(
-              hint: Text("select sub type"),
+              hint: const Text("select sub type"),
               items: dynamicItems,
               onChanged: (val)
               {
@@ -103,7 +102,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
                       typeId: widget.typeId,
                       isScheme: widget.isScheme,
                     )));
-                  }, child: Text("Back"),),
+                  }, child: const Text("Back"),),
 
                 MaterialButton(
                   color: Colors.green,
@@ -120,7 +119,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
                           ),
                         ));
                   },
-                  child: Text("Continue"),),
+                  child: const Text("Continue"),),
               ],
             ),
           ],
