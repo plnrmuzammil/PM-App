@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "327897442929",
+    "project_id": "pm-app-9252d",
+    "storage_bucket": "pm-app-9252d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327897442929:android:ec34fc57a3b2972fdec9d0",
+        "android_client_info": {
+          "package_name": "com.example.pm_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfFkHNkIzCTNNk-E4jd54jVkPIVzoVb2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
