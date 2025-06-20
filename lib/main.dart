@@ -7,8 +7,8 @@ import 'package:hive/hive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:path_provider/path_provider.dart'; // ✅ Needed for getApplicationDocumentsDirectory
-import 'package:flutter_spinkit/flutter_spinkit.dart'; // ✅ Needed for SpinKitFadingCube
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:pm_app/Auth/login.dart';
 import 'package:pm_app/firebase_options.dart';
@@ -86,7 +86,7 @@ class MyAppState extends State<MyApp> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-            SafeArea(child: Scaffold(body: UserFormAfterOTP(isFromLoginRoute: true))),
+                SafeArea(child: Scaffold(body: UserFormAfterOTP(isFromLoginRoute: true))),
           ),
         );
       }
@@ -142,16 +142,9 @@ class MyAppState extends State<MyApp> {
                   ),
                 ),
                 const SizedBox(height: 40),
-                SpinKitFadingCube(
+                const SpinKitFadingCube(
                   color: Colors.green,
                   size: 50.0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: index.isEven ? Colors.greenAccent : Colors.green,
-                      ),
-                    );
-                  },
                 ),
               ],
             ),
