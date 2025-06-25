@@ -12,7 +12,7 @@ class UserForm {
 
   @override
   String toString() {
-    return 'UserForm{name: $name, phone: $phone, businessName: $businessName, businessOwner: $businessOwner, officeAddress: $officeAddress, idCardNumber: $idCardNumber, registrationNumber: $registrationNumber, cardFrontImage: $cardFrontImage, cardBackImage: $cardBackImage, documentFrontImage: $documentFrontImage, documentBackImage: $documentBackImage, province: $province, city: $city, lat: $lat, long: $long}';
+    return 'UserForm{name: $name, phone: $phone, businessName: $businessName, businessOwner: $businessOwner, officeAddress: $officeAddress, idCardNumber: $idCardNumber, registrationNumber: $registrationNumber, cardFrontImage: $cardFrontImage, cardBackImage: $cardBackImage, documentFrontImage: $documentFrontImage, documentBackImage: $documentBackImage, province: $province, district: $district, lat: $lat, long: $long}';
   }
 
   String name='';
@@ -27,7 +27,7 @@ class UserForm {
   String documentFrontImage='';
   String documentBackImage='';
   String province='';
-  String city='';
+  String district='';
   String lat='';
   String long='';
 
@@ -43,7 +43,7 @@ class UserForm {
         //!(documentFrontImage.length > 0) ||
         //!(documentBackImage.length > 0) ||
         !(province.length > 0) ||
-        !(city.length > 0)) {
+        !(district.length > 0)) {
       return false;
     } else {
       return true;
@@ -65,7 +65,7 @@ class UserForm {
     document['registrationDocumentBackPic'] = documentBackImage;
 
     document['province'] = province;
-    document['city'] = city;
+    document['district'] = district;
     document['lat'] = lat;
     document['long'] = long;
     return document;
@@ -84,7 +84,7 @@ class UserForm {
     this.documentFrontImage = '',
     this.documentBackImage = '',
     this.province = '',
-    this.city= '',
+    this.district= '',
     this.lat= '',
     this.long= '',
   });

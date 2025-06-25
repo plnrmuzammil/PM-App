@@ -4,8 +4,8 @@ import "package:pm_app/listTab/selectPhase.dart";
 import "package:pm_app/widgets/stylishCustomButton.dart";
 
 class viewSceme extends StatefulWidget {
-  final city;
-  viewSceme({this.city});
+  final district;
+  viewSceme({this.district});
 
   @override
   _viewScemeState createState() => _viewScemeState();
@@ -20,7 +20,7 @@ class _viewScemeState extends State<viewSceme> {
           stream: FirebaseFirestore.instance
               .collection("Scheme")
               .orderBy("name", descending: false)
-              .where("cityID", isEqualTo: "${widget.city}")
+              .where("districtID", isEqualTo: "${widget.district}")
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {

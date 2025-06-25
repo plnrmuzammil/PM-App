@@ -4,8 +4,8 @@ import "package:pm_app/listTab/viewNonSchemeListing_new_shams.dart";
 import "package:pm_app/widgets/stylishCustomButton.dart";
 
 class NonSceme extends StatefulWidget {
-  final city;
-  NonSceme({this.city});
+  final district;
+  NonSceme({this.district});
 
   @override
   _viewScemeState createState() => _viewScemeState();
@@ -20,7 +20,7 @@ class _viewScemeState extends State<NonSceme> {
           stream: FirebaseFirestore.instance
               .collection("Non Scheme")
               //.orderBy("name", descending: false)
-              .where("cityID", isEqualTo: "${widget.city}")
+              .where("districtID", isEqualTo: "${widget.district}")
               .snapshots(),
           builder: (context, snapshot) {
 

@@ -473,7 +473,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListing> {
                                             children: [
                                               Flexible(
                                                 child: Text(
-                                                  "Province : ${(documents[index].data()as Map<String,dynamic>)["cityName"]} ${(documents[index].data()as Map<String,dynamic>)["provinceName"]}",
+                                                  "Province : ${(documents[index].data()as Map<String,dynamic>)["districtName"]} ${(documents[index].data()as Map<String,dynamic>)["provinceName"]}",
                                                   // overflow:
                                                   //     TextOverflow
                                                   //         .ellipsis,
@@ -886,7 +886,7 @@ class _ViewNonSchemeListingState extends State<ViewNonSchemeListing> {
                                             children: [
                                               Flexible(
                                                 child: Text(
-                                                  "Province : ${(documents[index].data()as Map<String,dynamic>)["cityName"]} ${(documents[index].data()as Map<String,dynamic>)["provinceName"]}",
+                                                  "Province : ${(documents[index].data()as Map<String,dynamic>)["districtName"]} ${(documents[index].data()as Map<String,dynamic>)["provinceName"]}",
                                                   // overflow:
                                                   //     TextOverflow
                                                   //         .ellipsis,

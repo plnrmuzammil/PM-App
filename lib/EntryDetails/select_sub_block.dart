@@ -8,9 +8,9 @@ import 'package:pm_app/EntryDetails/select_area.dart';
 import '../newCode/data.dart';
 
 class SubBlockDetails extends StatefulWidget {
-  const SubBlockDetails({Key? key, required this.cityId, required this.provinceId, required this.phaseId, required this.blockId, required this.schemeId, required this.isScheme, required this.propertyType}) : super(key: key);
+  const SubBlockDetails({Key? key, required this.districtId, required this.provinceId, required this.phaseId, required this.blockId, required this.schemeId, required this.isScheme, required this.propertyType}) : super(key: key);
 
-  final String cityId;
+  final String districtId;
   final String provinceId;
   final String phaseId;
   final String blockId;
@@ -59,7 +59,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
                     {
                       if(e.data() != null)
                       {
-                        if(e.data()['cityID'] == widget.cityId && e.data()['provinceID'] == widget.provinceId && e.data()['schemeID'] == widget.schemeId && e.data()['phaseID'] == widget.phaseId && e.data()['blockID'] == widget.blockId)
+                        if(e.data()['districtID'] == widget.districtId && e.data()['provinceID'] == widget.provinceId && e.data()['schemeID'] == widget.schemeId && e.data()['phaseID'] == widget.phaseId && e.data()['blockID'] == widget.blockId)
                         {
 
                           subBlock.add(e.data()['name']);
@@ -106,7 +106,7 @@ class _SubBlockDetailsState extends State<SubBlockDetails> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
                     SelectBlockDetails(
                       provinceId: widget.provinceId,
-                      cityId: widget.cityId,
+                      districtId: widget.districtId,
                       schemeId: widget.schemeId,
                       isScheme: widget.isScheme,
                       propertyType: widget.propertyType,

@@ -12,12 +12,12 @@ TextEditingController parkings = TextEditingController();
 class selectFloor extends StatefulWidget {
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
   final block;
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
   final subBlock;
@@ -30,11 +30,11 @@ class selectFloor extends StatefulWidget {
       {this.scheme,
       this.schemeName,
       this.province,
-      this.city,
+      this.district,
       this.phase,
       this.block,
       this.phaseName,
-      this.cityName,
+      this.districtName,
       this.provinceName,
       this.blockName,
       this.subBlockName,
@@ -117,7 +117,7 @@ class _selectFloorState extends State<selectFloor> {
                     selectPropertyPurpose(
                       province: widget.province,
                       scheme: widget.scheme,
-                      city: widget.city,
+                      district: widget.district,
                       phase: widget.phase,
                       block: widget.block,
                       subBlock: widget.subBlock,

@@ -177,7 +177,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
   String updatedProfileImage = "";
   String updatedBusinessName = "";
   String updatedBusinessOwnerName = "";
-  String updatedCity = "";
+  String updatedDistrict = "";
   String updatedOfficeAddress = "";
   String updatedIdCardNumber = "";
   String updatedRegisterationNumber = "";
@@ -194,7 +194,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
         updatedPhone = result['phone'];
         updatedBusinessName = result['businessName'];
         updatedBusinessOwnerName = result['businessOwner'];
-        updatedCity = result['city'];
+        updatedDistrict = result['district'];
         updatedOfficeAddress = result['officeAddress'];
         updatedIdCardNumber = result['idCard'];
         updatedRegisterationNumber = result['registrationNumber'];
@@ -377,7 +377,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           'businessName': businessNameController.text.toString(),
           'businessOwner': businessOwnerController.text.toString(),
           'email': "",
-          'city' : cityController.text.toString() ,
+          'district' : districtController.text.toString() ,
           'id': auth.currentUser!.uid.toString(),
           'idCard': idCardNumberController.text.toString(),
           'idCardBackPic': idCardbackImgUrl.toString(),
@@ -500,7 +500,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
   TextEditingController idCardNumberController = TextEditingController();
   TextEditingController registerationNumberController = TextEditingController();
   TextEditingController provinceController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
 
@@ -602,7 +602,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
   ];
 
   String province = 'Khyber Pakhtunkhwa';
-  String city = '';
+  String district = '';
 
   @override
   Widget build(BuildContext context) {
@@ -821,10 +821,10 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
 
                           SizedBox(height: 20),
 
-                          // city
-                          !widget.isFromLoginRoute ? Text("City : " +updatedCity) : TextFormField(
+                          // district
+                          !widget.isFromLoginRoute ? Text("District : " +updatedDistrict) : TextFormField(
                             //enabled: widget.isFromLoginRoute ? true : false,
-                            controller: cityController,
+                            controller: districtController,
                             style: TextStyle(fontSize: 16),
                             keyboardType: TextInputType.name,
                             validator: (val){
@@ -841,17 +841,17 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
                                 borderSide:
                                     BorderSide(color: Colors.black, width: 2),
                               ),
-                              hintText: 'city',
+                              hintText: 'district',
                               hintStyle: TextStyle(fontSize: 16),
-                              labelText: 'city',
+                              labelText: 'district',
                               labelStyle: _lableStyle,
                             ),
-                            onChanged: (String city) {
+                            onChanged: (String district) {
                               setState(() {
 
                               });
-                              this.city = city;
-                              print('selected city: ${this.city}');
+                              this.district = district;
+                              print('selected district: ${this.district}');
                             },
                           ),
 
@@ -1458,7 +1458,7 @@ class _UserFormAfterOTPState extends State<UserFormAfterOTP> {
           .get();
       // adding data to user model
       if (widget.isFromLoginRoute == true) {
-        _userModel!.city = this.city;
+        _userModel!.district = this.district;
         _userModel!.province = province;
         // me *************************************
         // _userModel.lat = _userLocationData.latitude.toString();

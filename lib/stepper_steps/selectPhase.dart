@@ -18,14 +18,14 @@ class selectPhase extends StatefulWidget {
   final schemeName;
   final province;
   final provinceName;
-  final city;
-  final cityName;
+  final district;
+  final districtName;
 
   selectPhase(
       {this.scheme,
       this.province,
-      this.city,
-      this.cityName,
+      this.district,
+      this.districtName,
       this.provinceName,
       this.schemeName});
 
@@ -149,8 +149,8 @@ class _selectPhaseState extends State<selectPhase> {
                                     phaseName: selectedPhase,
                                     province: widget.province,
                                     provinceName: widget.provinceName,
-                                    city: widget.city,
-                                    cityName: widget.cityName),
+                                    district: widget.district,
+                                    districtName: widget.districtName),
                               ],
                             ),
                           });

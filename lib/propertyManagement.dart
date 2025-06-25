@@ -11,6 +11,7 @@ import 'package:pm_app/widgets/stylishCustomButton.dart';
 import 'Auth/login.dart';
 
 import 'EntryDetails/selectProvinceDetails.dart';
+import 'EntryDetails/selectStepper.dart';
 import 'main.dart';
 import 'mainPage.dart';
 import 'newCode/Functions.dart';
@@ -23,12 +24,6 @@ class propertyManagement extends StatefulWidget {
 class _propertyManagementState extends State<propertyManagement> {
   FirebaseAuth auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
-
-  // String? _userName;
-  // String? _userPhone;
-  // String? _userProfileImage;
-  // int i = 0;
-  // Future? myFuture;
 
   String userName = "";
   String phoneNumber = "";
@@ -61,19 +56,10 @@ class _propertyManagementState extends State<propertyManagement> {
         .get();
     if (user.exists) {
       setState(() {
-        // _userName = (user.data()  as Map<String,dynamic>)['name'] ?? "No Name";
-        // _userPhone = (user.data()  as Map<String,dynamic>)['phone'] ?? "No Number";
-        // _userProfileImage = (user.data() as Map<String,dynamic>)['profile'];
+
         print('image url: ${(user.data() as Map<String,dynamic>)['profile']}');
       });
-      // setState(() {
-      //   _userName = user.data()['name'];
-      //   _userPhone = user.data()['phone'];
-      //   _userProfileImage = user.data()['profile'];
-      // });
-      // print('Name: ${(user.data() as Map<String,dynamic>)['name']}');
-      // print('Number: ${user.data()['phone']}');
-      print('future builder is completed');
+        print('future builder is completed');
     }
   }
 
@@ -83,16 +69,10 @@ class _propertyManagementState extends State<propertyManagement> {
     print('init state...property management');
     //myFuture = getUserNameAndPhoneNumber();
     getUserData();
-    // getUserNameAndPhoneNumber().then(
-    //     (value) => print('downloaded profile image and name and phone number'));
   }
 
   @override
   Widget build(BuildContext context) {
-    //myFuture = getUserNameAndPhoneNumber();
-    // getUserNameAndPhoneNumber().then((value) => print(
-    //     'inside build:::downloaded profile image and name and phone number'));
-    //FirebaseAuth auth = FirebaseAuth.instance;
     var photo = currentUser?.photoURL ?? "none";
 
     return SafeArea(
@@ -154,7 +134,7 @@ class _propertyManagementState extends State<propertyManagement> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return SelectProvinceDetails();
+                                    return StepperForm();
                                 // here we need to reset the stepper state model
                                // stepperStateModel.reset();
                                 // return policy();

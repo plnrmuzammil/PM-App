@@ -18,17 +18,17 @@ class selectBlock extends StatefulWidget {
   final schemeName;
   final provinceName;
   final province;
-  final city;
-  final cityName;
+  final district;
+  final districtName;
   final phase;
   final phaseName;
 
   selectBlock(
       {this.scheme,
       this.province,
-      this.city,
+      this.district,
       this.phase,
-      this.cityName,
+      this.districtName,
       this.provinceName,
       this.schemeName,
       this.phaseName});
@@ -152,8 +152,8 @@ class _selectBlockState extends State<selectBlock> {
                                   provinceName: widget.provinceName,
                                   schemeName: widget.schemeName,
                                   scheme: widget.scheme,
-                                  city: widget.city,
-                                  cityName: widget.cityName,
+                                  district: widget.district,
+                                  districtName: widget.districtName,
                                   phase: widget.phase,
                                   phaseName: widget.phaseName,
                                   block: blockId,

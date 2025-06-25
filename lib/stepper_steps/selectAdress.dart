@@ -22,12 +22,12 @@ final picker = ImagePicker();
 class selectAddress extends StatefulWidget {
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
   final block;
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
   final subBlock;
@@ -54,7 +54,7 @@ class selectAddress extends StatefulWidget {
   selectAddress({
     this.scheme,
     this.province,
-    this.city,
+    this.district,
     this.phase,
     this.block,
     this.subBlock,
@@ -69,7 +69,7 @@ class selectAddress extends StatefulWidget {
     this.subBlockName,
     this.blockName,
     this.phaseName,
-    this.cityName,
+    this.districtName,
     this.schemeName,
     this.provinceName,
     this.purpose,
@@ -184,7 +184,7 @@ class _selectAddressState extends State<selectAddress> {
 
               //should move all this task in address page
               SimpleDatabase _province = SimpleDatabase(name: 'province');
-              SimpleDatabase _city = SimpleDatabase(name: 'city');
+              SimpleDatabase _district = SimpleDatabase(name: 'district');
               SimpleDatabase _phase = SimpleDatabase(name: 'phase');
               SimpleDatabase _block = SimpleDatabase(name: 'block');
               SimpleDatabase _subBlock = SimpleDatabase(name: 'subBlock');
@@ -199,7 +199,7 @@ class _selectAddressState extends State<selectAddress> {
               CollectionReference listings =
                   FirebaseFirestore.instance.collection('listings');
               // get scheme image url from firestorage
-              // check city and store its corresponding image url
+              // check district and store its corresponding image url
 
               switch (houseModel.schemeName) {
                 case "bahria":
@@ -259,12 +259,12 @@ class _selectAddressState extends State<selectAddress> {
                 "province": widget.province ?? houseModel.province,
                 "scheme": widget.scheme ?? houseModel.scheme,
                 "provinceName": widget.provinceName ?? houseModel.provinceName,
-                "cityName": widget.cityName ?? houseModel.cityName,
+                "districtName": widget.districtName ?? houseModel.districtName,
                 "schemeName": widget.schemeName ?? houseModel.schemeName,
                 "phaseName": widget.phaseName ?? houseModel.phaseName,
                 "blockName": widget.blockName ?? houseModel.blockName,
                 "subBlockName": widget.subBlockName ?? houseModel.subBlockName,
-                "district": widget.city ?? houseModel.city,
+                "district": widget.district ?? houseModel.district,
                 "phase": widget.phase ?? houseModel.phase,
                 "block": widget.block ?? houseModel.block,
                 "subblock": widget.subBlock ?? houseModel.subBlock,

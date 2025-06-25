@@ -171,8 +171,12 @@ class _soldState extends State<sold> {
                                         Navigator.push(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return propertyDetailsNew(
-                                              fiteredList[index].data());
+                                          return PropertyDetailsNew(
+
+                                              fiteredList[index].data() as Map<String, dynamic>);
+
+
+
                                         }));
                                       },
                                       child: Column(

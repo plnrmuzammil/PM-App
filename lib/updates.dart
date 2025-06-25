@@ -62,7 +62,7 @@ class updatesState extends State<updates> {
                                 // print('Province name: ${docs[index]["name"]}');
                                 await Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return viewCity(
+                                      return viewDistrict(
                                           province: "${docs[index]["id"]}");
                                     }));
                               },
@@ -85,7 +85,7 @@ class updatesState extends State<updates> {
                               // print('Province name: ${docs[index]["name"]}');
                               await Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return viewCity(
+                                    return viewDistrict(
                                         province: "${docs[index]["id"]}");
                                   }));
                             },

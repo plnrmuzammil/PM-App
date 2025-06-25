@@ -6,11 +6,11 @@ import 'package:pm_app/EntryDetails/select_area.dart';
 import 'package:pm_app/EntryDetails/select_property_sub_type.dart';
 
 class SelectPurpose extends StatefulWidget {
-  const SelectPurpose({Key? key, required this.propertyType, required this.provinceId, required this.cityId, required this.typeId, required this.isScheme}) : super(key: key);
+  const SelectPurpose({Key? key, required this.propertyType, required this.provinceId, required this.districtId, required this.typeId, required this.isScheme}) : super(key: key);
 
   final String propertyType;
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final String typeId;
   final bool isScheme;
 
@@ -65,7 +65,7 @@ class _SelectPurposeState extends State<SelectPurpose> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
                         SelectPropertySubType(
                           provinceId: widget.provinceId,
-                          cityId: widget.cityId,
+                          districtId: widget.districtId,
                           typeId: widget.typeId,
                           isScheme: widget.isScheme,
                           propertyType: widget.propertyType,
@@ -78,7 +78,7 @@ class _SelectPurposeState extends State<SelectPurpose> {
                     box.put('purpose', selectedPurpose);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => widget.isScheme ? SelectPhaseDetails(cityId: widget.cityId, provinceId: widget.provinceId, typeId: widget.typeId, isScheme: widget.isScheme, propertyType: widget.propertyType,) :  SelectArea(isScheme: widget.isScheme,),
+                          builder: (context) => widget.isScheme ? SelectPhaseDetails(districtId: widget.districtId, provinceId: widget.provinceId, typeId: widget.typeId, isScheme: widget.isScheme, propertyType: widget.propertyType,) :  SelectArea(isScheme: widget.isScheme,),
                         ));
                   },
                   child: Text("Continue"),),

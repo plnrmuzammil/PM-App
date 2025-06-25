@@ -10,23 +10,23 @@ import "package:pm_app/widgets/setting_stepper.dart";
 
 import "package:simple_database/simple_database.dart";
 
-var cities = [];
-var cityIds = [];
-var selectedCity = "";
-var cityId;
+var districts = [];
+var districtIds = [];
+var selectedDistrict = "";
+var districtId;
 
-class selectCity extends StatefulWidget{
+class selectDistrict extends StatefulWidget{
 
   final province;
   final provinceName;
 
-  selectCity({this.province, this.provinceName});
+  selectDistrict({this.province, this.provinceName});
 
   @override
-  _selectCityState createState() => _selectCityState();
+  _selectDistrictState createState() => _selectDistrictState();
 }
 
-class _selectCityState extends State<selectCity> {
+class _selectDistrictState extends State<selectDistrict> {
   // bool _isCityDropDownEnable;
   //
   // _selectCityState(): _isCityDropDownEnable = true;
@@ -34,12 +34,12 @@ class _selectCityState extends State<selectCity> {
   @override
   void initState() {
     super.initState();
-    print('city init()');
+    print('district init()');
   }
 
   @override
   void dispose() {
-    print('city dispose()');
+    print('district dispose()');
     super.dispose();
   }
 
@@ -48,27 +48,27 @@ class _selectCityState extends State<selectCity> {
     return Container(
       child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("cities")
+              .collection("districts")
               .orderBy("name", descending: false)
               .snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               //InformationStepper.refresh(isShowLoader: false);
               var el = snapshot.data.docs;
-              cities = [];
-              cityIds = [];
+              districts = [];
+              districtIds = [];
               for (var e in el) {
                 if (e.data() != null) {
                   if (e.data()["provinceID"] == widget.province) {
-                    cities.add(e.data()["name"]);
-                    cityIds.add(e.data()["id"]);
+                    districts.add(e.data()["name"]);
+                    districtIds.add(e.data()["id"]);
                   }
                 }
               }
               //print(cities);
               //print(cityIds);
               dev.log(
-                  'city outside the onChange: content: $cities \ncities id: $cityIds');
+                  'district outside the onChange: content: $districts \ndistricts id: $districtIds');
               return Container(
                 alignment: Alignment.center,
                 child: Column(
@@ -76,43 +76,43 @@ class _selectCityState extends State<selectCity> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IgnorePointer(
-                      ignoring: !stepperStateModel.isCityDropDownEnable,
+                      ignoring: !stepperStateModel.isDistrictDropDownEnable,
                       child: DropDown<dynamic>(
-                        items: cities,
+                        items: districts,
                         // items: houseModel.cityName.length > 0
                         //     ? [houseModel.cityName]
                         //     : cities,
-                        initialValue: houseModel.cityName.isNotEmpty
-                            ? houseModel.cityName
+                        initialValue: houseModel.districtName.isNotEmpty
+                            ? houseModel.districtName
                             : null,
-                        hint: Text("select city"),
+                        hint: Text("select district"),
                         onChanged: (val) async {
                           dev.log(
-                              'city outside the onChange: content: $cities \ncities id: $cityIds');
+                              'district outside the onChange: content: $districts \ndistricts id: $districtIds');
                           var previousStep1 =
                               InformationStepper.allSteps[0]; // for province
                           var previousStep2 =
-                              InformationStepper.allSteps[1]; // for city
+                              InformationStepper.allSteps[1]; // for district
                           InformationStepper.allSteps.clear();
                           InformationStepper.allSteps = [
                             previousStep1,
                             previousStep2
                           ];
 
-                          SimpleDatabase city = SimpleDatabase(name: 'city');
-                          await city.clear();
-                          await city.add('${val}');
+                          SimpleDatabase district = SimpleDatabase(name: 'district');
+                          await district.clear();
+                          await district.add('${val}');
 
                           setState(() {
-                            selectedCity = val.toString();
+                            selectedDistrict = val.toString();
 
-                            print(selectedCity);
-                            // cityID is the index of city in city list
-                            cityId = cityIds[cities.indexOf(selectedCity)];
-                            houseModel.cityName = selectedCity;
-                            houseModel.city = cityId;
-                            print(cityId);
-                            stepperStateModel.isCityDropDownEnable = false;
+                            print(selectedDistrict);
+                            // districtID is the index of district in district list
+                            districtId = districtIds[districts.indexOf(selectedDistrict)];
+                            houseModel.districtName = selectedDistrict;
+                            houseModel.district = districtId;
+                            print(districtId);
+                            stepperStateModel.isDistrictDropDownEnable = false;
                           });
 
                           InformationStepper.refresh(isShowLoader: true);
@@ -131,8 +131,8 @@ class _selectCityState extends State<selectCity> {
                                 SchemeType(
                                   province: widget.province,
                                   provinceName: widget.provinceName,
-                                  city: cityId,
-                                  cityName: selectedCity,
+                                  district: districtId,
+                                  districtName: selectedDistrict,
                                 ),
                               ],
                             ),

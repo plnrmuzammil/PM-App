@@ -123,7 +123,7 @@ class _selectProvinceState extends State<selectProvince> {
                                 stepperStateModel.isProvinceDropDownEnable =
                                     false;
                                 index+=1;
-                                selectCity(
+                                selectDistrict(
                                     province: currentId,
                                     provinceName: selectedProvince);
                               });
@@ -140,7 +140,7 @@ class _selectProvinceState extends State<selectProvince> {
                                       style: TextStyle(fontSize: 18.0),
                                     ),
 
-                                    selectCity(
+                                    selectDistrict(
                                         province: currentId,
                                         provinceName: selectedProvince)
                                   ],

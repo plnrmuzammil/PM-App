@@ -129,7 +129,7 @@ class _NonSchemePropertyDetailsState extends State<NonSchemePropertyDetails> {
                             ),
                             CustomTextWidget(
                               text1: 'District: ',
-                              text2: '${widget.data["cityName"]}',
+                              text2: '${widget.data["districtName"]}',
                             ),
                             CustomTextWidget(
                               text1: 'Scheme: ',

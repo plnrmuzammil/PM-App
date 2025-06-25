@@ -26,12 +26,12 @@ class selectArea extends StatefulWidget {
   static bool isstartSubmittingData = false;
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
 
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
 
@@ -50,7 +50,7 @@ class selectArea extends StatefulWidget {
   selectArea(
       {this.scheme,
       this.province,
-      this.city,
+      this.district,
       this.phase,
       block,
       subBlock,
@@ -66,7 +66,7 @@ class selectArea extends StatefulWidget {
       this.subBlockName,
       this.blockName,
       this.phaseName,
-      this.cityName,
+      this.districtName,
       this.schemeName,
       this.provinceName,
       this.purpose});
@@ -89,14 +89,14 @@ class _selectAreaState extends State<selectArea> {
 
 
   SimpleDatabase? _province;
-  SimpleDatabase? _city;
+  SimpleDatabase? _district;
   SimpleDatabase? _phase;
   SimpleDatabase? _block;
   SimpleDatabase? _subBlock;
   SimpleDatabase? _scheme;
 
   String? provinceName;
-  String? cityName;
+  String? districtName;
 
 
 
@@ -118,14 +118,14 @@ class _selectAreaState extends State<selectArea> {
 
   Future<void> getValueFromDatabase() async {
     _province = SimpleDatabase(name: 'province');
-    _city = SimpleDatabase(name: 'city');
+    _district = SimpleDatabase(name: 'district');
     _phase = SimpleDatabase(name: 'phase');
     _block = SimpleDatabase(name: 'block');
     _subBlock = SimpleDatabase(name: 'subBlock');
     _scheme = SimpleDatabase(name: 'scheme');
 
     provinceName = await _province?.getAt(0) as String;
-    cityName = await _city?.getAt(0) as String;
+    districtName = await _district?.getAt(0) as String;
     schemeName = await _scheme?.getAt(0) as String;
     phaseName = await _phase?.getAt(0) as String;
     blockName = await _block?.getAt(0) as String;
@@ -361,12 +361,12 @@ class _selectAreaState extends State<selectArea> {
           province: widget.province,
           scheme: widget.scheme,
           provinceName: provinceName,
-          cityName: cityName,
+          districtName: districtName,
           schemeName: schemeName,
           phaseName: phaseName,
           blockName: blockName,
           subBlockName: subBlockName,
-          city: widget.city,
+          district: widget.district,
           phase: widget.phase,
           block: block,
           subBlock: subBlock,

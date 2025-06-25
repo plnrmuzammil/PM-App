@@ -13,7 +13,7 @@ class ListingRangeModel{
 
   void reset(){
     province = '';
-    city = '';
+    district = '';
     minRange = 0;
     maxRange = 0;
     propertySubType = '';
@@ -21,7 +21,7 @@ class ListingRangeModel{
   }
 
   String province='';
-  String city='';
+  String district='';
   int minRange=0;
   int maxRange=10;
   String propertySubType='';

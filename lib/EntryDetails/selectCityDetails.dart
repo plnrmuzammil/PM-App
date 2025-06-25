@@ -4,24 +4,25 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:hive/hive.dart';
 import 'package:pm_app/EntryDetails/selectProvinceDetails.dart';
 import 'package:pm_app/EntryDetails/selectSchemeDetails.dart';
+import 'package:pm_app/EntryDetails/selectStepper.dart';
 
-class SelectCityDetails extends StatefulWidget {
-  const SelectCityDetails({Key? key, required this.provinceId, }) : super(key: key);
+class SelectDistrictDetails extends StatefulWidget {
+  const SelectDistrictDetails({Key? key, required this.provinceId, }) : super(key: key);
 
   final String provinceId;
 
   @override
-  _SelectCityDetailsState createState() => _SelectCityDetailsState();
+  _SelectDistrictDetailsState createState() => _SelectDistrictDetailsState();
 }
 
-class _SelectCityDetailsState extends State<SelectCityDetails> {
+class _SelectDistrictDetailsState extends State<SelectDistrictDetails> {
 
-  var city = [];
-  var cityId = [];
+  var district = [];
+  var districtId = [];
   Box box = Hive.box<dynamic>('userData');
 
-  String selectCity = "";
-  String selectCityId = "";
+  String selectDistrict = "";
+  String selectDistrictId = "";
 
 
   @override
@@ -38,33 +39,33 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
           mainAxisSize: MainAxisSize.min,
           children: [
             StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('cities').orderBy('name', descending: false).snapshots(),
+              stream: FirebaseFirestore.instance.collection('districts').orderBy('name', descending: false).snapshots(),
               builder: (BuildContext context, AsyncSnapshot snapshot)
               {
                 if(snapshot.hasData)
                 {
                   var el = snapshot.data.docs;
-                  city = [];
-                  cityId = [];
+                  district = [];
+                  districtId = [];
                   for(var e in el)
                   {
                     if(e.data() != null)
                     {
                       if(e.data()['provinceID'] == widget.provinceId)
                       {
-                        cityId.add(e.data()['id']);
-                        city.add(e.data()['name']);
+                        districtId.add(e.data()['id']);
+                        district.add(e.data()['name']);
                       }
                     }
                   }
 
                   return DropDown<dynamic>(
-                    hint: Text('select city'),
-                    items: city,
+                    hint: Text('select district'),
+                    items: district,
                     onChanged: (val){
                       setState(() {
-                        selectCity = val;
-                        selectCityId = cityId[city.indexOf(val)];
+                        selectDistrict = val;
+                        selectDistrictId = districtId[district.indexOf(val)];
                       });
                     },
                   );
@@ -81,18 +82,18 @@ class _SelectCityDetailsState extends State<SelectCityDetails> {
                 MaterialButton(
                   color: Colors.green,
                   onPressed: (){
-                    box.delete('city');
-                    box.delete('cityId');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectProvinceDetails()));
+                    box.delete('district');
+                    box.delete('districtId');
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => StepperForm()));
                   }, child: Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
-                  onPressed:(selectCity == "" && selectCityId == "") ? null : (){
-                    box.put('city', selectCity);
-                    box.put('cityId', selectCityId);
+                  onPressed:(selectDistrict == "" && selectDistrictId == "") ? null : (){
+                    box.put('district', selectDistrict);
+                    box.put('districtId', selectDistrictId);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectSchemeDetails(
                       provinceId: widget.provinceId,
-                      cityId: selectCityId,
+                      districtId: selectDistrictId,
                     )));
                     //Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectProvinceDetails()));
                   }, child: Text("Continue"),),

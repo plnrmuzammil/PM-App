@@ -10,12 +10,12 @@ var propertyType;
 class selectPropertyType extends StatefulWidget {
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
   final block;
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
   final subBlock;
@@ -26,11 +26,11 @@ class selectPropertyType extends StatefulWidget {
     this.scheme,
     this.schemeName,
     this.province,
-    this.city,
+    this.district,
     this.phase,
     this.block,
     this.phaseName,
-    this.cityName,
+    this.districtName,
     this.provinceName,
     this.blockName,
     this.subBlockName,
@@ -136,8 +136,8 @@ class _selectPropertyTypeState extends State<selectPropertyType> {
                         provinceName: widget.provinceName,
                         schemeName: widget.schemeName,
                         scheme: widget.scheme,
-                        city: widget.city,
-                        cityName: widget.cityName,
+                        district: widget.district,
+                        districtName: widget.districtName,
                         phaseName: widget.phaseName,
                         phase: widget.phase,
                         block: widget.block,

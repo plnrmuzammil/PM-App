@@ -72,7 +72,7 @@ class viewSubBlockState extends State<viewSubBlock> {
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
-                                            return viewListings(
+                                            return ViewListings(
                                               subBlock: "${docs[index]["id"]}",
                                             );
                                           }));
@@ -92,7 +92,7 @@ class viewSubBlockState extends State<viewSubBlock> {
                                   onPressed: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                          return viewListings(
+                                          return ViewListings(
                                             subBlock: "${docs[index]["id"]}",
                                           );
                                         }));

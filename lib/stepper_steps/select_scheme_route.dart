@@ -15,14 +15,14 @@ bool boolSelectScheme=true;
 class SchemeType extends StatefulWidget {
   String? province;
   String? provinceName;
-  String? city;
-  String? cityName;
+  String? district;
+  String? districtName;
 
   SchemeType({
     this.province,
     this.provinceName,
-    this.city,
-    this.cityName,
+    this.district,
+    this.districtName,
   });
   static bool _isScheme = false;
 
@@ -103,8 +103,8 @@ class _SchemeTypeState extends State<SchemeType> {
                         selectScheme(
                           province: widget.province,
                           provinceName: widget.provinceName,
-                          city: widget.city,
-                          cityName: widget.cityName,
+                          district: widget.district,
+                          districtName: widget.districtName,
                           isNonScheme: false,
                         ),
                         // old code
@@ -145,8 +145,8 @@ class _SchemeTypeState extends State<SchemeType> {
                         selectScheme(
                           province: widget.province,
                           provinceName: widget.provinceName,
-                          city: widget.city,
-                          cityName: widget.cityName,
+                          district: widget.district,
+                          districtName: widget.districtName,
                           isNonScheme: true,
                         ),
                         // selectPropertyType( // recently commented code

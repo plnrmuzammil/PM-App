@@ -6,11 +6,11 @@ import 'package:pm_app/EntryDetails/selectBlockDetails.dart';
 import 'package:pm_app/EntryDetails/select_purpose.dart';
 
 class SelectPhaseDetails extends StatefulWidget {
-  const SelectPhaseDetails({Key? key, required this.cityId, required this.provinceId, required this.isScheme, required this.propertyType, required this.typeId,}) : super(key: key);
+  const SelectPhaseDetails({Key? key, required this.districtId, required this.provinceId, required this.isScheme, required this.propertyType, required this.typeId,}) : super(key: key);
 
   final String propertyType;
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final String typeId;
   final bool isScheme;
   @override
@@ -52,7 +52,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                   phaseId = [];
                   for (var i in el) {
                     if (i.data() != null) {
-                      if(i.data()['cityID'] == widget.cityId && i.data()['provinceID'] == widget.provinceId && i.data()['schemeID'] == widget.typeId)
+                      if(i.data()['districtID'] == widget.districtId && i.data()['provinceID'] == widget.provinceId && i.data()['schemeID'] == widget.typeId)
                         {
                           phase.add(i.data()['name']);
                           phaseId.add(i.data()['id']);
@@ -86,7 +86,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                   onPressed: (){
                     box.delete('phase');
                     box.delete('phaseId');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectPurpose(provinceId: widget.provinceId, cityId: widget.cityId, isScheme: true, propertyType: widget.propertyType, typeId: widget.typeId,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectPurpose(provinceId: widget.provinceId, districtId: widget.districtId, isScheme: true, propertyType: widget.propertyType, typeId: widget.typeId,)));
                   }, child: Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
@@ -95,7 +95,7 @@ class _SelectPhaseDetailsState extends State<SelectPhaseDetails> {
                     box.put('phaseId', selectedPhaseNameId);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                            builder: (context) => SelectBlockDetails(provinceId: widget.provinceId, cityId: widget.cityId, schemeId: widget.typeId, phaseId: selectedPhaseNameId, isScheme: widget.isScheme, propertyType: widget.propertyType,)
+                            builder: (context) => SelectBlockDetails(provinceId: widget.provinceId, districtId: widget.districtId, schemeId: widget.typeId, phaseId: selectedPhaseNameId, isScheme: widget.isScheme, propertyType: widget.propertyType,)
                         ));
                   },
                   child: Text("Continue"),),
