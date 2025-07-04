@@ -5,8 +5,8 @@ import 'package:pm_app/listTab/viewScheme.dart';
 import '../widgets/stylishCustomButton.dart';
 
 class SelectSchemeNonScheme extends StatelessWidget {
-  String city;
-  SelectSchemeNonScheme({Key? key, required this.city}) : super(key: key);
+  String district;
+  SelectSchemeNonScheme({Key? key, required this.district}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SelectSchemeNonScheme extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
                         return viewSceme(
-                            city: city);
+                            district: district);
                       }));
                 },
                 text: "Scheme",
@@ -49,7 +49,7 @@ class SelectSchemeNonScheme extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                        return NonSceme(                            city: city);
+                        return NonSceme(                            district: district);
                       }));
                 },
                 text: "Non Scheme",

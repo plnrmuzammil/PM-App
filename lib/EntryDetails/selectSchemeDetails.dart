@@ -6,10 +6,10 @@ import 'package:pm_app/EntryDetails/selectTypeDetails.dart';
 
 
 class SelectSchemeDetails extends StatefulWidget {
-  const SelectSchemeDetails({Key? key, required this.provinceId, required this.cityId}) : super(key: key);
+  const SelectSchemeDetails({Key? key, required this.provinceId, required this.districtId}) : super(key: key);
 
   final String provinceId;
-  final String cityId;
+  final String districtId;
 
   @override
   State<SelectSchemeDetails> createState() => _SelectSchemeDetailsState();
@@ -56,7 +56,7 @@ class _SelectSchemeDetailsState extends State<SelectSchemeDetails> {
                   color: Colors.green,
                   onPressed: (){
                     box.delete('schemeData');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectCityDetails(provinceId: widget.provinceId)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectDistrictDetails(provinceId: widget.provinceId)));
                   }, child: Text("Back"),),
 
                 MaterialButton(
@@ -65,7 +65,7 @@ class _SelectSchemeDetailsState extends State<SelectSchemeDetails> {
                     box.put('schemeData', selectScheme);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                            builder: (context) => SelectTypeDetails(provinceId: widget.provinceId, cityId: widget.cityId, isScheme: selectScheme == "Scheme" ? true : false,)
+                            builder: (context) => SelectTypeDetails(provinceId: widget.provinceId, districtId: widget.districtId, isScheme: selectScheme == "Scheme" ? true : false,)
                         ));
                   }, child: Text("Continue"),),
               ],

@@ -6,11 +6,11 @@ import 'package:pm_app/EntryDetails/selectSchemeDetails.dart';
 import 'package:pm_app/EntryDetails/select_property_type.dart';
 
 class SelectTypeDetails extends StatefulWidget {
-  const SelectTypeDetails({Key? key, required this.provinceId,  required this.cityId, required this.isScheme}) : super(key: key);
+  const SelectTypeDetails({Key? key, required this.provinceId,  required this.districtId, required this.isScheme}) : super(key: key);
 
 
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final bool isScheme;
   
   @override
@@ -61,7 +61,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
                       {
                         if(el.data() != null)
                           {
-                            if(widget.provinceId == el.data()['provinceID'] && widget.cityId == el.data()['cityID'])
+                            if(widget.provinceId == el.data()['provinceID'] && widget.districtId == el.data()['districtID'])
                               {
                                 type.add(el.data()['name']);
                                 typeId.add(el.data()['id']);
@@ -97,7 +97,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
                   color: Colors.green,
                   onPressed: (){
                     box.delete('type');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectSchemeDetails(provinceId: widget.provinceId, cityId: widget.cityId,)));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectSchemeDetails(provinceId: widget.provinceId, districtId: widget.districtId,)));
                   },
                   child: Text("Back"),
                 ),
@@ -108,7 +108,7 @@ class _SelectTypeDetailsState extends State<SelectTypeDetails> {
                     box.put('typeId', typeIdSelected);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) =>
-                         SelectPropertyType(isScheme: widget.isScheme, provinceId: widget.provinceId, cityId: widget.cityId, typeId: typeIdSelected,),
+                         SelectPropertyType(isScheme: widget.isScheme, provinceId: widget.provinceId, districtId: widget.districtId, typeId: typeIdSelected,),
                         ));
                   }, child:const Text("Continue"),),
               ],

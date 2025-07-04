@@ -5,11 +5,11 @@ import 'package:pm_app/EntryDetails/select_property_type.dart';
 import 'package:pm_app/EntryDetails/select_purpose.dart';
 
 class SelectPropertySubType extends StatefulWidget {
-  const SelectPropertySubType({Key? key, required this.propertyType, required this.provinceId, required this.cityId, required this.typeId, required this.isScheme}) : super(key: key);
+  const SelectPropertySubType({Key? key, required this.propertyType, required this.provinceId, required this.districtId, required this.typeId, required this.isScheme}) : super(key: key);
 
   final String propertyType;
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final String typeId;
   final bool isScheme;
 
@@ -98,7 +98,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
                     box.delete('propertySubType');
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SelectPropertyType(
                       provinceId: widget.provinceId,
-                      cityId: widget.cityId,
+                      districtId: widget.districtId,
                       typeId: widget.typeId,
                       isScheme: widget.isScheme,
                     )));
@@ -113,7 +113,7 @@ class _SelectPropertySubTypeState extends State<SelectPropertySubType>{
                           builder: (context) => SelectPurpose(
                             propertyType: widget.propertyType,
                             provinceId: widget.provinceId,
-                            cityId: widget.cityId,
+                            districtId: widget.districtId,
                             typeId: widget.typeId,
                             isScheme: widget.isScheme,
                           ),

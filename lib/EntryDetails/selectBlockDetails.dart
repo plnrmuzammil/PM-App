@@ -7,10 +7,10 @@ import 'package:pm_app/EntryDetails/selectPhaseDetails.dart';
 import 'package:pm_app/EntryDetails/select_sub_block.dart';
 
 class SelectBlockDetails extends StatefulWidget {
-  const SelectBlockDetails({Key? key, required this.provinceId, required this.cityId, required this.schemeId, required this.phaseId, required this.isScheme, required this.propertyType}) : super(key: key);
+  const SelectBlockDetails({Key? key, required this.provinceId, required this.districtId, required this.schemeId, required this.phaseId, required this.isScheme, required this.propertyType}) : super(key: key);
 
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final String schemeId;
   final String phaseId;
   final bool isScheme;
@@ -56,7 +56,7 @@ class _SelectBlockDetailsState extends State<SelectBlockDetails> {
                     {
                       if(e.data() != null)
                       {
-                        if(e.data()['cityID'] == widget.cityId && e.data()['provinceID'] == widget.provinceId && e.data()['schemeID'] == widget.schemeId && e.data()['phaseID'] == widget.phaseId)
+                        if(e.data()['districtID'] == widget.districtId && e.data()['provinceID'] == widget.provinceId && e.data()['schemeID'] == widget.schemeId && e.data()['phaseID'] == widget.phaseId)
                         {
                           block.add(e.data()['name']);
                           blockId.add(e.data()['id']);
@@ -101,7 +101,7 @@ class _SelectBlockDetailsState extends State<SelectBlockDetails> {
                     box.delete('blockId');
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) =>
-                            SelectPhaseDetails(provinceId: widget.provinceId, cityId: widget.cityId, typeId: widget.schemeId, isScheme: widget.isScheme, propertyType: widget.propertyType,)));
+                            SelectPhaseDetails(provinceId: widget.provinceId, districtId: widget.districtId, typeId: widget.schemeId, isScheme: widget.isScheme, propertyType: widget.propertyType,)));
                   }, child: Text("Back"),),
                 MaterialButton(
                   color: Colors.green,
@@ -112,7 +112,7 @@ class _SelectBlockDetailsState extends State<SelectBlockDetails> {
                         MaterialPageRoute(
                             builder: (context) => SubBlockDetails(
                               provinceId: widget.provinceId,
-                              cityId: widget.cityId,
+                              districtId: widget.districtId,
                               schemeId: widget.schemeId,
                               phaseId: widget.phaseId,
                               blockId: selectedBlockId,

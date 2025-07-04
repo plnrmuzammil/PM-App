@@ -6,10 +6,10 @@ import 'package:pm_app/EntryDetails/selectTypeDetails.dart';
 import 'package:pm_app/EntryDetails/select_property_sub_type.dart';
 
 class SelectPropertyType extends StatefulWidget {
-  const SelectPropertyType({Key? key, required this.isScheme, required this.provinceId, required this.cityId, required this.typeId}) : super(key: key);
+  const SelectPropertyType({Key? key, required this.isScheme, required this.provinceId, required this.districtId, required this.typeId}) : super(key: key);
 
   final String provinceId;
-  final String cityId;
+  final String districtId;
   final String typeId;
   final bool isScheme;
 
@@ -57,7 +57,7 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
                         SelectTypeDetails(
                           provinceId: widget.provinceId ,
-                          cityId: widget.cityId,
+                          districtId: widget.districtId,
                           isScheme: widget.isScheme,
                     )));
                   }, child: Text("Back"),),
@@ -71,7 +71,7 @@ class _SelectPropertyTypeState extends State<SelectPropertyType> {
                                 SelectPropertySubType(
                                   propertyType: selectPropertyType,
                                   provinceId: widget.provinceId,
-                                  cityId: widget.cityId,
+                                  districtId: widget.districtId,
                                   typeId: widget.typeId,
                                   isScheme: widget.isScheme,
                                 ),

@@ -18,12 +18,12 @@ var SubblockId;
 class selectSubblocks extends StatefulWidget {
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
   final block;
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
 
@@ -31,11 +31,11 @@ class selectSubblocks extends StatefulWidget {
       {this.scheme,
       this.schemeName,
       this.province,
-      this.city,
+      this.district,
       this.phase,
       this.block,
       this.phaseName,
-      this.cityName,
+      this.districtName,
       this.provinceName,
       this.blockName});
 
@@ -167,8 +167,8 @@ class _selectSubblocksState extends State<selectSubblocks> {
                                   provinceName: widget.provinceName,
                                   schemeName: widget.schemeName,
                                   scheme: widget.scheme,
-                                  city: widget.city,
-                                  cityName: widget.cityName,
+                                  district: widget.district,
+                                  districtName: widget.districtName,
                                   phaseName: widget.phaseName,
                                   phase: widget.phase,
                                   block: widget.block,

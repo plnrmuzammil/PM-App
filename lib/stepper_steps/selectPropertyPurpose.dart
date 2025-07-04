@@ -17,12 +17,12 @@ var parkings;
 class selectPropertyPurpose extends StatefulWidget {
   final scheme;
   final province;
-  final city;
+  final district;
   final phase;
   final block;
   final blockName;
   final provinceName;
-  final cityName;
+  final districtName;
   final phaseName;
   final schemeName;
   final subBlock;
@@ -34,7 +34,7 @@ class selectPropertyPurpose extends StatefulWidget {
   selectPropertyPurpose(
       {this.scheme,
       this.province,
-      this.city,
+      this.district,
       this.phase,
       this.block,
       this.subBlock,
@@ -50,7 +50,7 @@ class selectPropertyPurpose extends StatefulWidget {
       this.subBlockName,
       this.blockName,
       this.phaseName,
-      this.cityName,
+      this.districtName,
       this.schemeName,
       this.provinceName});
 
@@ -163,7 +163,7 @@ class _selectPropertyPurposeState extends State<selectPropertyPurpose> {
                       selectArea(
                         province: widget.province,
                         scheme: widget.scheme,
-                        city: widget.city,
+                        district: widget.district,
                         phase: widget.phase,
                         block: widget.block,
                         subBlock: widget.subBlock,

@@ -18,7 +18,7 @@ class StepperStateModel {
     // this will enable all drop down
     print('stepper state model reset()');
     isProvinceDropDownEnable = true;
-    isCityDropDownEnable = true;
+    isDistrictDropDownEnable = true;
     isSchemeDropDownEnable = true;
     isListSchemeDropDownEnable = true;
     isSelectPropertyDropDownEnable = true;
@@ -31,7 +31,7 @@ class StepperStateModel {
 
   // state variables <9 drop down>
   late bool isProvinceDropDownEnable;
-  late bool isCityDropDownEnable;
+  late bool isDistrictDropDownEnable;
   late bool isSchemeDropDownEnable;
   late bool isListSchemeDropDownEnable;
   late bool isSelectPropertyDropDownEnable;

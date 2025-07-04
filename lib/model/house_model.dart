@@ -23,12 +23,12 @@ class HouseModel {
       'province': province,
       'scheme': scheme,
       'provinceName': provinceName,
-      'cityName': cityName,
+      'districtName': districtName,
       'schemeName': schemeName,
       'phaseName': phaseName,
       'blockName': blockName,
       'subBlockName': subBlockName,
-      'city': city,
+      'district': district,
       'phase': phase,
       'block': block,
       'subBlock': subBlock,
@@ -46,12 +46,12 @@ class HouseModel {
     province = '';
     scheme = '';
     provinceName = '';
-    cityName = '';
+    districtName = '';
     schemeName = '';
     phaseName = '';
     blockName = '';
     subBlockName = '';
-    city = '';
+    district = '';
     phase = '';
     block = '';
     subBlock = [];
@@ -76,12 +76,12 @@ class HouseModel {
   String province = '';
   String scheme = '';
   String provinceName = '';
-  String cityName = '';
+  String districtName = '';
   String schemeName = '';
   String phaseName = '';
   String blockName = '';
   String subBlockName = '';
-  String city = '';
+  String district = '';
   String phase = '';
   String block = '';
   List<dynamic> subBlock = [];

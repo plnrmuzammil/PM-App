@@ -52,8 +52,8 @@ class _SelectAreaState extends State<SelectArea> {
 
   String provinceName = "";
   String provinceId = "";
-  String city = "";
-  String cityId = "";
+  String district = "";
+  String districtId = "";
   String scheme = "";
   String type = "";
   String typeId = "";
@@ -72,8 +72,8 @@ class _SelectAreaState extends State<SelectArea> {
   {
     provinceName = box.get('provinceName');
     provinceId = box.get('provinceId');
-    city = box.get('city');
-    cityId = box.get('cityId');
+    district = box.get('district');
+    districtId = box.get('districtId');
     scheme = box.get('schemeData');
     type = box.get('type');
     typeId = box.get('typeId');
@@ -97,8 +97,8 @@ class _SelectAreaState extends State<SelectArea> {
   {
     provinceName = box.get('provinceName');
     provinceId = box.get('provinceId');
-    city = box.get('city');
-    cityId = box.get('cityId');
+    district = box.get('district');
+    districtId = box.get('districtId');
     scheme = box.get('schemeData');
     type = box.get('type');
     typeId = box.get('typeId');
@@ -318,12 +318,12 @@ class _SelectAreaState extends State<SelectArea> {
                         "province": provinceId.toString()?? "",
                         "scheme": typeId.toString() ?? "",
                         "provinceName": provinceName.toString() ?? "",
-                        "cityName": city.toString() ?? "",
+                        "districtName": district.toString() ?? "",
                         "schemeName": type.toString() ?? "",
                         "phaseName": phase.toString() ?? "",
                         "blockName": block.toString() ?? "",
                         "subBlockName": subBlock.toString() ?? "",
-                        "district": cityId.toString() ?? "",
+                        "district": districtId.toString() ?? "",
                         "phase": phaseId.toString() ?? "",
                         "block": blockId.toString() ?? "",
                         "subblock": subBlockId.toString() ?? "",
@@ -375,24 +375,19 @@ class _SelectAreaState extends State<SelectArea> {
                       "province": provinceId.toString()?? "",
                       "scheme": typeId.toString() ?? "",
                       "provinceName": provinceName.toString() ?? "",
-                      "cityName": city.toString() ?? "",
+                      "districtName": district.toString() ?? "",
                       "schemeName": type.toString() ?? "",
                       "phaseName": phase.toString() ?? "",
                       "blockName": block.toString() ?? "",
                       "subBlockName": subBlock.toString() ?? "",
-                      "district": cityId.toString() ?? "",
+                      "district": districtId.toString() ?? "",
                       "phase": phaseId.toString() ?? "",
                       "block": blockId.toString() ?? "",
                       "subblock": subBlockId.toString() ?? "",
                       "adress": addressController.text.toString() ?? "",
                       "type": propertyType.toString() ?? "",
                       "subType": subPropertyType.toString() ?? "",
-                      // "washroom": widget.washrooms,
-                      // "kitchens": widget.kitchens,
-                      // "basements": widget.basements,
-                      // "floors": widget.floors,
-                      // "parkings": widget.parkings,
-                      // "rooms": widget.rooms,
+
                       "sale": purpose.toString() ?? "",
                       "sold": "no", // static value used for time being
                       "area": areaController.text.toString() ?? "",

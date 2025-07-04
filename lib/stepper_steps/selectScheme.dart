@@ -11,7 +11,7 @@ import "package:pm_app/widgets/setting_stepper.dart";
 
 import 'package:simple_database/simple_database.dart';
 
-var schemes = []; // hold scheme names means city names
+var schemes = []; // hold scheme names means district names
 var schemeIds = [];
 var selectedScheme;
 var schemeId;
@@ -20,15 +20,15 @@ var schemeId;
 class selectScheme extends StatefulWidget {
   final province;
   final provinceName;
-  final city;
-  final cityName;
+  final district;
+  final districtName;
   bool isNonScheme;
 
   selectScheme({
     this.province,
-    this.city,
+    this.district,
     this.provinceName,
-    this.cityName,
+    this.districtName,
     required this.isNonScheme,
   });
 
@@ -67,7 +67,7 @@ class _selectSchemeState extends State<selectScheme> {
                 if (document.data() != null) {
                   // print(
                   //     '${widget.isNonScheme ? "Non Scheme" : "Scheme"} data: ${e.data()}');
-                  if ((document.data() as Map<String,dynamic>)["cityID"] == widget.city) {
+                  if ((document.data() as Map<String,dynamic>)["districtID"] == widget.district) {
                     schemes.add((document.data() as Map<String,dynamic>)["name"]);
                     schemeIds.add((document.data() as Map<String,dynamic>)["id"]);
                   }
@@ -169,8 +169,8 @@ class _selectSchemeState extends State<selectScheme> {
                                               provinceName: widget.provinceName,
                                               schemeName: selectScheme,
                                               scheme: schemeId,
-                                              city: widget.city,
-                                              cityName: widget.cityName,
+                                              district: widget.district,
+                                              districtName: widget.districtName,
                                               phaseName: null,
                                               phase: null,
                                               block: null,
@@ -184,8 +184,8 @@ class _selectSchemeState extends State<selectScheme> {
                                           : selectPhase(
                                               province: widget.province,
                                               provinceName: widget.provinceName,
-                                              city: widget.city,
-                                              cityName: widget.cityName,
+                                              district: widget.district,
+                                              districtName: widget.districtName,
                                               scheme: schemeId,
                                               schemeName: selectedScheme,
                                             ),

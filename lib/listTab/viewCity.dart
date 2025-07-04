@@ -5,22 +5,22 @@ import "package:pm_app/listTab/viewScheme.dart";
 import "package:pm_app/main.dart";
 import "package:pm_app/widgets/stylishCustomButton.dart";
 
-class viewCity extends StatefulWidget {
+class viewDistrict extends StatefulWidget {
   final province;
-  viewCity({this.province});
+  viewDistrict({this.province});
 
   @override
-  _viewCityState createState() => _viewCityState();
+  _viewDistrictState createState() => _viewDistrictState();
 }
 
-class _viewCityState extends State<viewCity> {
+class _viewDistrictState extends State<viewDistrict> {
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       body: StreamBuilder<dynamic>(
           stream: FirebaseFirestore.instance
-              .collection("cities")
+              .collection("districts")
               .where("provinceID", isEqualTo: "${widget.province}")
               .orderBy("name", descending: false)
               .snapshots(),
@@ -65,15 +65,15 @@ class _viewCityState extends State<viewCity> {
                                 const EdgeInsets.only(top: 15, bottom: 5, left: 20),
                                 child: StylishCustomButton(
                                   onPressed: () {
-                                    listingModel.city = docs[index]["name"];
-                                    // print('city name: ${docs[index]["name"]}');
+                                    listingModel.district = docs[index]["name"];
+                                    // print('district name: ${docs[index]["name"]}');
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context){
                                           return SelectSchemeNonScheme(
-                                              city: "${docs[index]["id"]}"
+                                              district: "${docs[index]["id"]}"
                                           );
                                           return viewSceme(
-                                              city: "${docs[index]["id"]}");
+                                              district: "${docs[index]["id"]}");
                                         }));
                                   },
                                   text: docs[index]["name"],
@@ -88,12 +88,12 @@ class _viewCityState extends State<viewCity> {
                               margin: EdgeInsets.only(top: 15, bottom: 5),
                               child: StylishCustomButton(
                                 onPressed: () {
-                                  listingModel.city = docs[index]["name"];
-                                  // print('city name: ${docs[index]["name"]}');
+                                  listingModel.district = docs[index]["name"];
+                                  // print('district name: ${docs[index]["name"]}');
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return SelectSchemeNonScheme(city: "${docs[index]["id"]}");
-                                        return viewSceme(city: "${docs[index]["id"]}");
+                                        return SelectSchemeNonScheme(district: "${docs[index]["id"]}");
+                                        return viewSceme(district: "${docs[index]["id"]}");
                                       }));
                                 },
                                 text: docs[index]["name"],
